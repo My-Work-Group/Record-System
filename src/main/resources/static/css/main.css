@@ -1,0 +1,13 @@
+html {
+    height: 100%
+}
+
+.home .box .item {
+    height: 250px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 2px 12px 0 rgba(14, 92, 156, 0.2);
+}

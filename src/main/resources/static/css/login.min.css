@@ -1,0 +1,241 @@
+html {
+    height: 100%
+}
+
+body.signin {
+    /*height: auto;*/
+    /*background: url(../img/login-background.jpg) no-repeat center fixed;*/
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover*/
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url("../img/login-background.jpg");
+    background-size: cover;
+
+}
+
+.top-logo{
+    position: absolute;
+    top: 0cm;
+    left: 0.2cm;
+}
+.logo_img_style{
+    width:45px; height:75px;
+}
+.top-institution-name{
+    position: absolute;
+    top: 0.2cm;
+    left: 1.2cm;
+}
+.institution-name_img_style{
+    width:600px; height:80px;
+}
+.top-slogan{
+    position: absolute;
+    top: 0cm;
+    right: 0cm;
+}
+.slogan_img_style{
+    width:450px; height:180px;
+}
+
+.col-sm-5 {
+    width: 400px;
+    height: 300px;
+    /* 把元素变成定位元素 */
+    position: absolute;
+    /* 元素距离上，左都为50% */
+    left: 50%;
+    top: 50%;
+    /* 让元素的左外边距，上外边距为元素宽高的1/2 注意margin是负距*/
+    margin-top: -150px;
+    margin-left: -200px;
+
+}
+
+.signinpanel {
+    width: 900px;
+    margin: 20px auto 0;
+    color: rgba(255, 255, 255, .95)
+}
+
+.signinpanel .logopanel {
+    float: none;
+    width: auto;
+    padding: 0;
+    background: 0
+}
+
+.signinpanel .signin-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0
+}
+
+.signinpanel .form-control {
+    display: block;
+    margin-top: 15px;
+}
+
+.signinpanel .uname {
+    background: #fff url(../img/user.png) no-repeat 95% center;
+    color: #333
+}
+
+.signinpanel .pword {
+    background: #fff url(../img/locked.png) no-repeat 95% center;
+    color: #333
+}
+
+.signinpanel .code {
+    background: #fff no-repeat 95% center;
+    color: #333;
+    margin: 0 0 15px 0
+}
+
+.signinpanel .btn {
+    margin-top: 15px
+}
+
+/*登录框 四周*/
+.signinpanel form {
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, .0);
+    -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
+    -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
+    box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 100px;
+    border-radius: 3px;
+    padding: 28px
+}
+
+.signup-footer {
+    border-top: solid 1px rgba(255, 255, 255, .3);
+    margin: 300px auto 0;
+    padding-top: 15px
+    /*width: 100%;*/
+    /*position: fixed;*/
+    /*!*bottom: 0px;*!*/
+    /*!*left: 0px;*!*/
+    /*text-align: center;*/
+}
+
+.pull-left {
+    color: white;
+    font-size: 25px;
+    width: 100%;
+    height: 35px;
+    line-height: 26px;
+    /*background: #ccc;*/
+    position: fixed;
+    bottom: 20px;
+    left: 0px;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .signinpanel, .signuppanel {
+        text-align: center
+        margin: 0 auto;
+        width: 380px !important;
+        padding: 20px
+    }
+
+    .signinpanel form {
+        margin-top: 20px
+    }
+
+    .signup-footer, .signuppanel .form-control {
+        margin-bottom: 10px
+    }
+
+    .signup-footer .pull-left, .signup-footer .pull-right {
+        float: none !important;
+    }
+
+    .signinpanel .signin-info ul {
+        display: none
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .signinpanel, .signuppanel {
+        margin: 0 20px;
+        width: auto
+    }
+}
+
+.checkbox-custom {
+    position: relative;
+    padding: 0 15px 0 25px;
+    margin-bottom: 7px;
+    display: inline-block
+}
+
+.checkbox-custom input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    margin: -6px 0 0 0;
+    top: 50%;
+    left: 3px
+}
+
+.checkbox-custom label:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -9px;
+    width: 18px;
+    height: 17px;
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid #bbb;
+    background: #fff
+}
+
+.checkbox-custom input[type="checkbox"]:checked + label:after {
+    position: absolute;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    content: "\e013";
+    top: 42%;
+    left: 3px;
+    margin-top: -5px;
+    font-size: 11px;
+    line-height: 1;
+    width: 16px;
+    height: 16px;
+    color: #333
+}
+
+.checkbox-custom label {
+    cursor: pointer;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-bottom: 0;
+    text-align: left
+}
+
+.form-control, .form-control:focus, .has-error .form-control:focus, .has-success .form-control:focus, .has-warning .form-control:focus, .navbar-collapse, .navbar-form, .navbar-form-custom .form-control:focus, .navbar-form-custom .form-control:hover, .open .btn.dropdown-toggle, .panel, .popover, .progress, .progress-bar {
+    box-shadow: none
+}
+
+.form-control {
+    border-radius: 1px !important;
+    padding: 6px 12px !important;
+    height: 34px !important
+}
+
+.form-control:focus {
+    border-color: #1ab394 !important
+}

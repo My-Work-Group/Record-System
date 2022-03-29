@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>若依介绍</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main.min.css" th:href="@{/css/main.min.css}" rel="stylesheet"/>
+</head>
+
+<body class="main">
+<div class="box">
+    <div class="item">
+        <img th:src="@{/img/info_edit.png}" alt=""/>
+        <el-link type="primary" href="/admin/person">完善个人资料</el-link>
+
+    </div>
+    <div class="item">
+        <img th:src="@{/img/site_record.png}" alt=""/>
+        <el-link type="primary" href="/admin/person">现场笔录制作</el-link>
+    </div>
+    <div class="item">
+        <img th:src="@{/img/offsite_record.png}" alt=""/>
+        <a href="/record/offsite"  class="anchor" >非现场笔录制作</a>
+    </div>
+    <div class="item">
+        <img th:src="@{/img/offsite_platform.png}" alt=""/>
+        <a href="http://180.101.184.120:63216/#/index/CasePredict" target="_blank">非现场治超平台</a>
+    </div>
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script type="text/javascript">
+    $('#pay-qrcode').click(function () {
+        var html = $(this).html();
+        parent.layer.open({
+            title: false,
+            type: 1,
+            closeBtn: false,
+            shadeClose: true,
+            area: ['600px', '360px'],
+            content: html
+        });
+    });
+</script>
+</body>
+</html>

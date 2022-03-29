@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <th:block th:include="include :: header('新增用户')"/>
+    <th:block th:include="include :: select2-css"/>
+</head>
+<body>
+<div class="main-content">
+    <form id="form-user-add" class="form-horizontal">
+        <input name="deptId" type="hidden" id="treeId"/>
+        <h4 class="form-header h4">案件信息</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label is-required">案件编号：</label>
+                    <div class="col-sm-8">
+                        <input name="caseId" placeholder="请输入案件编号" value="锡交路罚字〔2022〕30012号" class="form-control"
+                               type="text" maxlength="30"
+                               required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label is-required">处罚对象：</label>
+                    <div class="col-sm-8">
+                        <select id="object" name="object" class="form-control m-b">
+                            <option value="person">个人</option>
+                            <option value="company">公司</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label is-required">受案时间：</label>
+                    <div class="col-sm-8">
+                        <input id="time" name="time" type="datetime-local" value="" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="person-info" id="person-info">
+            <h4 class="form-header h4">个人信息</h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">姓名：</label>
+                        <div class="col-sm-8">
+                            <input name="userName" placeholder="请输入姓名" class="form-control" type="text" maxlength="30"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">用户性别：</label>
+                        <div class="col-sm-8">
+                            <select name="sex" class="form-control m-b" >
+                                    <option>男</option>
+                                    <option>女</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">身份证号：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="numberId" name="numberId" placeholder="请输入身份证号" class="form-control"
+                                       type="text"
+                                       maxlength="18">
+                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">年龄：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="age" name="age" class="form-control age" type="text" maxlength="3"
+                                       placeholder="请输入年龄">
+                                <span class="input-group-addon"><i class="fa fa-male"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">手机号码：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="phonenumber" name="phonenumber" placeholder="请输入手机号码" class="form-control"
+                                       type="text" maxlength="11">
+                                <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">家庭住址：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="home-address" name="home-address" class="form-control address" type="text"
+                                       maxlength="50" placeholder="请输入住址">
+                                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">工作单位：</label>
+                        <div class="col-sm-8">
+                            <input id="company" name="company" placeholder="请输入工作单位" class="form-control" type="text"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">职务：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="post" name="post" placeholder="请输入职务" class="form-control" type="text"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">联系地址：</label>
+                        <div class="col-sm-8">
+                            <input id="contact-addres " name="contact-address" placeholder="请输入联系地址"
+                                   class="form-control"
+                                   type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-info" id="company-info" style="display:none;">
+            <h4 class="form-header h4">公司信息</h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">名称：</label>
+                        <div class="col-sm-8">
+                            <input name="company-name" placeholder="请输入公司名称" class="form-control" type="text"
+                                   maxlength="30"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">统一社会信用代码：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="credit-code" name="credit-code" class="form-control age" type="text"
+                                       maxlength="3"
+                                       placeholder="请输入社会信用代码">
+                                <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">法人（负责人）姓名：</label>
+                        <div class="col-sm-8">
+                            <input name="company-name" placeholder="请输入姓名" class="form-control" type="text"
+                                   maxlength="30"
+                                   required>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">法人（负责人）身份证号：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="legal-person-id" name="legal-person-id" placeholder="请输入身份证号"
+                                       class="form-control" type="text"
+                                       maxlength="18">
+                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">地址：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="company-add" name="company-add" class="form-control age" type="text"
+                                       maxlength="3"
+                                       placeholder="请输入公司地址">
+                                <span class="input-group-addon"><i class="fa fa-send"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">联系电话：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="telephone" name="telephone" placeholder="请输入联系电话" class="form-control"
+                                       type="text"
+                                       maxlength="18">
+                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="veh-info">
+            <h4 class="form-header h4">车辆信息</h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">车牌号：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input name="userName" placeholder="请输入车牌号" class="form-control" type="text"
+                                       maxlength="30"
+                                       required>
+                                <span class="input-group-addon"><i class="fa fa-cc-jcb"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">车牌颜色：</label>
+                        <div class="col-sm-8">
+                            <select name="color" class="form-control m-b">
+                                <option>黄</option>
+                                <option>蓝</option>
+                                <option>绿</option>
+                                <option>白</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">车型：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="veh-type" name="veh-type" placeholder="请输入车型" class="form-control"
+                                       type="text"
+                                       maxlength="18">
+                                <span class="input-group-addon"><i class="fa fa-car"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">轴数：</label>
+                        <div class="col-sm-8">
+                            <select name="number-axes" class="form-control m-b">
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>8</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">车货总重：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="weight" name="weight" placeholder="请输入车货总重" class="form-control" type="text"
+                                       maxlength="11">
+                                <span class="input-group-addon"><i class="fa fa-truck"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">检测时间：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="check-time" name="check-time" type="datetime-local" value=""
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">检测站点：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="site-code" name="site-code" placeholder="请输入检测站点" class="form-control"
+                                       type="text"
+                                       required>
+                                <span class="input-group-addon"><i class="fa fa-road"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">超限吨位：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="out-weight" name="out-weight" placeholder="请输入超限吨位" class="form-control"
+                                       type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">装载货物：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="goods" name="goods" placeholder="请输入装载货物" class="form-control" type="text"
+                                       required>
+                                <span class="input-group-addon"><i class="fa fa-shopping-cart"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">装载时间：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="load-time" name="load-time" type="datetime-local" value=""
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">装载地点：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="load-addreass" name="load-addreass" placeholder="请输入装载地点"
+                                       class="form-control"
+                                       type="text" required>
+                                <span class="input-group-addon"><i class="fa fa-send-o"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">运往目的地：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="destination" name="destination" placeholder="请输入运往目的地" class="form-control"
+                                       type="text" required>
+                                <span class="input-group-addon"><i class="fa fa-send"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-sm-offset-5 col-sm-10">
+        <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存
+        </button>&nbsp;
+        <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭
+        </button>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: select2-js"/>
+<script>
+    var prefix = ctx + "system/user";
+
+    $("#form-user-add").validate({
+        onkeyup: false,
+        rules: {
+            loginName: {
+                minlength: 2,
+                maxlength: 20,
+                remote: {
+                    url: prefix + "/checkLoginNameUnique",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "loginName": function () {
+                            return $.common.trim($("#loginName").val());
+                        }
+                    },
+                    dataFilter: function (data, type) {
+                        return $.validate.unique(data);
+                    }
+                }
+            },
+            password: {
+                minlength: 5,
+                maxlength: 20
+            },
+            email: {
+                email: true,
+                remote: {
+                    url: prefix + "/checkEmailUnique",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "email": function () {
+                            return $.common.trim($("#email").val());
+                        }
+                    },
+                    dataFilter: function (data, type) {
+                        return $.validate.unique(data);
+                    }
+                }
+            },
+            phonenumber: {
+                isPhone: true,
+                remote: {
+                    url: prefix + "/checkPhoneUnique",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "phonenumber": function () {
+                            return $.common.trim($("#phonenumber").val());
+                        }
+                    },
+                    dataFilter: function (data, type) {
+                        return $.validate.unique(data);
+                    }
+                }
+            },
+        },
+        messages: {
+            "loginName": {
+                remote: "用户已经存在"
+            },
+            "email": {
+                remote: "Email已经存在"
+            },
+            "phonenumber": {
+                remote: "手机号码已经存在"
+            }
+        },
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
+        var password = $("#password").val();
+        if ($.validate.form() && checkpwd(chrtype, password)) {
+            var data = $("#form-user-add").serializeArray();
+            var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
+            var roleIds = $.form.selectCheckeds("role");
+            var postIds = $.form.selectSelects("post");
+            data.push({"name": "status", "value": status});
+            data.push({"name": "roleIds", "value": roleIds});
+            data.push({"name": "postIds", "value": postIds});
+            $.operate.saveTab(prefix + "/add", data);
+        }
+    }
+
+    /* 用户管理-新增-选择部门树 */
+    function selectDeptTree() {
+        var treeId = $("#treeId").val();
+        var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
+        var url = ctx + "system/dept/selectDeptTree/" + deptId;
+        var options = {
+            title: '选择部门',
+            width: "380",
+            url: url,
+            callBack: doSubmit
+        };
+        $.modal.openOptions(options);
+    }
+
+    function doSubmit(index, layero) {
+        var body = $.modal.getChildFrame(index);
+        $("#treeId").val(body.find('#treeId').val());
+        $("#treeName").val(body.find('#treeName').val());
+        $.modal.close(index);
+    }
+
+    $(function () {
+        $('#post').select2({
+            placeholder: "请选择岗位",
+            allowClear: true
+        });
+    })
+
+    $('#object').off('change').on('change', function () {
+        if (document.getElementById('object').value === "company") {
+            $('#company-info').show();
+            $('#person-info').hide();
+        }
+
+        else {
+            $('#person-info').show();
+            $('#company-info').hide();
+            //$('#company-info').style.visibility="visible";
+        }
+    })
+
+</script>
+</body>
+</html>
