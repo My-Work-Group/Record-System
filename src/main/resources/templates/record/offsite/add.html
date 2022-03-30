@@ -7,15 +7,15 @@
 </head>
 <body>
 <div class="main-content">
-    <form id="form-user-add" class="form-horizontal">
-        <input name="deptId" type="hidden" id="treeId"/>
+    <form id="form-info" class="form-horizontal">
+        <input name="caseInfo" type="hidden" id="treeId"/>
         <h4 class="form-header h4">案件信息</h4>
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="col-sm-4 control-label is-required">案件编号：</label>
                     <div class="col-sm-8">
-                        <input name="caseId" placeholder="请输入案件编号" value="锡交路罚字〔2022〕30012号" class="form-control"
+                        <input name="case-num" id="case-num" placeholder="请输入案件编号" value="锡交路罚字〔2022〕30012号" class="form-control"
                                type="text" maxlength="30"
                                required>
                     </div>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label is-required">受案时间：</label>
                     <div class="col-sm-8">
-                        <input id="time" name="time" type="datetime-local" value="" class="form-control">
+                        <input id="case-time" name="case-time" type="datetime-local" value="" class="form-control">
                     </div>
                 </div>
             </div>
@@ -249,7 +249,7 @@
                         <label class="col-sm-4 control-label is-required">车牌号：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input name="userName" placeholder="请输入车牌号" class="form-control" type="text"
+                                <input name="veh-plate" id="veh-plate" placeholder="请输入车牌号" class="form-control" type="text"
                                        maxlength="30"
                                        required>
                                 <span class="input-group-addon"><i class="fa fa-cc-jcb"></i></span>
@@ -261,7 +261,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">车牌颜色：</label>
                         <div class="col-sm-8">
-                            <select name="color" class="form-control m-b">
+                            <select name="plate-color" id="plate-color" class="form-control m-b">
                                 <option>黄</option>
                                 <option>蓝</option>
                                 <option>绿</option>
@@ -289,7 +289,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">轴数：</label>
                         <div class="col-sm-8">
-                            <select name="number-axes" class="form-control m-b">
+                            <select name="veh-axles" id="veh-axles" class="form-control m-b">
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
@@ -420,7 +420,7 @@
 <th:block th:include="include :: footer"/>
 <th:block th:include="include :: select2-js"/>
 <script>
-    var prefix = ctx + "system/user";
+    var prefix = ctx + "record/offsite";
 
     $("#form-user-add").validate({
         onkeyup: false,
@@ -494,18 +494,37 @@
     });
 
     function submitHandler() {
-        var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
-        var password = $("#password").val();
-        if ($.validate.form() && checkpwd(chrtype, password)) {
-            var data = $("#form-user-add").serializeArray();
-            var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
-            var roleIds = $.form.selectCheckeds("role");
-            var postIds = $.form.selectSelects("post");
-            data.push({"name": "status", "value": status});
-            data.push({"name": "roleIds", "value": roleIds});
-            data.push({"name": "postIds", "value": postIds});
+        // var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
+        // var password = $("#password").val();
+        // if ($.validate.form() && checkpwd(chrtype, password)) {
+        //     var data = $("#form-user-add").serializeArray();
+        //     var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
+        //     var roleIds = $.form.selectCheckeds("role");
+        //     var postIds = $.form.selectSelects("post");
+        //     data.push({"name": "status", "value": status});
+        //     data.push({"name": "roleIds", "value": roleIds});
+        //     data.push({"name": "postIds", "value": postIds});
+        //     $.operate.saveTab(prefix + "/add", data);
+        // }
+
+            var data = $("#form-info").serializeArray();
+            var caseNum = document.getElementById("case-num").value;
+            var caseObject = document.getElementById("object").value;
+           var caseTime = document.getElementById("case-time").value;
+            var vehPlate = document.getElementById("veh-plate").value;
+            var plateColor = document.getElementById("plate-color").value;
+            var vehType = document.getElementById("veh-type").value;
+            var vehAxles = document.getElementById("veh-axles").value;
+
+            data.push({"name": "caseNum", "value": caseNum});
+            data.push({"name": "caseObject", "value": caseObject});
+            data.push({"name": "caseTime", "value": caseTime});
+            data.push({"name": "vehPlate", "value": vehPlate});
+            data.push({"name": "plateColor", "value": plateColor});
+            data.push({"name": "vehType", "value": vehType});
+            data.push({"name": "vehAxles", "value": vehAxles});
             $.operate.saveTab(prefix + "/add", data);
-        }
+
     }
 
     /* 用户管理-新增-选择部门树 */
