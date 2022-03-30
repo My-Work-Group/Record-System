@@ -134,6 +134,7 @@ public class UserController extends BaseController
         {
             return error("新增用户'" + user.getLoginName() + "'失败，邮箱账号已存在");
         }
+        System.out.println(user);
         return toAjax(userService.insertUser(user));
     }
 

@@ -27,8 +27,8 @@
                     <label class="col-sm-4 control-label is-required">处罚对象：</label>
                     <div class="col-sm-8">
                         <select id="object" name="object" class="form-control m-b">
-                            <option value="person">个人</option>
-                            <option value="company">公司</option>
+                            <option>个人</option>
+                            <option>公司</option>
                         </select>
                     </div>
                 </div>
@@ -507,23 +507,46 @@
         //     $.operate.saveTab(prefix + "/add", data);
         // }
 
-            var data = $("#form-info").serializeArray();
-            var caseNum = document.getElementById("case-num").value;
+            //var data = $("#form-info").serializeArray();
+            //var caseNum = document.getElementById("case-num").value;
+            var caseNum = $("input[name='case-num']").val();
             var caseObject = document.getElementById("object").value;
-           var caseTime = document.getElementById("case-time").value;
+            var caseTime = document.getElementById("case-time").value;
             var vehPlate = document.getElementById("veh-plate").value;
             var plateColor = document.getElementById("plate-color").value;
             var vehType = document.getElementById("veh-type").value;
             var vehAxles = document.getElementById("veh-axles").value;
 
-            data.push({"name": "caseNum", "value": caseNum});
-            data.push({"name": "caseObject", "value": caseObject});
-            data.push({"name": "caseTime", "value": caseTime});
-            data.push({"name": "vehPlate", "value": vehPlate});
-            data.push({"name": "plateColor", "value": plateColor});
-            data.push({"name": "vehType", "value": vehType});
-            data.push({"name": "vehAxles", "value": vehAxles});
-            $.operate.saveTab(prefix + "/add", data);
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : prefix + "/add",
+            data : {
+                "caseNum": caseNum,
+                "caseObject": caseObject,
+                "caseTime": caseTime,
+                "vehPlate": vehPlate,
+                "plateColor": plateColor,
+                "vehType": vehType,
+                "vehAxles": vehAxles,
+            },
+            async : false,
+            error : function(request) {
+                $.modal.alertError("系统错误");
+            },
+            success : function(data) {
+                $.operate.successCallback(data);
+            }
+        });
+
+            // data.push({"name": "caseNum", "value": caseNum});
+            // data.push({"name": "caseObject", "value": caseObject});
+            // data.push({"name": "caseTime", "value": caseTime});
+            // data.push({"name": "vehPlate", "value": vehPlate});
+            // data.push({"name": "plateColor", "value": plateColor});
+            // data.push({"name": "vehType", "value": vehType});
+            // data.push({"name": "vehAxles", "value": vehAxles});
+            // $.operate.saveTab(prefix + "/add", data);
 
     }
 

@@ -74,7 +74,7 @@ public class OffsiteController extends BaseController {
      * 新增保存用户
      */
     @RequiresPermissions("record:offsite:add")
-    //@Log(title = "用户管理", businessType = BusinessType.INSERT)
+    @Log(title = "案件管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(OffSiteCase offSiteCase) {
