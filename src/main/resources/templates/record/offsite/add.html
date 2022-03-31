@@ -15,7 +15,8 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label is-required">案件编号：</label>
                     <div class="col-sm-8">
-                        <input name="case-num" id="case-num" placeholder="请输入案件编号" value="锡交路罚字〔2022〕30012号" class="form-control"
+                        <input name="case-num" id="case-num" placeholder="请输入案件编号" value="锡交路罚字〔2022〕30012号"
+                               class="form-control"
                                type="text" maxlength="30"
                                required>
                     </div>
@@ -61,9 +62,9 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">用户性别：</label>
                         <div class="col-sm-8">
-                            <select name="sex" class="form-control m-b" >
-                                    <option>男</option>
-                                    <option>女</option>
+                            <select name="sex" class="form-control m-b">
+                                <option>男</option>
+                                <option>女</option>
                             </select>
                         </div>
                     </div>
@@ -249,7 +250,8 @@
                         <label class="col-sm-4 control-label is-required">车牌号：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input name="veh-plate" id="veh-plate" placeholder="请输入车牌号" class="form-control" type="text"
+                                <input name="veh-plate" id="veh-plate" placeholder="请输入车牌号" class="form-control"
+                                       type="text"
                                        maxlength="30"
                                        required>
                                 <span class="input-group-addon"><i class="fa fa-cc-jcb"></i></span>
@@ -495,36 +497,39 @@
 
     function submitHandler() {
 
-            //var caseNum = document.getElementById("case-num").value;
-            var caseNum =$("input[name='case-num']").val();
-            //var caseNum = document.getElementById("case-num").value;
-            var caseObject = document.getElementById("object").value;
-            var caseTime = document.getElementById("case-time").value.replace(/T/g, " ");
-
-            //
-            // var vehPlate = document.getElementById("veh-plate").value;
-            // var plateColor = document.getElementById("plate-color").value;
-            // var vehType = document.getElementById("veh-type").value;
-            // var vehAxles = document.getElementById("veh-axles").value;
-
+        // 案件信息
+        var caseNum = $("input[name='case-num']").val();
+        var caseObject = document.getElementById("object").value;
+        var caseTime = document.getElementById("case-time").value.replace(/T/g, " ");
+        // 车辆信息
+        var vehPlate = document.getElementById("veh-plate").value;
+        var vehPlateColor = document.getElementById("plate-color").value;
+        var vehType = document.getElementById("veh-type").value;
+        var VehAxleNum = document.getElementById("veh-axles").value;
+        var json = {
+            "offSiteCase": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
+            "vehicle": {"vehPlate": vehPlate, "vehPlateColor": vehPlateColor, "vehType": vehType, "VehAxleNum": VehAxleNum}
+        };
         $.ajax({
-            cache : true,
-            type : "POST",
-            url : prefix + "/add",
-            data : {
-                "caseNumber": caseNum,
-                "caseObject": caseObject,
-                "caseTime": caseTime,
-                // "vehPlate": vehPlate,
-                // "plateColor": plateColor,
-                // "vehType": vehType,
-                // "vehAxles": vehAxles,
-            },
-            async : false,
-            error : function(request) {
+            cache: true,
+            type: "POST",
+            url: prefix + "/add",
+            contentType: "application/json",
+            data: JSON.stringify(json),
+            // data : {
+            // "caseNumber": caseNum,
+            // "caseObject": caseObject,
+            // "caseTime": caseTime,
+            // "vehPlate": vehPlate,
+            // "plateColor": plateColor,
+            // "vehType": vehType,
+            // "vehAxles": vehAxles,
+            //},
+            async: false,
+            error: function (request) {
                 $.modal.alertError("系统错误");
             },
-            success : function(data) {
+            success: function (data) {
                 $.operate.successCallback(data);
             }
         });
@@ -563,9 +568,7 @@
         if (document.getElementById('object').value === "company") {
             $('#company-info').show();
             $('#person-info').hide();
-        }
-
-        else {
+        } else {
             $('#person-info').show();
             $('#company-info').hide();
             //$('#company-info').style.visibility="visible";

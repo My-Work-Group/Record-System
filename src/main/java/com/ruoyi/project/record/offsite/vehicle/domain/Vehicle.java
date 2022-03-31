@@ -1,6 +1,5 @@
-package com.ruoyi.project.record.offsite.domain;
+package com.ruoyi.project.record.offsite.vehicle.domain;
 
-import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -10,13 +9,21 @@ public class Vehicle {
     // 车辆id
     private Long vehId;
     // 车牌号
-    private String vehPlate;
+    private String plateNumber;
     // 车牌颜色
-    private String vehPlateColor;
+    private String plateColor;
     // 轴数
-    private int VehAxleNum;
+    private int vehAxleNum;
     // 车型
     private String vehType;
+
+    private Long personId;
+
+    private Long companyId;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Long getVehId() {
         return vehId;
@@ -27,27 +34,27 @@ public class Vehicle {
     }
 
     public String getVehPlate() {
-        return vehPlate;
+        return plateNumber;
     }
 
     public void setVehPlate(String vehPlate) {
-        this.vehPlate = vehPlate;
+        this.plateNumber = vehPlate;
     }
 
     public String getVehPlateColor() {
-        return vehPlateColor;
+        return plateColor;
     }
 
     public void setVehPlateColor(String vehPlateColor) {
-        this.vehPlateColor = vehPlateColor;
+        this.plateColor = vehPlateColor;
     }
 
     public int getVehAxleNum() {
-        return VehAxleNum;
+        return vehAxleNum;
     }
 
     public void setVehAxleNum(int vehAxleNum) {
-        VehAxleNum = vehAxleNum;
+        this.vehAxleNum = vehAxleNum;
     }
 
     public String getVehType() {
@@ -58,15 +65,32 @@ public class Vehicle {
         this.vehType = vehType;
     }
 
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Long personId) {
+        this.personId = personId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).
                 append("vehId", getVehId()).
+                append("personId",getPersonId()).
+                append("companyId",getCompanyId()).
                 append("vehPlate", getVehPlate()).
                 append("vehPlateColor", getVehPlateColor()).
                 append("VehAxleNum", getVehAxleNum()).
-                append("vehType", getVehType()).
-                append("vehPlate", getVehPlate()).toString();
+                append("vehType", getVehType()).toString();
 
 //        return "Vehicle{" +
 //                "vehId=" + vehId +

@@ -1,6 +1,7 @@
 package com.ruoyi.project.record.offsite.mapper;
 
 import com.ruoyi.project.record.offsite.domain.OffSiteCase;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

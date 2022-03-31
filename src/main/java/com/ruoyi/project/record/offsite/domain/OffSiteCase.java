@@ -1,5 +1,6 @@
 package com.ruoyi.project.record.offsite.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.controller.BaseController;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,6 +26,7 @@ public class OffSiteCase extends BaseController {
 
     // 受案时间
     //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date caseTime;
     //private String caseTime;
 
