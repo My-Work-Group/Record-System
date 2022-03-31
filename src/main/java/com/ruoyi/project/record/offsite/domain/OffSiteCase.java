@@ -1,6 +1,7 @@
 package com.ruoyi.project.record.offsite.domain;
 
 import com.ruoyi.framework.web.controller.BaseController;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,17 +15,21 @@ public class OffSiteCase extends BaseController {
     private static final long serialVersionUID = 1L;
     // 案件id
     private Long caseId;
+    // 处罚的车辆id
+    private Long vehId;
     // 案卷编号
     private String caseNumber;
-    // 受案时间
-    private Date caseTime;
+
     // 处罚对象
     private String caseObject;
 
-    // 处罚的车辆id
-    private Long vehId;
-    // 处罚车辆
-    private Vehicle vehicle;
+    // 受案时间
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private Date caseTime;
+    //private String caseTime;
+
+//    // 处罚车辆
+//    private Vehicle vehicle;
 
     public Long getCaseId() {
         return caseId;
@@ -66,13 +71,13 @@ public class OffSiteCase extends BaseController {
         this.caseObject = caseObject;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
+//    public Vehicle getVehicle() {
+//        return vehicle;
+//    }
+//
+//    public void setVehicle(Vehicle vehicle) {
+//        this.vehicle = vehicle;
+//    }
 
     @Override
     public String toString() {
@@ -82,7 +87,7 @@ public class OffSiteCase extends BaseController {
                 ", caseNumber='" + caseNumber + '\'' +
                 ", caseTime=" + caseTime +
                 ", caseObject='" + caseObject + '\'' +
-                ", vehicle=" + vehicle +
+//                ", vehicle=" + vehicle +
                 '}';
     }
 

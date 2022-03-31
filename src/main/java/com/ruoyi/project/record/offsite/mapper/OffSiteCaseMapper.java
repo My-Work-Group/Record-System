@@ -13,35 +13,35 @@ public interface OffSiteCaseMapper {
     /**
      * 根据条件分页查询案件信息
      *
-     * @param OffSiteCase 案件信息
+     * @param offSiteCase 案件信息
      * @return 用户信息集合信息
      */
-    public List<OffSiteCase> selectCaseList(OffSiteCase OffSiteCase);
+    public List<OffSiteCase> selectCaseList(OffSiteCase offSiteCase);
 
 
     /**
      * 保存案件信息
      *
-     * @param OffSiteCase 案件信息
+     * @param offSiteCase 案件信息
      * @return 结果
      */
-    public  int insertCase(OffSiteCase OffSiteCase);
+    public  int insertCase(OffSiteCase offSiteCase);
 
 
     /**
      * 修改后，保存用户信息
      *
-     * @param OffSiteCase 保存案件信息
+     * @param offSiteCase 保存案件信息
      * @return 结果
      */
-    public int updateCase(OffSiteCase OffSiteCase);
+    public int updateCase(OffSiteCase offSiteCase);
 
     /**
      * 修改用户详细信息
      *
-     * @param OffSiteCase 用户信息
+     * @param offSiteCase 用户信息
      * @return 结果
      */
-    public int updateCaseInfo(OffSiteCase OffSiteCase);
+    public int updateCaseInfo(OffSiteCase offSiteCase);
 }
 

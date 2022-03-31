@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.system.user.mapper.UserMapper">
+<mapper namespace="com.ruoyi.project.record.offsite.mapper.OffSiteCaseMapper">
 
     <resultMap type="OffSiteCase" id="OffSiteCaseResult">
         <id property="caseId" column="case_id"/>
@@ -10,7 +10,7 @@
         <result property="caseNumber" column="case_number"/>
         <result property="caseObject" column="case_object"/>
         <result property="caseTime" column="case_time"/>
-        <association property="vehicle" column="veh_id" javaType="Vehicle" resultMap="vehicleResult"/>
+<!--        <association property="vehicle" column="veh_id" javaType="Vehicle" resultMap="vehicleResult"/>-->
     </resultMap>
 
     <resultMap id="vehicleResult" type="Vehicle">
@@ -21,21 +21,19 @@
         <result property="vehType" column="veh_axes"/>
     </resultMap>
 
-    <insert id="insertOffSiteCase" parameterType="OffSiteCase" useGeneratedKeys="true" keyProperty="caseId">
+    <insert id="insertCase" parameterType="OffSiteCase" useGeneratedKeys="true" keyProperty="caseId">
         insert into rec_offsite_case(
-        <if test="caseId != null and caseId != 0">case_id,</if>
-        <if test="vehId != null and vehId != 0">veh_id,</if>
+        <if test="caseId != null">case_id,</if>
+        <if test="vehId != null ">veh_id,</if>
         <if test="caseNumber != null and caseNumber != ''">case_number,</if>
         <if test="caseObject != null and caseObject != ''">case_object,</if>
-        <if test="caseTime != null and caseTime != ''">case_time,</if>
-        create_time
+        <if test="caseTime != null">case_time</if>
         )values(
         <if test="caseId != null and caseId != ''">#{caseId},</if>
         <if test="vehId != null and vehId != ''">#{vehId},</if>
         <if test="caseNumber != null and caseNumber != ''">#{caseNumber},</if>
         <if test="caseObject != null and caseObject != ''">#{caseObject},</if>
-        <if test="caseTime != null and caseTime != ''">#{caseTime},</if>
-        sysdate()
+        <if test="caseTime != null">#{caseTime}</if>
         )
     </insert>
 

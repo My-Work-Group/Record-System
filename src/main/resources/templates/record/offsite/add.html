@@ -494,41 +494,31 @@
     });
 
     function submitHandler() {
-        // var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
-        // var password = $("#password").val();
-        // if ($.validate.form() && checkpwd(chrtype, password)) {
-        //     var data = $("#form-user-add").serializeArray();
-        //     var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
-        //     var roleIds = $.form.selectCheckeds("role");
-        //     var postIds = $.form.selectSelects("post");
-        //     data.push({"name": "status", "value": status});
-        //     data.push({"name": "roleIds", "value": roleIds});
-        //     data.push({"name": "postIds", "value": postIds});
-        //     $.operate.saveTab(prefix + "/add", data);
-        // }
 
-            //var data = $("#form-info").serializeArray();
             //var caseNum = document.getElementById("case-num").value;
-            var caseNum = $("input[name='case-num']").val();
+            var caseNum =$("input[name='case-num']").val();
+            //var caseNum = document.getElementById("case-num").value;
             var caseObject = document.getElementById("object").value;
-            var caseTime = document.getElementById("case-time").value;
-            var vehPlate = document.getElementById("veh-plate").value;
-            var plateColor = document.getElementById("plate-color").value;
-            var vehType = document.getElementById("veh-type").value;
-            var vehAxles = document.getElementById("veh-axles").value;
+            var caseTime = document.getElementById("case-time").value.replace(/T/g, " ");
+
+            //
+            // var vehPlate = document.getElementById("veh-plate").value;
+            // var plateColor = document.getElementById("plate-color").value;
+            // var vehType = document.getElementById("veh-type").value;
+            // var vehAxles = document.getElementById("veh-axles").value;
 
         $.ajax({
             cache : true,
             type : "POST",
             url : prefix + "/add",
             data : {
-                "caseNum": caseNum,
+                "caseNumber": caseNum,
                 "caseObject": caseObject,
                 "caseTime": caseTime,
-                "vehPlate": vehPlate,
-                "plateColor": plateColor,
-                "vehType": vehType,
-                "vehAxles": vehAxles,
+                // "vehPlate": vehPlate,
+                // "plateColor": plateColor,
+                // "vehType": vehType,
+                // "vehAxles": vehAxles,
             },
             async : false,
             error : function(request) {
@@ -538,15 +528,6 @@
                 $.operate.successCallback(data);
             }
         });
-
-            // data.push({"name": "caseNum", "value": caseNum});
-            // data.push({"name": "caseObject", "value": caseObject});
-            // data.push({"name": "caseTime", "value": caseTime});
-            // data.push({"name": "vehPlate", "value": vehPlate});
-            // data.push({"name": "plateColor", "value": plateColor});
-            // data.push({"name": "vehType", "value": vehType});
-            // data.push({"name": "vehAxles", "value": vehAxles});
-            // $.operate.saveTab(prefix + "/add", data);
 
     }
 

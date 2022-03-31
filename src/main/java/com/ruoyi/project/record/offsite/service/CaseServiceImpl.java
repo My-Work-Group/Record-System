@@ -3,11 +3,11 @@ package com.ruoyi.project.record.offsite.service;
 
 import com.ruoyi.project.record.offsite.domain.OffSiteCase;
 import com.ruoyi.project.record.offsite.mapper.OffSiteCaseMapper;
-import com.ruoyi.project.system.user.service.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class CaseServiceImpl implements ICaseService {
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(CaseServiceImpl.class);
 
     @Autowired
     private OffSiteCaseMapper offSiteCaseMapper;
@@ -29,6 +29,7 @@ public class CaseServiceImpl implements ICaseService {
     }
 
     @Override
+    @Transactional
     public int insertCase(OffSiteCase offSiteCase) {
 
         // 新增案件信息
