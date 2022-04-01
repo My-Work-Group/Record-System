@@ -1,4 +1,4 @@
-package com.ruoyi.project.record.offsite.domain;
+package com.ruoyi.project.record.person.domain;
 
 public class Person {
     private static final long serialVersionUID = 1L;

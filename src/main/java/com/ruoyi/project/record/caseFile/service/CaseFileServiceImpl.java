@@ -8,6 +8,7 @@ import com.ruoyi.project.record.offsite.mapper.OffSiteCaseMapper;
 import com.ruoyi.project.record.vehicle.mapper.VehicleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author: 庞沛东
@@ -29,11 +30,10 @@ public class CaseFileServiceImpl implements ICaseFileService {
     private VehicleMapper vehicleMapper;
 
     @Override
+    @Transactional
     public int insertCaseFile(CaseFile caseFile) {
         OffSiteCase offSiteCase = caseFile.getOffSiteCase();
         Vehicle vehicle = caseFile.getVehicle();
-        System.out.println(offSiteCase.toString());
-        System.out.println(vehicle.toString());
         offSiteCaseMapper.insertCase(offSiteCase);
         int row = vehicleMapper.insertVehicle(vehicle);
         return row ;

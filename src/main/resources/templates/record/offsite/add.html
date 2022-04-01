@@ -506,6 +506,7 @@
         var vehPlateColor = document.getElementById("plate-color").value;
         var vehType = document.getElementById("veh-type").value;
         var vehAxleNum = document.getElementById("veh-axles").value;
+
         var json = {
             "offSiteCase": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
             "vehicle": {"vehPlateNumber": vehPlateNumber, "vehPlateColor": vehPlateColor, "vehType": vehType, "vehAxleNum": vehAxleNum}
@@ -516,15 +517,6 @@
             url: prefix + "/add",
             contentType: "application/json",
             data: JSON.stringify(json),
-            // data : {
-            // "caseNumber": caseNum,
-            // "caseObject": caseObject,
-            // "caseTime": caseTime,
-            // "vehPlate": vehPlate,
-            // "plateColor": plateColor,
-            // "vehType": vehType,
-            // "vehAxles": vehAxles,
-            //},
             async: false,
             error: function (request) {
                 $.modal.alertError("系统错误");
