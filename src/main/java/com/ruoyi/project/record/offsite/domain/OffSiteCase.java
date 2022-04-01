@@ -20,18 +20,13 @@ public class OffSiteCase extends BaseController {
     private Long vehId;
     // 案卷编号
     private String caseNumber;
-
     // 处罚对象
     private String caseObject;
 
     // 受案时间
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date caseTime;
-    //private String caseTime;
 
-//    // 处罚车辆
-//    private Vehicle vehicle;
 
     public Long getCaseId() {
         return caseId;

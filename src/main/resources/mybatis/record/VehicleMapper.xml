@@ -2,36 +2,36 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.record.offsite.vehicle.mapper.VehicleMapper">
+<mapper namespace="com.ruoyi.project.record.vehicle.mapper.VehicleMapper">
 
-    <resultMap type="Vehicle" id="VehicleResult">
-        <result property="vehId" column="veh_id"/>
-        <result property="plateNumber" column="plate_number"/>
-        <result property="plateColor" column="plate_color"/>
-        <result property="vehType" column="veh_type"/>
-        <result property="vehAxes" column="veh_axes"/>
-        <result property="personId" column="person_id"/>
-        <result property="companyId" column="company_id"/>
-<!--        <association property="vehicle" column="veh_id" javaType="Vehicle" resultMap="vehicleResult"/>-->
-    </resultMap>
+<!--    <resultMap type="Vehicle" id="VehicleResult">-->
+<!--        <result property="vehId" column="veh_id"/>-->
+<!--        <result property="vehPlateNumber" column="veh_plate_number"/>-->
+<!--        <result property="vehPlateColor" column="veh_plate_color"/>-->
+<!--        <result property="vehType" column="veh_type"/>-->
+<!--        <result property="vehAxes" column="veh_axes"/>-->
+<!--        <result property="personId" column="person_id"/>-->
+<!--        <result property="companyId" column="company_id"/>-->
+<!--    </resultMap>-->
 
     <insert id="insertVehicle" parameterType="Vehicle" useGeneratedKeys="true" keyProperty="vehId">
         insert into rec_offsite_veh(
-        <if test="vehId != null">veh_id,</if>
-        <if test="plateNumber != null ">plate_number,</if>
-        <if test="plateColor != null and plateColor != ''">plate_color,</if>
-        <if test="vehType != null and vehType != ''">veh_type,</if>
-        <if test="vehAxleNum != null">veh_axes</if>
-        <if test="personId != null and personId != ''">person_id,</if>
-        <if test="companyId != null and companyId != ''">company_id,</if>
-        )values(
-        <if test="vehId != null and vehId != ''">#{veh_id},</if>
-        <if test="plateNumber != null and plateNumber != ''">#{plate_number},</if>
-        <if test="plateColor != null and plateColor != ''">#{plate_color},</if>
-        <if test="vehType != null and vehType != ''">#{veh_type},</if>
-        <if test="vehAxleNum != null and vehAxleNum != ''">#{veh_axes},</if>
-        <if test="personId != null and personId != ''">#{person_id},</if>
-        <if test="companyId != null and companyId != ''">#{company_id}</if>
+        <if test="vehicle.vehId != null and vehicle.vehId != ''">veh_id,</if>
+        <if test="vehicle.personId != null and vehicle.personId != ''">person_id,</if>
+        <if test="vehicle.companyId != null and vehicle.companyId != ''">company_id,</if>
+        <if test="vehicle.vehPlateNumber != null and vehicle.vehPlateNumber != ''">veh_plate_number,</if>
+        <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">veh_plate_color,</if>
+        <if test="vehicle.vehType != null and vehicle.vehType != ''">veh_type,</if>
+        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes</if>
+        ) values (
+        <if test="vehicle.vehId != null and vehicle.vehId != ''">#{vehicle.vehId},</if>
+        <if test="vehicle.personId != null and vehicle.personId != ''">#{vehicle.personId},</if>
+        <if test="vehicle.companyId != null and vehicle.companyId != ''">#{vehicle.companyId},</if>
+        <if test="vehicle.vehPlateNumber != null and vehicle.vehPlateNumber != ''">#{vehicle.vehPlateNumber},</if>
+        <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">#{vehicle.vehPlateColor},</if>
+        <if test="vehicle.vehType != null and vehicle.vehType != ''">#{vehicle.vehType},</if>
+        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">#{vehicle.vehAxleNum}</if>
+
         )
     </insert>
 

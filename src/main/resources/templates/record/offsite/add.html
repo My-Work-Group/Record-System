@@ -502,13 +502,13 @@
         var caseObject = document.getElementById("object").value;
         var caseTime = document.getElementById("case-time").value.replace(/T/g, " ");
         // 车辆信息
-        var vehPlate = document.getElementById("veh-plate").value;
+        var vehPlateNumber = document.getElementById("veh-plate").value;
         var vehPlateColor = document.getElementById("plate-color").value;
         var vehType = document.getElementById("veh-type").value;
-        var VehAxleNum = document.getElementById("veh-axles").value;
+        var vehAxleNum = document.getElementById("veh-axles").value;
         var json = {
             "offSiteCase": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
-            "vehicle": {"vehPlate": vehPlate, "vehPlateColor": vehPlateColor, "vehType": vehType, "VehAxleNum": VehAxleNum}
+            "vehicle": {"vehPlateNumber": vehPlateNumber, "vehPlateColor": vehPlateColor, "vehType": vehType, "vehAxleNum": vehAxleNum}
         };
         $.ajax({
             cache: true,

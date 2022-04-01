@@ -1,11 +1,14 @@
-package com.ruoyi.project.record.offsite.domain;
+package com.ruoyi.project.record.caseFile.domain;
 
-import com.ruoyi.project.record.offsite.vehicle.domain.Vehicle;
+import com.ruoyi.project.record.offsite.domain.Company;
+import com.ruoyi.project.record.offsite.domain.OffSiteCase;
+import com.ruoyi.project.record.offsite.domain.Person;
+import com.ruoyi.project.record.vehicle.domain.Vehicle;
 
-public class Param {
+public class CaseFile {
     private OffSiteCase offSiteCase;
     private Company company;
-    private Person Person;
+    private com.ruoyi.project.record.offsite.domain.Person Person;
     private Vehicle vehicle;
 
     public OffSiteCase getOffSiteCase() {
@@ -24,11 +27,11 @@ public class Param {
         this.company = company;
     }
 
-    public com.ruoyi.project.record.offsite.domain.Person getPerson() {
+    public Person getPerson() {
         return Person;
     }
 
-    public void setPerson(com.ruoyi.project.record.offsite.domain.Person person) {
+    public void setPerson(Person person) {
         Person = person;
     }
 
