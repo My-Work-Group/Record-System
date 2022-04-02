@@ -26,13 +26,13 @@
     <insert id="insertCase" parameterType="OffSiteCase" useGeneratedKeys="true" keyProperty="caseId">
         insert into rec_offsite_case(
         <if test="offSiteCase.caseId != null">case_id,</if>
-        <if test="offSiteCase.vehId != null ">veh_id,</if>
+        <if test="offSiteCase.vehPlateNum != null ">veh_plate_num,</if>
         <if test="offSiteCase.caseNumber != null and offSiteCase.caseNumber != ''">case_number,</if>
         <if test="offSiteCase.caseObject != null and offSiteCase.caseObject != ''">case_object,</if>
         <if test="offSiteCase.caseTime != null">case_time</if>
         )values(
         <if test="offSiteCase.caseId != null and offSiteCase.caseId != ''">#{offSiteCase.caseId},</if>
-        <if test="offSiteCase.vehId != null and offSiteCase.vehId != ''">#{offSiteCase.vehId},</if>
+        <if test="offSiteCase.vehPlateNum != null and offSiteCase.vehPlateNum != ''">#{offSiteCase.vehPlateNum},</if>
         <if test="offSiteCase.caseNumber != null and offSiteCase.caseNumber != ''">#{offSiteCase.caseNumber},</if>
         <if test="offSiteCase.caseObject != null and offSiteCase.caseObject != ''">#{offSiteCase.caseObject},</if>
         <if test="offSiteCase.caseTime != null">#{offSiteCase.caseTime}</if>

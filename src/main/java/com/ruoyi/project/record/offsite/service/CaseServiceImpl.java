@@ -18,7 +18,6 @@ import java.util.List;
  */
 @Service
 public class CaseServiceImpl implements ICaseService {
-    private static final Logger log = LoggerFactory.getLogger(CaseServiceImpl.class);
 
     @Autowired
     private OffSiteCaseMapper offSiteCaseMapper;
@@ -33,9 +32,8 @@ public class CaseServiceImpl implements ICaseService {
     public int insertCase(OffSiteCase offSiteCase) {
 
         // 新增案件信息
-        int rows = offSiteCaseMapper.insertCase(offSiteCase);
+        return offSiteCaseMapper.insertCase(offSiteCase);
 
-        return rows;
     }
 
     @Override

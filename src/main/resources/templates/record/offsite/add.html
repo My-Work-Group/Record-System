@@ -53,7 +53,8 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">姓名：</label>
                         <div class="col-sm-8">
-                            <input name="userName" placeholder="请输入姓名" class="form-control" type="text" maxlength="30"
+                            <input name="name" id="name" placeholder="请输入姓名" class="form-control" type="text"
+                                   maxlength="30"
                                    required>
                         </div>
                     </div>
@@ -62,7 +63,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">用户性别：</label>
                         <div class="col-sm-8">
-                            <select name="sex" class="form-control m-b">
+                            <select name="sex" id="sex" class="form-control m-b">
                                 <option>男</option>
                                 <option>女</option>
                             </select>
@@ -103,7 +104,7 @@
                         <label class="col-sm-4 control-label">手机号码：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="phonenumber" name="phonenumber" placeholder="请输入手机号码" class="form-control"
+                                <input id="personPhone" name="personPhone" placeholder="请输入手机号码" class="form-control"
                                        type="text" maxlength="11">
                                 <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                             </div>
@@ -115,7 +116,7 @@
                         <label class="col-sm-4 control-label">家庭住址：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="home-address" name="home-address" class="form-control address" type="text"
+                                <input id="homeAddrsss" name="homeAddrsss" class="form-control address" type="text"
                                        maxlength="50" placeholder="请输入住址">
                                 <span class="input-group-addon"><i class="fa fa-home"></i></span>
                             </div>
@@ -128,7 +129,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">工作单位：</label>
                         <div class="col-sm-8">
-                            <input id="company" name="company" placeholder="请输入工作单位" class="form-control" type="text"
+                            <input id="workUnit" name="workUnit" placeholder="请输入工作单位" class="form-control" type="text"
                                    required>
                         </div>
                     </div>
@@ -150,7 +151,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">联系地址：</label>
                         <div class="col-sm-8">
-                            <input id="contact-addres " name="contact-address" placeholder="请输入联系地址"
+                            <input id="contactAddress" name="contactAddress" placeholder="请输入联系地址"
                                    class="form-control"
                                    type="text" required>
                         </div>
@@ -166,7 +167,8 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">名称：</label>
                         <div class="col-sm-8">
-                            <input name="company-name" placeholder="请输入公司名称" class="form-control" type="text"
+                            <input name="companyName" id="companyName" placeholder="请输入公司名称" class="form-control"
+                                   type="text"
                                    maxlength="30"
                                    required>
                         </div>
@@ -177,7 +179,7 @@
                         <label class="col-sm-4 control-label">统一社会信用代码：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="credit-code" name="credit-code" class="form-control age" type="text"
+                                <input id="creditCode" name="creditCode" class="form-control age" type="text"
                                        maxlength="3"
                                        placeholder="请输入社会信用代码">
                                 <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
@@ -191,7 +193,8 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">法人（负责人）姓名：</label>
                         <div class="col-sm-8">
-                            <input name="company-name" placeholder="请输入姓名" class="form-control" type="text"
+                            <input name="directorName" id="directorName" placeholder="请输入姓名" class="form-control"
+                                   type="text"
                                    maxlength="30"
                                    required>
                             </select>
@@ -203,7 +206,7 @@
                         <label class="col-sm-4 control-label">法人（负责人）身份证号：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="legal-person-id" name="legal-person-id" placeholder="请输入身份证号"
+                                <input id="directorNumId" name="directorNumId" placeholder="请输入身份证号"
                                        class="form-control" type="text"
                                        maxlength="18">
                                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
@@ -218,8 +221,7 @@
                         <label class="col-sm-4 control-label">地址：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="company-add" name="company-add" class="form-control age" type="text"
-                                       maxlength="3"
+                                <input id="companyAddress" name="companyAddress" class="form-control age" type="text"
                                        placeholder="请输入公司地址">
                                 <span class="input-group-addon"><i class="fa fa-send"></i></span>
                             </div>
@@ -231,7 +233,7 @@
                         <label class="col-sm-4 control-label">联系电话：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="telephone" name="telephone" placeholder="请输入联系电话" class="form-control"
+                                <input id="companyPhone" name="companyPhone" placeholder="请输入联系电话" class="form-control"
                                        type="text"
                                        maxlength="18">
                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -309,7 +311,8 @@
                         <label class="col-sm-4 control-label">车货总重：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="weight" name="weight" placeholder="请输入车货总重" class="form-control" type="text"
+                                <input id="totalWeight" name="totalWeight" placeholder="请输入车货总重" class="form-control"
+                                       type="text"
                                        maxlength="11">
                                 <span class="input-group-addon"><i class="fa fa-truck"></i></span>
                             </div>
@@ -321,7 +324,7 @@
                         <label class="col-sm-4 control-label">检测时间：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="check-time" name="check-time" type="datetime-local" value=""
+                                <input id="checkTime" name="checkTime" type="datetime-local" value=""
                                        class="form-control">
                             </div>
                         </div>
@@ -334,7 +337,8 @@
                         <label class="col-sm-4 control-label is-required">检测站点：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="site-code" name="site-code" placeholder="请输入检测站点" class="form-control"
+                                <input id="checkSite" name="checkSite" placeholder="请输入检测站点"
+                                       class="form-control"
                                        type="text"
                                        required>
                                 <span class="input-group-addon"><i class="fa fa-road"></i></span>
@@ -347,7 +351,7 @@
                         <label class="col-sm-4 control-label is-required">超限吨位：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="out-weight" name="out-weight" placeholder="请输入超限吨位" class="form-control"
+                                <input id="outWeight" name="outWeight" placeholder="请输入超限吨位" class="form-control"
                                        type="text" required>
                             </div>
                         </div>
@@ -372,7 +376,7 @@
                         <label class="col-sm-4 control-label">装载时间：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="load-time" name="load-time" type="datetime-local" value=""
+                                <input id="loadTime" name="loadTime" type="datetime-local" value=""
                                        class="form-control">
                             </div>
                         </div>
@@ -385,7 +389,7 @@
                         <label class="col-sm-4 control-label is-required">装载地点：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="load-addreass" name="load-addreass" placeholder="请输入装载地点"
+                                <input id="loadSite" name="loadSite" placeholder="请输入装载地点"
                                        class="form-control"
                                        type="text" required>
                                 <span class="input-group-addon"><i class="fa fa-send-o"></i></span>
@@ -398,7 +402,7 @@
                         <label class="col-sm-4 control-label is-required">运往目的地：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="destination" name="destination" placeholder="请输入运往目的地" class="form-control"
+                                <input id="dest" name="dest" placeholder="请输入运往目的地" class="form-control"
                                        type="text" required>
                                 <span class="input-group-addon"><i class="fa fa-send"></i></span>
                             </div>
@@ -496,20 +500,83 @@
     });
 
     function submitHandler() {
-
         // 案件信息
         var caseNum = $("input[name='case-num']").val();
         var caseObject = document.getElementById("object").value;
         var caseTime = document.getElementById("case-time").value.replace(/T/g, " ");
+
+        //个人信息
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var sex = document.getElementById("sex").value;
+        var numberId = document.getElementById("numberId").value;
+        var personPhone = document.getElementById("personPhone").value;
+        var homeAddress = document.getElementById("homeAddress").value;
+        var workUnit = document.getElementById("workUnit").value;
+        var post = document.getElementById("post").value;
+        var contactAddress = document.getElementById("contactAddress").value;
+
+        // 公司信息
+        var companyName = document.getElementById("companyName").value;
+        var creditCode = document.getElementById("creditCode").value;
+        var directorName = document.getElementById("directorName").value;
+        var directorNumId = document.getElementById("directorNumId").value;
+        var companyAddress = document.getElementById("companyAddress").value;
+        var companyPhone = document.getElementById("companyPhone").value;
+
         // 车辆信息
         var vehPlateNumber = document.getElementById("veh-plate").value;
         var vehPlateColor = document.getElementById("plate-color").value;
         var vehType = document.getElementById("veh-type").value;
         var vehAxleNum = document.getElementById("veh-axles").value;
 
+        //超限信息
+        var checkTime = document.getElementById("checkTime").value;
+        var checkSite = document.getElementById("checkSite").value;
+        var totalWeight = document.getElementById("totalWeight").value;
+        var outWeight = document.getElementById("outWeight").value;
+        var goods = document.getElementById("goods").value;
+        var loadTime = document.getElementById("loadTime").value;
+        var loadSite = document.getElementById("loadSite").value;
+        var dest = document.getElementById("dest").value;
+
         var json = {
             "offSiteCase": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
-            "vehicle": {"vehPlateNumber": vehPlateNumber, "vehPlateColor": vehPlateColor, "vehType": vehType, "vehAxleNum": vehAxleNum}
+            "person": {
+                "name": name,
+                "age": age,
+                "sex": sex,
+                "numberId": numberId,
+                "personPhone": personPhone,
+                "homeAddress": homeAddress,
+                "workUnit": workUnit,
+                "post": post,
+                "contactAddress": contactAddress
+            },
+            "vehicle": {
+                "vehPlateNumber": vehPlateNumber,
+                "vehPlateColor": vehPlateColor,
+                "vehType": vehType,
+                "vehAxleNum": vehAxleNum
+            },
+            "company": {
+                "companyName": companyName,
+                "creditCode": creditCode,
+                "directorName": directorName,
+                "directorNumId": directorNumId,
+                "companyAddress": companyAddress,
+                "companyPhone": companyPhone
+            },
+            "overload": {
+                "checkTime": checkTime,
+                "checkSite": checkSite,
+                "totalWeight": totalWeight,
+                "outWeight": outWeight,
+                "goods": goods,
+                "loadTime": loadTime,
+                "loadSite": loadSite,
+                "dest": dest
+            }
         };
         $.ajax({
             cache: true,

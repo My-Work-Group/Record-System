@@ -10,7 +10,7 @@ public class Vehicle {
     // 车辆id
     private Long vehId;
     // 车牌号
-    private String vehPlateNumber;
+    private String vehPlateNum;
     // 车牌颜色
     private String vehPlateColor;
     // 轴数
@@ -30,12 +30,12 @@ public class Vehicle {
         this.vehId = vehId;
     }
 
-    public String getVehPlateNumber() {
-        return vehPlateNumber;
+    public String getVehPlateNum() {
+        return vehPlateNum;
     }
 
-    public void setVehPlateNumber(String vehPlateNumber) {
-        this.vehPlateNumber = vehPlateNumber;
+    public void setVehPlateNum(String vehPlateNum) {
+        this.vehPlateNum = vehPlateNum;
     }
 
     public String getVehPlateColor() {
@@ -82,7 +82,7 @@ public class Vehicle {
     public String toString() {
         return "Vehicle{" +
                 "vehId=" + vehId +
-                ", vehPlateNumber='" + vehPlateNumber + '\'' +
+                ", vehPlateNum='" + vehPlateNum + '\'' +
                 ", vehPlateColor='" + vehPlateColor + '\'' +
                 ", vehAxleNum=" + vehAxleNum +
                 ", vehType='" + vehType + '\'' +
@@ -97,7 +97,7 @@ public class Vehicle {
 //                append("vehId", getVehId()).
 //                append("personId",getPersonId()).
 //                append("companyId",getCompanyId()).
-//                append("vehPlate", getVehPlateNumber()).
+//                append("vehPlate", getVehPlateNum()).
 //                append("vehPlateColor", getVehPlateColor()).
 //                append("VehAxleNum", getVehAxleNum()).
 //                append("vehType", getVehType()).toString();

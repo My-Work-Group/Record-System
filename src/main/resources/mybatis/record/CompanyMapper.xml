@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.company.mapper.CompanyMapper">
+
+    <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="companyId">
+        insert into rec_offsite_company(
+        <if test="company.companyId != null and vehicle.companyId != ''">company_id,</if>
+        <if test="company.companyName != null and company.companyName != ''">company_name,</if>
+        <if test="company.creditCode != null and company.creditCode != ''"> credit_code,</if>
+        <if test="company.directorName != null and company.directorName != ''">director_name,</if>
+        <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id,</if>
+        <if test="company.companyAddress != null and company.companyAddress != ''">company_address,</if>
+        <if test="company.companyPhone != null and company.companyPhone != ''">company_phone</if>
+        ) values (
+        <if test="company.companyId != null and vehicle.companyId != ''">#{company.companyId},</if>
+        <if test="company.companyName != null and company.companyName != ''">#{company.companyName},</if>
+        <if test="company.creditCode != null and company.creditCode != ''"> #{company.creditCode},</if>
+        <if test="company.directorName != null and company.directorName != ''">#{company.directorName},</if>
+        <if test="company.directorNumId != null and company.directorNumId != ''">#{company.directorNumId},</if>
+        <if test="company.companyAddress != null and company.companyAddress != ''">#{company.companyAddress},</if>
+        <if test="company.companyPhone != null and company.companyPhone != ''">#{company.companyPhone}</if>
+        )
+    </insert>
+
+</mapper> 

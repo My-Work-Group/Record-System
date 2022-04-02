@@ -1,15 +1,27 @@
 package com.ruoyi.project.record.caseFile.domain;
 
-import com.ruoyi.project.record.company.controller.CompanyController;
+import com.ruoyi.project.record.company.domain.Company;
 import com.ruoyi.project.record.offsite.domain.OffSiteCase;
+import com.ruoyi.project.record.overload.domain.Overload;
 import com.ruoyi.project.record.person.domain.Person;
 import com.ruoyi.project.record.vehicle.domain.Vehicle;
 
 public class CaseFile {
+
+    // 案件概览
     private OffSiteCase offSiteCase;
-    private CompanyController company;
-    private com.ruoyi.project.record.person.domain.Person Person;
+
+    // 公司实体
+    private Company company;
+
+    // 个人实体
+    private Person person;
+
+    // 车辆实体
     private Vehicle vehicle;
+
+    //超限信息实体
+    private Overload overload;
 
     public OffSiteCase getOffSiteCase() {
         return offSiteCase;
@@ -19,20 +31,20 @@ public class CaseFile {
         this.offSiteCase = offSiteCase;
     }
 
-    public CompanyController getCompany() {
+    public Company getCompany() {
         return company;
     }
 
-    public void setCompany(CompanyController company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 
     public Person getPerson() {
-        return Person;
+        return person;
     }
 
     public void setPerson(Person person) {
-        Person = person;
+        this.person = person;
     }
 
     public Vehicle getVehicle() {
@@ -43,14 +55,22 @@ public class CaseFile {
         this.vehicle = vehicle;
     }
 
+    public Overload getOverload() {
+        return overload;
+    }
+
+    public void setOverload(Overload overload) {
+        this.overload = overload;
+    }
 
     @Override
     public String toString() {
-        return "Param{" +
+        return "CaseFile{" +
                 "offSiteCase=" + offSiteCase +
                 ", company=" + company +
-                ", Person=" + Person +
+                ", person=" + person +
                 ", vehicle=" + vehicle +
+                ", overload=" + overload +
                 '}';
     }
 }

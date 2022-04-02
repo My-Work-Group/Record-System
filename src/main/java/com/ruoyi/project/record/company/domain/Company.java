@@ -20,4 +20,73 @@ public class Company {
     private String companyAddress;
     // 公司电话
     private String companyPhone;
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCreditCode() {
+        return creditCode;
+    }
+
+    public void setCreditCode(String creditCode) {
+        this.creditCode = creditCode;
+    }
+
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
+    public String getDirectorNumId() {
+        return directorNumId;
+    }
+
+    public void setDirectorNumId(String directorNumId) {
+        this.directorNumId = directorNumId;
+    }
+
+    public String getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
+
+    public String getCompanyPhone() {
+        return companyPhone;
+    }
+
+    public void setCompanyPhone(String companyPhone) {
+        this.companyPhone = companyPhone;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyId=" + companyId +
+                ", companyName='" + companyName + '\'' +
+                ", creditCode='" + creditCode + '\'' +
+                ", directorName='" + directorName + '\'' +
+                ", directorNumId='" + directorNumId + '\'' +
+                ", companyAddress='" + companyAddress + '\'' +
+                ", companyPhone='" + companyPhone + '\'' +
+                '}';
+    }
 }

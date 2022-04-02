@@ -10,14 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Date: create in 2022/4/1 13:41
  */
 
-public class VehicleServiceImpl  implements IVehicleService{
+public class VehicleServiceImpl implements IVehicleService {
 
     @Autowired
     private VehicleMapper vehicleMapper;
 
     @Override
     public int insertVehicle(Vehicle vehicle) {
-        int row   =  vehicleMapper.insertVehicle(vehicle);
-        return row;
+        return vehicleMapper.insertVehicle(vehicle);
     }
 }

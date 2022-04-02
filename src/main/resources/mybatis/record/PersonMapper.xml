@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.person.mapper.PersonMapper">
+
+    <insert id="insertPerson" parameterType="Person" useGeneratedKeys="true" keyProperty="personId">
+        insert into rec_offsite_person(
+        <if test="person.personId != null and person.personId != ''">person_id,</if>
+        <if test="person.personName != null and person.personName != ''">person_name,</if>
+        <if test="person.age != null and person.age != ''">age,</if>
+        <if test="person.sex != null and person.sex != ''">sex,</if>
+        <if test="person.homeAddress != null and person.homeAddress != ''">home_address,</if>
+        <if test="person.workUnit != null and person.workUnit != ''">work_unit,</if>
+        <if test="person.post != null and person.post != ''">post,</if>
+        <if test="person.contactAddress != null and person.contactAddress != ''">contact_address</if>
+        ) values (
+        <if test="person.personId != null and person.personId != ''">#{person.personId},</if>
+        <if test="person.personName != null and person.personName != ''">#{person.personName},</if>
+        <if test="person.age != null and person.age != ''">#{person.age},</if>
+        <if test="person.sex != null and person.sex != ''">#{person.sex},</if>
+        <if test="person.homeAddress != null and person.homeAddress != ''">#{person.homeAddress},</if>
+        <if test="person.workUnit != null and person.workUnit != ''">#{person.workUnit},</if>
+        <if test="person.post != null and person.post != ''">#{person.post},</if>
+        <if test="person.contactAddress != null and person.contactAddress != ''">#{person.contactAddress}</if>
+        )
+    </insert>
+
+</mapper> 

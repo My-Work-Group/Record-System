@@ -16,8 +16,12 @@ public class OffSiteCase extends BaseController {
     private static final long serialVersionUID = 1L;
     // 案件id
     private Long caseId;
-    // 处罚的车辆id
-    private Long vehId;
+//    // 处罚的车辆id
+//    private Long vehId;
+
+    //处罚车辆的车牌号
+    private String vehPlateNum;
+
     // 案卷编号
     private String caseNumber;
     // 处罚对象
@@ -36,13 +40,13 @@ public class OffSiteCase extends BaseController {
         this.caseId = caseId;
     }
 
-    public Long getVehId() {
-        return vehId;
-    }
-
-    public void setVehId(Long vehId) {
-        this.vehId = vehId;
-    }
+//    public Long getVehId() {
+//        return vehId;
+//    }
+//
+//    public void setVehId(Long vehId) {
+//        this.vehId = vehId;
+//    }
 
     public String getCaseNumber() {
         return caseNumber;
@@ -68,55 +72,23 @@ public class OffSiteCase extends BaseController {
         this.caseObject = caseObject;
     }
 
-//    public Vehicle getVehicle() {
-//        return vehicle;
-//    }
-//
-//    public void setVehicle(Vehicle vehicle) {
-//        this.vehicle = vehicle;
-//    }
+    public String getVehPlateNum() {
+        return vehPlateNum;
+    }
+
+    public void setVehPlateNum(String vehPlateNum) {
+        this.vehPlateNum = vehPlateNum;
+    }
 
     @Override
     public String toString() {
         return "OffSiteCase{" +
                 "caseId=" + caseId +
-                ", vehId=" + vehId +
+                ", vehPlateNum=" + vehPlateNum +
                 ", caseNumber='" + caseNumber + '\'' +
                 ", caseTime=" + caseTime +
                 ", caseObject='" + caseObject + '\'' +
-//                ", vehicle=" + vehicle +
                 '}';
     }
-
-    // 罚款金额
-//    private int fine;
-
-//
-//    // 车牌号
-//    private String plateNum;
-//    // 轴数
-//    @Excel(name = "轴数")
-//    private String axleNum;
-//    //车货总重
-//    @Excel(name = "车货总重")
-//    private String totalWeight;
-//    // 检测时间
-//    private String checkTime;
-//    // 检测站点
-//    @Excel(name = "检测站点")
-//    private String siteCode;
-//    //超限吨位
-//    private String overLoad;
-//    // 超限比例
-//    private String overRate;
-//    //	装载的货物
-//    private String goods;
-//    //	装载时间
-//    private String loadingTime;
-//    //	装载地点
-//    private String loadAdd;
-//    //	运往目的地
-//    private String destination;
-
 
 }
