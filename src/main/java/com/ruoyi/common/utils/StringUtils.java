@@ -1,5 +1,6 @@
 package com.ruoyi.common.utils;
-
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -153,6 +154,29 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     public static boolean isArray(Object object)
     {
         return isNotNull(object) && object.getClass().isArray();
+    }
+
+    /**
+     * *判断该对象是否: 返回ture表示所有属性为null  返回false表示不是所有属性都是null
+     *
+     * @param
+     * @return
+     */
+    public static boolean isAllFieldNull(Object object) {
+        if (null == object) {
+            return true;
+        }
+        try {
+            for (Field f : object.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+                if (f.get(object) != null && !String.valueOf(f.get(object)).equals("")) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     /**

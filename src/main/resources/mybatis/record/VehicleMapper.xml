@@ -19,7 +19,7 @@
         <if test="vehicle.vehId != null and vehicle.vehId != ''">veh_id,</if>
         <if test="vehicle.personId != null and vehicle.personId != ''">person_id,</if>
         <if test="vehicle.companyId != null and vehicle.companyId != ''">company_id,</if>
-        <if test="vehicle.vehPlateNum != null and vehicle.vehPlateNum != ''">veh_plate_number,</if>
+        <if test="vehicle.vehPlateNum != null and vehicle.vehPlateNum != ''">veh_plate_num,</if>
         <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">veh_plate_color,</if>
         <if test="vehicle.vehType != null and vehicle.vehType != ''">veh_type,</if>
         <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes</if>
@@ -31,7 +31,6 @@
         <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">#{vehicle.vehPlateColor},</if>
         <if test="vehicle.vehType != null and vehicle.vehType != ''">#{vehicle.vehType},</if>
         <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">#{vehicle.vehAxleNum}</if>
-
         )
     </insert>
 

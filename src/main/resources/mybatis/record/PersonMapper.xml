@@ -8,8 +8,10 @@
         insert into rec_offsite_person(
         <if test="person.personId != null and person.personId != ''">person_id,</if>
         <if test="person.personName != null and person.personName != ''">person_name,</if>
+        <if test="person.numberId != null and person.numberId != ''">number_id,</if>
         <if test="person.age != null and person.age != ''">age,</if>
         <if test="person.sex != null and person.sex != ''">sex,</if>
+        <if test="person.personPhone != null and person.personPhone != ''">person_phone,</if>
         <if test="person.homeAddress != null and person.homeAddress != ''">home_address,</if>
         <if test="person.workUnit != null and person.workUnit != ''">work_unit,</if>
         <if test="person.post != null and person.post != ''">post,</if>
@@ -17,8 +19,10 @@
         ) values (
         <if test="person.personId != null and person.personId != ''">#{person.personId},</if>
         <if test="person.personName != null and person.personName != ''">#{person.personName},</if>
+        <if test="person.numberId != null and person.numberId != ''">#{person.numberId},</if>
         <if test="person.age != null and person.age != ''">#{person.age},</if>
         <if test="person.sex != null and person.sex != ''">#{person.sex},</if>
+        <if test="person.personPhone != null and person.personPhone != ''">#{person.personPhone},</if>
         <if test="person.homeAddress != null and person.homeAddress != ''">#{person.homeAddress},</if>
         <if test="person.workUnit != null and person.workUnit != ''">#{person.workUnit},</if>
         <if test="person.post != null and person.post != ''">#{person.post},</if>

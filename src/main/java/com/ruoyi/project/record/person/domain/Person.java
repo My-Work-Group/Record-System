@@ -2,9 +2,11 @@ package com.ruoyi.project.record.person.domain;
 
 public class Person {
     private static final long serialVersionUID = 1L;
+    // id
+    private String personId;
 
     // 姓名
-    private String name;
+    private String personName;
 
     // 年龄
     private int age;
@@ -30,12 +32,20 @@ public class Person {
     // 职务
     private String post;
 
-    public String getName() {
-        return name;
+    public String getPersonId() {
+        return personId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
     }
 
     public int getAge() {
@@ -105,7 +115,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
+                "name='" + personName + '\'' +
                 ", age=" + age +
                 ", sex='" + sex + '\'' +
                 ", numberId='" + numberId + '\'' +

@@ -8,7 +8,7 @@
         insert into rec_offsite_company(
         <if test="company.companyId != null and vehicle.companyId != ''">company_id,</if>
         <if test="company.companyName != null and company.companyName != ''">company_name,</if>
-        <if test="company.creditCode != null and company.creditCode != ''"> credit_code,</if>
+        <if test="company.creditCode != null and company.creditCode != ''">credit_code,</if>
         <if test="company.directorName != null and company.directorName != ''">director_name,</if>
         <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id,</if>
         <if test="company.companyAddress != null and company.companyAddress != ''">company_address,</if>

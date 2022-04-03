@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Company {
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     // 公司id
-    private Long companyId;
+    private Integer companyId;
     // 公司名称
     private String companyName;
     // 统一社会信用代码
@@ -21,11 +21,11 @@ public class Company {
     // 公司电话
     private String companyPhone;
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

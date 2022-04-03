@@ -4,7 +4,12 @@ $(document).ready(function(){
 		  submitHandler: function(form) {    
 		 		form.submit();    
 		}       
-	});  
+	});
+
+	//校验车牌号，保留暂时不用
+	jQuery.validator.addMethod("isVehPlateNum",function(value,element){
+
+	},"请填写正确的车牌号");
 	//手机号码验证身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)
 	jQuery.validator.addMethod("isPhone",function(value,element){
 		var length = value.length;
@@ -16,6 +21,14 @@ $(document).ready(function(){
 		var tel = /^(0\d{2,3}-)?\d{7,8}$/g;//区号3,4位,号码7,8位
 		return this.optional(element) || (tel.test(value));
 	},"请填写正确的座机号码");
+
+	//公司电话号码（手机）验证
+	jQuery.validator.addMethod("isPhoneOrTel",function(value,element){
+		var phone=/^1[3-9]\d{9}$/;
+		var tel = /^(0\d{2,3}-)?\d{7,8}$/g;//区号3,4位,号码7,8位
+		return this.optional(element) || (phone.test(value) || tel.test(value));
+	},"请填写正确的号码");
+
 	//姓名校验
 	jQuery.validator.addMethod("isName",function(value,element){
 		var name=/^[\u4e00-\u9fa5]{2,6}$/;
