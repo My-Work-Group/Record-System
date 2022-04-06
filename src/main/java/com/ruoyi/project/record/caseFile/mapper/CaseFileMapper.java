@@ -1,6 +1,9 @@
 package com.ruoyi.project.record.caseFile.mapper;
 
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
+import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
+
+import java.util.List;
 
 /**
  * @Author: 庞沛东
@@ -10,10 +13,9 @@ import com.ruoyi.project.record.caseFile.domain.CaseFile;
 public interface CaseFileMapper {
 
     /**
-     * 新增案件信息
      *
-     * @param caseFile 用户信息
-     * @return 结果
+     * @param caseInfo 查询笔录，用于显示首页的笔录列表
+     * @return
      */
-    public  int insertCaseFile(CaseFile caseFile);
+    public List<CaseFile> selectRecordList(CaseInfo caseInfo);
 }
