@@ -8,7 +8,7 @@ public class Vehicle {
 
     private static final long serialVersionUID = 1L;
     // 车辆id
-    private Long vehId;
+    private Integer vehId;
     // 车牌号
     private String vehPlateNum;
     // 车牌颜色
@@ -18,15 +18,15 @@ public class Vehicle {
     // 车型
     private String vehType;
 
-    private Long personId;
+    private Integer personId;
 
-    private Long companyId;
+    private Integer companyId;
 
-    public Long getVehId() {
+    public Integer getVehId() {
         return vehId;
     }
 
-    public void setVehId(Long vehId) {
+    public void setVehId(Integer vehId) {
         this.vehId = vehId;
     }
 
@@ -62,19 +62,19 @@ public class Vehicle {
         this.vehType = vehType;
     }
 
-    public Long getPersonId() {
+    public Integer getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
+    public void setPersonId(Integer personId) {
         this.personId = personId;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

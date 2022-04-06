@@ -3,7 +3,7 @@ package com.ruoyi.project.record.person.domain;
 public class Person {
     private static final long serialVersionUID = 1L;
     // id
-    private String personId;
+    private Integer personId;
 
     // 姓名
     private String personName;
@@ -32,11 +32,11 @@ public class Person {
     // 职务
     private String post;
 
-    public String getPersonId() {
+    public Integer getPersonId() {
         return personId;
     }
 
-    public void setPersonId(String personId) {
+    public void setPersonId(Integer personId) {
         this.personId = personId;
     }
 

@@ -15,6 +15,7 @@ import com.ruoyi.project.record.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper;
 import com.ruoyi.project.record.vehicle.mapper.VehicleMapper;
 import com.ruoyi.project.system.user.domain.User;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,13 +71,21 @@ public class CaseFileServiceImpl implements ICaseFileService {
         caseInfoMapper.insertCase(caseInfo);
         if (!isAllFieldNull(person) && caseInfo.getCaseObject().equals("个人")) {
             personMapper.insertPerson(person);
+            System.out.println("-----------------------");
+            System.out.println(person.getPersonId());
+//            vehicle.setPersonId(person.getPersonId());
+            System.out.println("-----------------------");
         }
         if (!isAllFieldNull(company) && caseInfo.getCaseObject().equals("公司")) {
             companyMapper.insertCompany(company);
+            System.out.println("-----------------------");
+            System.out.println(company.getCompanyId());
+            System.out.println("-----------------------");
+//            vehicle.setCompanyId(company.getCompanyId());
         }
         vehicleMapper.insertVehicle(vehicle);
-        overloadMapper.insertOverload(overload);
-        return 1;
+        int row = overloadMapper.insertOverload(overload);
+        return row;
     }
 
     /**

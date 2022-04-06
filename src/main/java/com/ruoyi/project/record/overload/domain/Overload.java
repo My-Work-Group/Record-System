@@ -15,7 +15,7 @@ public class Overload {
     private static final long serialVersionUID = 1L;
 
     // 超限id
-    private Long overloadId;
+    private Integer overloadId;
 
     // 车牌号
     private String vehPlateNum;
@@ -39,11 +39,11 @@ public class Overload {
     //送往目的地
     private String dest;
 
-    public Long getOverloadId() {
+    public Integer getOverloadId() {
         return overloadId;
     }
 
-    public void setOverloadId(Long overloadId) {
+    public void setOverloadId(Integer overloadId) {
         this.overloadId = overloadId;
     }
 

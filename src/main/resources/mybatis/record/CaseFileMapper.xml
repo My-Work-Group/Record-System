@@ -65,7 +65,7 @@
         <result property="dest" column="dest"/>
     </resultMap>
 
-    <select id="selectCaseList" parameterType="CaseInfo" resultMap="UserResult">
+    <select id="selectCaseList" parameterType="CaseInfo" resultMap="CaseInfoResult">
         select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber,
         u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
         d.dept_name, d.leader from sys_user u

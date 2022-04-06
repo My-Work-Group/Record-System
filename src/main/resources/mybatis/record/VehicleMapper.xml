@@ -36,6 +36,8 @@
         <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">veh_plate_color=values(veh_plate_color),</if>
         <if test="vehicle.vehType != null and vehicle.vehType != ''">veh_type=values(veh_type),</if>
         <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes=values(veh_axes)</if>
+<!--        <if test="vehicle.personId != null and vehicle.personId != ''">person_id=values(person_id),</if>-->
+<!--        <if test="vehicle.companyId != null and vehicle.companyId != ''">company_id=values(company_id)</if>-->
     </insert>
 
 </mapper> 

@@ -14,7 +14,7 @@ import java.util.Date;
 public class CaseInfo extends BaseController {
     private static final long serialVersionUID = 1L;
     // 案件id
-    private Long caseId;
+    private Integer caseId;
 
     //处罚车辆的车牌号
     private String vehPlateNum;
@@ -28,11 +28,11 @@ public class CaseInfo extends BaseController {
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date caseTime;
 
-    public Long getCaseId() {
+    public Integer getCaseId() {
         return caseId;
     }
 
-    public void setCaseId(Long caseId) {
+    public void setCaseId(Integer caseId) {
         this.caseId = caseId;
     }
 
