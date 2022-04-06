@@ -1,7 +1,7 @@
 package com.ruoyi.project.record.caseFile.domain;
 
 import com.ruoyi.project.record.company.domain.Company;
-import com.ruoyi.project.record.offsite.domain.OffSiteCase;
+import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.overload.domain.Overload;
 import com.ruoyi.project.record.person.domain.Person;
 import com.ruoyi.project.record.vehicle.domain.Vehicle;
@@ -9,7 +9,7 @@ import com.ruoyi.project.record.vehicle.domain.Vehicle;
 public class CaseFile {
 
     // 案件概览
-    private OffSiteCase offSiteCase;
+    private CaseInfo caseInfo;
 
     // 公司实体
     private Company company;
@@ -23,12 +23,12 @@ public class CaseFile {
     //超限信息实体
     private Overload overload;
 
-    public OffSiteCase getOffSiteCase() {
-        return offSiteCase;
+    public CaseInfo getCaseInfo() {
+        return caseInfo;
     }
 
-    public void setOffSiteCase(OffSiteCase offSiteCase) {
-        this.offSiteCase = offSiteCase;
+    public void setCaseInfo(CaseInfo caseInfo) {
+        this.caseInfo = caseInfo;
     }
 
     public Company getCompany() {
@@ -66,7 +66,7 @@ public class CaseFile {
     @Override
     public String toString() {
         return "CaseFile{" +
-                "offSiteCase=" + offSiteCase +
+                "caseInfo=" + caseInfo +
                 ", company=" + company +
                 ", person=" + person +
                 ", vehicle=" + vehicle +

@@ -1,14 +1,13 @@
 package com.ruoyi.project.record.caseFile.contorller;
 
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.caseFile.service.ICaseFileService;
-import com.ruoyi.project.record.offsite.domain.OffSiteCase;
-import com.ruoyi.project.record.vehicle.domain.Vehicle;
-import com.ruoyi.project.record.offsite.service.ICaseService;
+import com.ruoyi.project.record.caseInfo.service.ICaseInfoService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +30,9 @@ public class CaseFileController extends BaseController {
     @Autowired
     private ICaseFileService caseFileService;
 
+    @Autowired
+    private ICaseInfoService caseInfoService;
+
 
     @RequiresPermissions("record:offsite:view")
     @GetMapping()
@@ -39,7 +41,7 @@ public class CaseFileController extends BaseController {
     }
 
     /**
-     * 新增用户
+     * 新增案件
      */
     @GetMapping("/add")
     public String add(ModelMap mmap) {
@@ -47,13 +49,20 @@ public class CaseFileController extends BaseController {
     }
 
     /**
-     * 新增保存用户
+     * 新增保存案件
      */
     @RequiresPermissions("record:offsite:add")
     @Log(title = "案件管理", businessType = BusinessType.INSERT)
     @PostMapping(value = "/add")
     @ResponseBody
     public AjaxResult addSave(@RequestBody CaseFile caseFile) {
+
+        String caseNum = caseFile.getCaseInfo().getCaseNumber();
+        // 校验案件编号是否存在
+        if ("1".equals(caseInfoService.checkCaseNumUnique(caseNum)))
+        {
+            return error( caseNum + "，该案件编号已存在！");
+        }
 
         return toAjax(caseFileService.insertCaseFile(caseFile));
     }

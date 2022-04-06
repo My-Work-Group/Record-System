@@ -10,7 +10,6 @@ import com.ruoyi.project.record.caseFile.domain.CaseFile;
 
 public interface ICaseFileService {
 
-
     /**
      * 保存案件信息
      *
@@ -18,6 +17,8 @@ public interface ICaseFileService {
      * @return 结果
      */
     public int insertCaseFile(CaseFile caseFile);
+
+
 }
 
 

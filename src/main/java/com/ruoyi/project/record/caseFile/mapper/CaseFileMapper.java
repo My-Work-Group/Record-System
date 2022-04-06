@@ -8,5 +8,12 @@ import com.ruoyi.project.record.caseFile.domain.CaseFile;
  * @Date: create in 2022/4/1 13:08
  */
 public interface CaseFileMapper {
+
+    /**
+     * 新增案件信息
+     *
+     * @param caseFile 用户信息
+     * @return 结果
+     */
     public  int insertCaseFile(CaseFile caseFile);
 }

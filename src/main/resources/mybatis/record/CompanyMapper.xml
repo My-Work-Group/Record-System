@@ -22,6 +22,11 @@
         <if test="company.companyAddress != null and company.companyAddress != ''">#{company.companyAddress},</if>
         <if test="company.companyPhone != null and company.companyPhone != ''">#{company.companyPhone}</if>
         )
+        ON DUPLICATE KEY UPDATE
+        <if test="company.directorName != null and company.directorName != ''">credit_code=values(credit_code),</if>
+        <if test="company.directorName != null and company.directorName != ''">director_name=values(director_name),</if>
+        <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id=values(director_num_id),</if>
+        <if test="company.companyAddress != null and company.companyAddress != ''">company_address=values(company_address),</if>
+        <if test="company.companyPhone != null and company.companyPhone != ''">company_phone=values(company_phone)</if>
     </insert>
-
 </mapper> 

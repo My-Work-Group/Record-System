@@ -1,8 +1,7 @@
-package com.ruoyi.project.record.offsite.domain;
+package com.ruoyi.project.record.caseInfo.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.web.controller.BaseController;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,12 +11,10 @@ import java.util.Date;
  * @Date: create in 2022/3/30 11:38
  */
 
-public class OffSiteCase extends BaseController {
+public class CaseInfo extends BaseController {
     private static final long serialVersionUID = 1L;
     // 案件id
     private Long caseId;
-//    // 处罚的车辆id
-//    private Long vehId;
 
     //处罚车辆的车牌号
     private String vehPlateNum;
@@ -31,7 +28,6 @@ public class OffSiteCase extends BaseController {
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date caseTime;
 
-
     public Long getCaseId() {
         return caseId;
     }
@@ -39,14 +35,6 @@ public class OffSiteCase extends BaseController {
     public void setCaseId(Long caseId) {
         this.caseId = caseId;
     }
-
-//    public Long getVehId() {
-//        return vehId;
-//    }
-//
-//    public void setVehId(Long vehId) {
-//        this.vehId = vehId;
-//    }
 
     public String getCaseNumber() {
         return caseNumber;
@@ -82,7 +70,7 @@ public class OffSiteCase extends BaseController {
 
     @Override
     public String toString() {
-        return "OffSiteCase{" +
+        return "caseInfo{" +
                 "caseId=" + caseId +
                 ", vehPlateNum=" + vehPlateNum +
                 ", caseNumber='" + caseNumber + '\'' +

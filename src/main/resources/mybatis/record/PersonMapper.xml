@@ -28,6 +28,15 @@
         <if test="person.post != null and person.post != ''">#{person.post},</if>
         <if test="person.contactAddress != null and person.contactAddress != ''">#{person.contactAddress}</if>
         )
+        ON DUPLICATE KEY UPDATE
+        <if test="person.personName != null and person.personName != ''">person_name=values(person_name),</if>
+        <if test="person.numberId != null and person.numberId != ''">number_id=values(number_id),</if>
+        <if test="person.age != null and person.age != ''">age=values(age),</if>
+        <if test="person.sex != null and person.sex != ''">sex=values(sex),</if>
+        <if test="person.personPhone != null and person.personPhone != ''">person_phone=values(person_phone),</if>
+        <if test="person.homeAddress != null and person.homeAddress != ''">home_address=values(home_address),</if>
+        <if test="person.workUnit != null and person.workUnit != ''">work_unit=values(work_unit),</if>
+        <if test="person.post != null and person.post != ''">post=values(post),</if>
+        <if test="person.contactAddress != null and person.contactAddress != ''">contact_address=values(contact_address)</if>
     </insert>
-
 </mapper> 
