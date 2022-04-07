@@ -21,7 +21,7 @@ public class test {
         System.out.println(company.toString());
         if (!isAllFieldNull(company)) {
             System.out.println("不是空的");
-        }else {
+        } else {
             System.out.println("空的");
         }
     }
