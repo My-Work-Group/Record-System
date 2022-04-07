@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : pangpd
 Source Server Version : 50725
 Source Host           : localhost:3306
 Source Database       : ry
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-04-06 13:21:31
+Date: 2022-04-07 20:55:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,4 +29,11 @@ CREATE TABLE `rec_offsite_veh` (
   `company_id` bigint(20) DEFAULT NULL COMMENT '所属公司编号',
   PRIMARY KEY (`veh_id`),
   UNIQUE KEY `veh_plate_num` (`veh_plate_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='车辆信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='车辆信息表';
+
+-- ----------------------------
+-- Records of rec_offsite_veh
+-- ----------------------------
+INSERT INTO `rec_offsite_veh` VALUES ('30', '苏B1111', '黄', '半挂1122', '2', null, null);
+INSERT INTO `rec_offsite_veh` VALUES ('32', '苏B3333', '黄', '半挂1122', '2', null, null);
+INSERT INTO `rec_offsite_veh` VALUES ('33', '苏B9999', '黄', '半挂1122', '2', null, null);

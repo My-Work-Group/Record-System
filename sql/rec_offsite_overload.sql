@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : pangpd
 Source Server Version : 50725
 Source Host           : localhost:3306
 Source Database       : ry
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-04-06 13:21:25
+Date: 2022-04-07 20:55:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,15 +20,23 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `rec_offsite_overload`;
 CREATE TABLE `rec_offsite_overload` (
-  `overload_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '超限信息id',
+  `overload_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '超限信息id= 案件id',
   `check_time` datetime NOT NULL COMMENT '过车时间',
   `check_site` varchar(50) NOT NULL COMMENT '过车地点',
   `total_weight` bigint(20) NOT NULL COMMENT '车货总重',
   `out_weight` bigint(20) NOT NULL COMMENT '超限吨位',
   `goods` varchar(20) NOT NULL COMMENT '装载货物',
   `load_time` datetime NOT NULL COMMENT '装载时间',
-  `load_site` varchar(20) NOT NULL COMMENT '装载地点',
-  `dest` varchar(20) NOT NULL COMMENT '送往目的地',
+  `load_site` varchar(50) NOT NULL COMMENT '装载地点',
+  `dest` varchar(50) NOT NULL COMMENT '送往目的地',
   `veh_plate_num` varchar(20) NOT NULL COMMENT '车辆号',
   PRIMARY KEY (`overload_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='超限信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COMMENT='超限信息表';
+
+-- ----------------------------
+-- Records of rec_offsite_overload
+-- ----------------------------
+INSERT INTO `rec_offsite_overload` VALUES ('79', '2022-04-20 17:46:00', 'S122 K159+500云亭江阴大道东向西', '88', '20', '棉纱', '2022-04-20 17:46:00', '张家港', '云亭', '苏B1111');
+INSERT INTO `rec_offsite_overload` VALUES ('80', '2022-04-20 17:46:00', 'S122 K159+500云亭江阴大道东向西', '88', '20', '棉纱', '2022-04-20 17:46:00', '张家港', '云亭', '苏B1111');
+INSERT INTO `rec_offsite_overload` VALUES ('81', '2022-04-14 18:40:00', 'S122 K159+500云亭江阴大道东向西', '88', '20', '棉纱', '2022-04-22 18:40:00', '张家港', '云亭', '苏B3333');
+INSERT INTO `rec_offsite_overload` VALUES ('82', '2022-04-25 18:59:00', 'S122 K159+500云亭江阴大道东向西', '88', '20', '棉纱', '2022-04-19 18:59:00', '张家港', '云亭', '苏B9999');

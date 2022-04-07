@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : pangpd
 Source Server Version : 50725
 Source Host           : localhost:3306
 Source Database       : ry
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-04-06 13:21:28
+Date: 2022-04-07 20:55:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,4 +32,9 @@ CREATE TABLE `rec_offsite_person` (
   `contact_address` varchar(30) NOT NULL COMMENT '联系地址',
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_name` (`person_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='个人信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='个人信息表';
+
+-- ----------------------------
+-- Records of rec_offsite_person
+-- ----------------------------
+INSERT INTO `rec_offsite_person` VALUES ('38', '庞沛东', '2', '371521198709010768', '34', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室');

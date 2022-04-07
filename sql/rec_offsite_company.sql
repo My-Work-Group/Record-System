@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : pangpd
 Source Server Version : 50725
 Source Host           : localhost:3306
 Source Database       : ry
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-04-06 13:21:21
+Date: 2022-04-07 20:55:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,4 +29,8 @@ CREATE TABLE `rec_offsite_company` (
   `company_phone` varchar(11) DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`company_id`),
   UNIQUE KEY `company_name` (`company_name`,`credit_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='公司信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='公司信息表';
+
+-- ----------------------------
+-- Records of rec_offsite_company
+-- ----------------------------
