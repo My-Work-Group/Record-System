@@ -12,8 +12,8 @@
         <div class="row">
             <div class="col-sm-12 search-collapse">
                 <form id="record-form">
-                    <input type="hidden" id="deptId" name="deptId">
-                    <input type="hidden" id="parentId" name="parentId">
+                    <input type="hidden" id="caseId" name="caseId">
+<!--                    <input type="hidden" id="parentId" name="parentId">-->
                     <div class="select-list">
                         <ul>
                             <li>
@@ -22,17 +22,17 @@
                             <li>
                                 车牌号：<input type="text" name="vehPlate"/>
                             </li>
-                            <li>
-                                检测站点：<input type="text" name="checkSite"/>
-                            </li>
-                            <li class="select-time">
-                                <label>受案时间： </label>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间"
-                                       name="params[beginTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间"
-                                       name="params[endTime]"/>
-                            </li>
+<!--                            <li>-->
+<!--                                检测站点：<input type="text" name="checkSite"/>-->
+<!--                            </li>-->
+<!--                            <li class="select-time">-->
+<!--                                <label>受案时间： </label>-->
+<!--                                <input type="text" class="time-input" id="startTime" placeholder="开始时间"-->
+<!--                                       name="params[beginTime]"/>-->
+<!--                                <span>-</span>-->
+<!--                                <input type="text" class="time-input" id="endTime" placeholder="结束时间"-->
+<!--                                       name="params[endTime]"/>-->
+<!--                            </li>-->
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
                                         class="fa fa-search"></i>&nbsp;搜索</a>
@@ -146,13 +146,13 @@
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        if (row.userId != 1) {
+                        if (row.caseId != 1) {
                             var actions = [];
-                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.userId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                            actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.userId + '\')"><i class="fa fa-remove"></i>删除</a> ');
+                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.caseId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                            actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.caseId + '\')"><i class="fa fa-remove"></i>删除</a> ');
                             var more = [];
-                            more.push("<a class='btn btn-default btn-xs " + resetPwdFlag + "' href='javascript:void(0)' onclick='resetPwd(" + row.userId + ")'><i class='fa fa-key'></i>重置密码</a> ");
-                            more.push("<a class='btn btn-default btn-xs " + editFlag + "' href='javascript:void(0)' onclick='authRole(" + row.userId + ")'><i class='fa fa-check-square-o'></i>分配角色</a>");
+                            more.push("<a class='btn btn-default btn-xs " + resetPwdFlag + "' href='javascript:void(0)' onclick='resetPwd(" + row.caseId + ")'><i class='fa fa-key'></i>重置密码</a> ");
+                            more.push("<a class='btn btn-default btn-xs " + editFlag + "' href='javascript:void(0)' onclick='authRole(" + row.caseId + ")'><i class='fa fa-check-square-o'></i>分配角色</a>");
                             actions.push('<a tabindex="0" class="btn btn-info btn-xs" role="button" data-container="body" data-placement="left" data-toggle="popover" data-html="true" data-trigger="hover" data-content="' + more.join('') + '"><i class="fa fa-chevron-circle-right"></i>更多操作</a>');
                             return actions.join('');
                         } else {
@@ -217,9 +217,9 @@
     /* 用户状态显示 */
     function statusTools(row) {
         if (row.status == 1) {
-            return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="enable(\'' + row.userId + '\')"></i> ';
+            return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="enable(\'' + row.caseId + '\')"></i> ';
         } else {
-            return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.userId + '\')"></i> ';
+            return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.caseId + '\')"></i> ';
         }
     }
 

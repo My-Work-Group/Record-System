@@ -575,6 +575,7 @@
                     "dest": dest
                 }
             };
+            //$.operate.saveTab(prefix + "/add", data);
             $.ajax({
                 cache: true,
                 type: "POST",
@@ -582,19 +583,28 @@
                 contentType: "application/json",
                 data: JSON.stringify(json),
                 async: false,
-                error: function (request) {
-                    $.modal.alertError("系统错误");
+                // error: function (request) {
+                //     $.modal.alertError("系统错误");
+                // },
+                // success: function (data) {
+                //     $.operate.successCallback(data);
+                // }
+                beforeSend: function () {
+                    $.modal.loading("正在处理中，请稍候...");
                 },
-                success: function (data) {
-                    $.operate.successCallback(data);
+                success: function(result) {
+                    if (typeof callback == "function") {
+                        callback(result);
+                    }
+                    $.operate.successTabCallback(result);
                 }
             });
+
         }
     }
 
     $("#numberId").blur(function() {
         var idNumber = $("#numberId").val();
-        console.log(idNumber)
         // 定义籍贯、出生日期、性别、年龄等变量
         var currDate, month, date, age;
         //计算年龄

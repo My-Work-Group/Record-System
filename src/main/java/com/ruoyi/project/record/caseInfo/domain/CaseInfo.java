@@ -15,6 +15,10 @@ public class CaseInfo extends BaseController {
     private static final long serialVersionUID = 1L;
     // 案件id
     private Integer caseId;
+    // 个人id
+    private Integer personId;
+    // 公司id
+    private Integer companyId;
 
     //处罚车辆的车牌号
     private String vehPlateNum;
@@ -68,15 +72,32 @@ public class CaseInfo extends BaseController {
         this.vehPlateNum = vehPlateNum;
     }
 
-    @Override
-    public String toString() {
-        return "caseInfo{" +
-                "caseId=" + caseId +
-                ", vehPlateNum=" + vehPlateNum +
-                ", caseNumber='" + caseNumber + '\'' +
-                ", caseTime=" + caseTime +
-                ", caseObject='" + caseObject + '\'' +
-                '}';
+    public Integer getPersonId() {
+        return personId;
     }
 
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    @Override
+    public String toString() {
+        return "CaseInfo{" +
+                "caseId=" + caseId +
+                ", personId=" + personId +
+                ", companyId=" + companyId +
+                ", vehPlateNum='" + vehPlateNum + '\'' +
+                ", caseNumber='" + caseNumber + '\'' +
+                ", caseObject='" + caseObject + '\'' +
+                ", caseTime=" + caseTime +
+                '}';
+    }
 }

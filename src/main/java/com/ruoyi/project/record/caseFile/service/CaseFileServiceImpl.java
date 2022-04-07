@@ -68,22 +68,23 @@ public class CaseFileServiceImpl implements ICaseFileService {
         //【案件， 超限信息】注入车牌号
         caseInfo.setVehPlateNum(vehPlate);
         overload.setVehPlateNum(vehPlate);
-        caseInfoMapper.insertCase(caseInfo);
         if (!isAllFieldNull(person) && caseInfo.getCaseObject().equals("个人")) {
             personMapper.insertPerson(person);
-            System.out.println("-----------------------");
-            System.out.println(person.getPersonId());
-//            vehicle.setPersonId(person.getPersonId());
-            System.out.println("-----------------------");
+            // 案件信息关联个人Id
+            caseInfo.setPersonId(person.getPersonId());
         }
         if (!isAllFieldNull(company) && caseInfo.getCaseObject().equals("公司")) {
             companyMapper.insertCompany(company);
-            System.out.println("-----------------------");
-            System.out.println(company.getCompanyId());
-            System.out.println("-----------------------");
-//            vehicle.setCompanyId(company.getCompanyId());
+            // 案件信息关联公司id
+            caseInfo.setCompanyId(company.getCompanyId());
         }
+        // 插入案件信息
+        caseInfoMapper.insertCase(caseInfo);
+        // 案件id关联到超限信息
+        overload.setOverloadId(caseInfo.getCaseId());
+        // 插入车辆信息
         vehicleMapper.insertVehicle(vehicle);
+        // 插入超限信息
         int row = overloadMapper.insertOverload(overload);
         return row;
     }
@@ -95,10 +96,9 @@ public class CaseFileServiceImpl implements ICaseFileService {
      * @return 案件信息集合信息
      */
     @Override
-    @DataScope(caseAlias = "a", vehicleAlias = "v", personAlias = "p", companyAlias = "c", overloadAlias = "o")
-    public List<CaseFile> selectRecordList(CaseInfo caseInfo) {
-        // 生成数据权限过滤条件
-        return caseFileMapper.selectRecordList(caseInfo);
+    //@DataScope(caseAlias = "a", vehicleAlias = "v", personAlias = "p", companyAlias = "c", overloadAlias = "o")
+    public String selectRecordList() {
+        return caseFileMapper.selectRecordList();
     }
 
 

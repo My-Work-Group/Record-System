@@ -4,52 +4,59 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.record.caseFile.mapper.CaseFileMapper">
 
+
+    <!--    笔录-->
+    <resultMap type="CaseFile" id="CaseRecordResult">
+        <association property="overload" column="overload_id" javaType="Overload" resultMap="OverloadResult"/>
+        <association property="caseInfo" column="case_id" javaType="CaseInfo" resultMap="CaseInfoResult"/>
+    </resultMap>
+
     <!--    案件信息-->
     <resultMap type="CaseInfo" id="CaseInfoResult">
         <id property="caseId" column="case_id"/>
         <result property="caseNumber" column="case_number"/>
         <result property="caseObject" column="case_object"/>
         <result property="vehPlateNum" column="veh_plate_Num"/>
-        <association property="vehicle" column="veh_plate_Num" javaType="Vehicle" resultMap="vehicleResult"/>
+        <association property="overload" column="overload_id" javaType="Overload" resultMap="OverloadResult"/>
     </resultMap>
 
-    <!--    车辆信息-->
-    <resultMap id="VehicleResult" type="Vehicle">
-        <id property="vehId" column="veh_id"/>
-        <result property="vehPlateNum" column="veh_plate_Num"/>
-        <result property="vehPlateColor" column="veh_plate_color"/>
-        <result property="vehAxleNum" column="veh_axes"/>
-        <result property="vehType" column="veh_type"/>
-        <result property="personId" column="person_id"/>
-        <result property="companyId" column="company_id"/>
-        <association property="overload" column="veh_plate_Num" javaType="Overload" resultMap="OverloadResult"/>
-        <association property="person" column="person_id" javaType="Person" resultMap="PersonResult"/>
-        <association property="company" column="company_id" javaType="Company" resultMap="CompanyResult"/>
-    </resultMap>
+    <!--    &lt;!&ndash;    车辆信息&ndash;&gt;-->
+    <!--    <resultMap id="VehicleResult" type="Vehicle">-->
+    <!--        <id property="vehId" column="veh_id"/>-->
+    <!--        <result property="vehPlateNum" column="veh_plate_Num"/>-->
+    <!--        <result property="vehPlateColor" column="veh_plate_color"/>-->
+    <!--        <result property="vehAxleNum" column="veh_axes"/>-->
+    <!--        <result property="vehType" column="veh_type"/>-->
+    <!--        <result property="personId" column="person_id"/>-->
+    <!--        <result property="companyId" column="company_id"/>-->
+    <!--        <association property="overload" column="veh_plate_Num" javaType="Overload" resultMap="OverloadResult"/>-->
+    <!--        <association property="person" column="person_id" javaType="Person" resultMap="PersonResult"/>-->
+    <!--        <association property="company" column="company_id" javaType="Company" resultMap="CompanyResult"/>-->
+    <!--    </resultMap>-->
 
-    <!--    个人信息-->
-    <resultMap id="PersonResult" type="Person">
-        <id property="personId" column="person_id;"/>
-        <result property="personName" column="person_name"/>
-        <result property="age" column="age"/>
-        <result property="sex" column="sex"/>
-        <result property="numberId" column="number_id"/>
-        <result property="personPhone" column="person_phone"/>
-        <result property="homeAddress" column="company_phone"/>
-        <result property="workUnit" column="work_unit"/>
-        <result property="contactAddress" column="contact_address"/>
-        <result property="post" column="post"/>
-    </resultMap>
+    <!--    &lt;!&ndash;    个人信息&ndash;&gt;-->
+    <!--    <resultMap id="PersonResult" type="Person">-->
+    <!--        <id property="personId" column="person_id;"/>-->
+    <!--        <result property="personName" column="person_name"/>-->
+    <!--        <result property="age" column="age"/>-->
+    <!--        <result property="sex" column="sex"/>-->
+    <!--        <result property="numberId" column="number_id"/>-->
+    <!--        <result property="personPhone" column="person_phone"/>-->
+    <!--        <result property="homeAddress" column="company_phone"/>-->
+    <!--        <result property="workUnit" column="work_unit"/>-->
+    <!--        <result property="contactAddress" column="contact_address"/>-->
+    <!--        <result property="post" column="post"/>-->
+    <!--    </resultMap>-->
 
-    <!--    公司信息-->
-    <resultMap id="CompanyResult" type="Company">
-        <id property="companyId" column="company_id;"/>
-        <result property="companyName" column="company_name"/>
-        <result property="creditCode" column="credit_code"/>
-        <result property="directorName" column="director_name "/>
-        <result property="companyAddress" column="company_address"/>
-        <result property="companyPhone" column="company_phone"/>
-    </resultMap>
+    <!--    &lt;!&ndash;    公司信息&ndash;&gt;-->
+    <!--    <resultMap id="CompanyResult" type="Company">-->
+    <!--        <id property="companyId" column="company_id;"/>-->
+    <!--        <result property="companyName" column="company_name"/>-->
+    <!--        <result property="creditCode" column="credit_code"/>-->
+    <!--        <result property="directorName" column="director_name "/>-->
+    <!--        <result property="companyAddress" column="company_address"/>-->
+    <!--        <result property="companyPhone" column="company_phone"/>-->
+    <!--    </resultMap>-->
 
     <!--    超限信息-->
     <resultMap id="OverloadResult" type="Overload">
@@ -65,36 +72,14 @@
         <result property="dest" column="dest"/>
     </resultMap>
 
-    <select id="selectCaseList" parameterType="CaseInfo" resultMap="CaseInfoResult">
-        select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber,
-        u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
-        d.dept_name, d.leader from sys_user u
-        left join sys_dept d on u.dept_id = d.dept_id
-        where u.del_flag = '0'
-        <if test="userId != null and userId != 0">
-            AND u.user_id = #{userId}
-        </if>
-        <if test="loginName != null and loginName != ''">
-            AND u.login_name like concat('%', #{loginName}, '%')
-        </if>
-        <if test="status != null and status != ''">
-            AND u.status = #{status}
-        </if>
-        <if test="phonenumber != null and phonenumber != ''">
-            AND u.phonenumber like concat('%', #{phonenumber}, '%')
-        </if>
-        <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-            AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
-        </if>
-        <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-            AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
-        </if>
-        <if test="deptId != null and deptId != 0">
-            AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE FIND_IN_SET
-            (#{deptId},ancestors) ))
-        </if>
+<!--    <select id="selectRecordList" parameterType="CaseFile" resultMap="CaseFileResult">-->
+    <select id="selectRecordList"  resultMap="CaseRecordResult">
+        select c.case_id, c.case_number, c.case_object,c.case_time, c.veh_plate_num,
+        o.check_time, o.check_site, o.total_weight, o.out_weight
+        from rec_offsite_case c join rec_offsite_overload o
+        on c.case_id = o.overload_id
         <!-- 数据范围过滤 -->
-        ${params.dataScope}
+--         ${params.dataScope}
     </select>
 
 </mapper>

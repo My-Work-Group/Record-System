@@ -27,7 +27,7 @@ public interface ICaseFileService {
      * @param caseInfo 案件基本信息
      * @return 案件信息集合信息
      */
-    public List<CaseFile> selectRecordList(CaseInfo caseInfo);
+    public String selectRecordList();
 
 }
 
