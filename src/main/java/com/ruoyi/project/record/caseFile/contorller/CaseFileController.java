@@ -42,16 +42,24 @@ public class CaseFileController extends BaseController {
         return prefix + "/offsite";
     }
 
+
+    @RequiresPermissions("record:offsite:export")
+    @GetMapping("/exportRecord")
+    public String file(ModelMap mmap) {
+        return  prefix + "/exportRecord";
+    }
+
+
     @RequiresPermissions("record:offsite:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(CaseInfo caseInfo)
     {
-//        startPage();
-//        List<CaseInfo> list = caseFileService.selectRecordList(caseInfo);
-//        return getDataTable(list);
-        String string = caseFileService.selectRecordList();
-        return null;
+        startPage();
+        List<CaseInfo> list = caseFileService.selectRecordList();
+        System.out.println(list.toString());
+        return getDataTable(list);
+        //String string = caseFileService.selectRecordList();
     }
 
     /**

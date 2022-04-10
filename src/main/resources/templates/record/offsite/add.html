@@ -35,14 +35,14 @@
                 </div>
             </div>
 
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label is-required">受案时间：</label>
-                    <div class="col-sm-8">
-                        <input id="caseTime" name="caseTime" type="datetime-local" value="" class="form-control">
-                    </div>
-                </div>
-            </div>
+<!--            <div class="col-sm-6">-->
+<!--                <div class="form-group">-->
+<!--                    <label class="col-sm-4 control-label is-required">受案时间：</label>-->
+<!--                    <div class="col-sm-8">-->
+<!--                        <input id="caseTime" name="caseTime" type="datetime-local" value="" class="form-control">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
 
@@ -504,7 +504,7 @@
             // 案件信息
             var caseNum = $("input[name='caseNum']").val();
             var caseObject = document.getElementById("object").value;
-            var caseTime = document.getElementById("caseTime").value.replace(/T/g, " ");
+            //var caseTime = document.getElementById("caseTime").value.replace(/T/g, " ");
             //个人信息
             var name = document.getElementById("name").value;
             var age = document.getElementById("age").value;
@@ -538,7 +538,8 @@
             var dest = document.getElementById("dest").value;
 
             var json = {
-                "caseInfo": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
+                //"caseInfo": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
+                "caseInfo": {"caseNumber": caseNum, "caseObject": caseObject},
                 "person": {
                     "personName": name,
                     "age": age,

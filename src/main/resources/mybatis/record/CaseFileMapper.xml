@@ -7,17 +7,17 @@
 
     <!--    笔录-->
     <resultMap type="CaseFile" id="CaseRecordResult">
-        <association property="overload" column="overload_id" javaType="Overload" resultMap="OverloadResult"/>
         <association property="caseInfo" column="case_id" javaType="CaseInfo" resultMap="CaseInfoResult"/>
+        <association property="overload" column="overload_id" javaType="Overload" resultMap="OverloadResult"/>
     </resultMap>
 
     <!--    案件信息-->
     <resultMap type="CaseInfo" id="CaseInfoResult">
         <id property="caseId" column="case_id"/>
         <result property="caseNumber" column="case_number"/>
+        <result property="createTime" column="create_time"/>
         <result property="caseObject" column="case_object"/>
         <result property="vehPlateNum" column="veh_plate_Num"/>
-        <association property="overload" column="overload_id" javaType="Overload" resultMap="OverloadResult"/>
     </resultMap>
 
     <!--    &lt;!&ndash;    车辆信息&ndash;&gt;-->
@@ -74,12 +74,10 @@
 
 <!--    <select id="selectRecordList" parameterType="CaseFile" resultMap="CaseFileResult">-->
     <select id="selectRecordList"  resultMap="CaseRecordResult">
-        select c.case_id, c.case_number, c.case_object,c.case_time, c.veh_plate_num,
+        select c.case_id, c.case_number, c.case_object,c.create_time, c.veh_plate_num,
         o.check_time, o.check_site, o.total_weight, o.out_weight
         from rec_offsite_case c join rec_offsite_overload o
         on c.case_id = o.overload_id
-        <!-- 数据范围过滤 -->
---         ${params.dataScope}
     </select>
 
 </mapper>

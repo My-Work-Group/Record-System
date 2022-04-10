@@ -97,8 +97,9 @@ public class CaseFileServiceImpl implements ICaseFileService {
      */
     @Override
     //@DataScope(caseAlias = "a", vehicleAlias = "v", personAlias = "p", companyAlias = "c", overloadAlias = "o")
-    public String selectRecordList() {
+    public List<CaseInfo> selectRecordList() {
         return caseFileMapper.selectRecordList();
+
     }
 
 

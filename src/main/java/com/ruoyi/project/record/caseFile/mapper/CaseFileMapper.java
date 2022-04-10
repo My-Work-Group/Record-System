@@ -18,5 +18,5 @@ public interface CaseFileMapper {
      * @param caseInfo 查询笔录，用于显示首页的笔录列表
      * @return
      */
-    public String selectRecordList();
+    public List<CaseInfo> selectRecordList();
 }

@@ -24,31 +24,31 @@ public @interface DataScope {
      * 用户表的别名
      */
     public String userAlias() default "";
-
-    /**
-     * 案件表的别名
-     */
-    public String caseAlias() default "";
-
-    /**
-     * 个人信息表的别名
-     */
-    public String personAlias() default "";
-
-    /**
-     * 公司表的别名
-     */
-    public String companyAlias() default "";
-
-    /**
-     * 车辆的别名
-     */
-    public String vehicleAlias() default "";
-
-    /**
-     * 超限信息的别名
-     */
-    public String overloadAlias() default "";
+//
+//    /**
+//     * 案件表的别名
+//     */
+//    public String caseAlias() default "";
+//
+//    /**
+//     * 个人信息表的别名
+//     */
+//    public String personAlias() default "";
+//
+//    /**
+//     * 公司表的别名
+//     */
+//    public String companyAlias() default "";
+//
+//    /**
+//     * 车辆的别名
+//     */
+//    public String vehicleAlias() default "";
+//
+//    /**
+//     * 超限信息的别名
+//     */
+//    public String overloadAlias() default "";
 
 
 }

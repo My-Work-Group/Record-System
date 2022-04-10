@@ -24,10 +24,10 @@ public interface ICaseFileService {
     /**
      * 根据条件分页查询笔录列表
      *
-     * @param caseInfo 案件基本信息
+//     * @param  案件基本信息
      * @return 案件信息集合信息
      */
-    public String selectRecordList();
+    public List<CaseInfo> selectRecordList();
 
 }
 

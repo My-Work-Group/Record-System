@@ -30,7 +30,7 @@ public class CaseInfo extends BaseController {
 
     // 受案时间
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
-    private Date caseTime;
+    private Date createTime;
 
     public Integer getCaseId() {
         return caseId;
@@ -48,12 +48,12 @@ public class CaseInfo extends BaseController {
         this.caseNumber = caseNumber;
     }
 
-    public Date getCaseTime() {
-        return caseTime;
+    public Date getcreateTime() {
+        return createTime;
     }
 
-    public void setCaseTime(Date caseTime) {
-        this.caseTime = caseTime;
+    public void setcreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getCaseObject() {
@@ -97,7 +97,7 @@ public class CaseInfo extends BaseController {
                 ", vehPlateNum='" + vehPlateNum + '\'' +
                 ", caseNumber='" + caseNumber + '\'' +
                 ", caseObject='" + caseObject + '\'' +
-                ", caseTime=" + caseTime +
+                ", createTime=" + createTime +
                 '}';
     }
 }

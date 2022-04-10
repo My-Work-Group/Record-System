@@ -10,13 +10,15 @@
         <if test="caseInfo.vehPlateNum != null ">veh_plate_num,</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number,</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object,</if>
-        <if test="caseInfo.caseTime != null">case_time</if>
+<!--        <if test="caseInfo.caseTime != null">create_time</if>-->
+        create_time
         )values(
         <if test="caseInfo.caseId != null and caseInfo.caseId != ''">#{caseInfo.caseId},</if>
         <if test="caseInfo.vehPlateNum != null and caseInfo.vehPlateNum != ''">#{caseInfo.vehPlateNum},</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">#{caseInfo.caseNumber},</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">#{caseInfo.caseObject},</if>
-        <if test="caseInfo.caseTime != null">#{caseInfo.caseTime}</if>
+<!--        <if test="caseInfo.caseTime != null">#{caseInfo.caseTime}</if>-->
+        sysdate()
         )
     </insert>
 
