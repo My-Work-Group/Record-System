@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-04-07 20:55:44
+Date: 2022-04-11 21:01:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,9 +32,9 @@ CREATE TABLE `rec_offsite_person` (
   `contact_address` varchar(30) NOT NULL COMMENT '联系地址',
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_name` (`person_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='个人信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='个人信息表';
 
 -- ----------------------------
 -- Records of rec_offsite_person
 -- ----------------------------
-INSERT INTO `rec_offsite_person` VALUES ('38', '庞沛东', '2', '371521198709010768', '34', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室');
+INSERT INTO `rec_offsite_person` VALUES ('38', '庞沛东', '1', '412587954236545155', '24', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室');
