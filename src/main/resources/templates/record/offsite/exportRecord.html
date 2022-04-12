@@ -1,87 +1,133 @@
+<!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
-    <th:block th:include="include :: header('图表组合')" />
+    <th:block th:include="include :: header('笔录导出')"/>
 </head>
-<body>
-<body class="gray-bg">
+<body >
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-sm-3">
-                <div class="ibox-content">
-                    <h5 class="m-b-md">Q1 销量</h5>
-                    <h2 class="text-navy">
-                        <i class="fa fa-play fa-rotate-270"></i> 上升
-                    </h2>
-                    <small>更新时间：12天以前</small>
-                </div>
-        </div>
-        <div class="col-sm-3">
-                <div class="ibox-content ">
-                    <h5 class="m-b-md">Q2 销量</h5>
-                    <h2 class="text-navy">
-                        <i class="fa fa-play fa-rotate-270"></i> 上升
-                    </h2>
-                    <small>更新时间：12天以前</small>
-                </div>
-        </div>
-        <div class="col-sm-3">
-                <div class="ibox-content">
-                    <h5 class="m-b-md">Q3 销量</h5>
-                    <h2 class="text-danger">
-                        <i class="fa fa-play fa-rotate-90"></i> 下降
-                    </h2>
-                    <small>更新时间：12天以前</small>
-            </div>
-        </div>
-        <div class="col-sm-3">
-                <div class="ibox-content">
-                    <h5 class="m-b-md">Q4 销量</h5>
-                    <h2 class="text-danger">
-                        <i class="fa fa-play fa-rotate-90"></i> 下降
-                    </h2>
-                    <small>更新时间：12天以前</small>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-                <div class="ibox-content">
-                    <h5>本日访问量</h5>
-                    <h2>198 009</h2>
-                    <div id="sparkline1"></div>
-                </div>
-        </div>
-        <div class="col-sm-3">
-                <div class="ibox-content">
-                    <h5>本周访问量</h5>
-                    <h2>65 000</h2>
-                    <div id="sparkline2"></div>
-                </div>
-        </div>
-        <div class="col-sm-3">
-                <div class="ibox-content">
-                    <h5>本月访问量</h5>
-                    <h2>680 900</h2>
-                    <div id="sparkline3"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
+    <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="col-sm-2">
             <div class="ibox">
                 <div class="ibox-content">
-                    <h5>平均停留时间</h5>
-                    <h2>00:06:40</h2>
-                    <div id="sparkline4"></div>
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">1. 立案登记表</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">2. 询问笔录</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">3. 案卷调查报告</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">4. 违法行为通知书</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">5. 通知书送达回证</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">6. 陈述申辩笔录</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">7. 行政处罚决定书</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">8. 决定书送达回证</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">9. 结案报告</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">10. 送达信息确认书</h3>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>一键导出
+            </button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭
+            </button>
+        </div>
+    </div>
 </div>
-<th:block th:include="include :: footer" />
-<th:block th:include="include :: peity-js" />
-<th:block th:include="include :: sparkline-js" />
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: peity-js"/>
+<th:block th:include="include :: sparkline-js"/>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 52], {
@@ -141,14 +187,14 @@
         });
     });
 
-    $(function() {
+    $(function () {
         $("span.pie").peity("pie", {
             fill: ['#1ab394', '#d7d7d7', '#ffffff']
         })
 
-        $(".line").peity("line",{
+        $(".line").peity("line", {
             fill: '#1ab394',
-            stroke:'#169c81',
+            stroke: '#169c81',
         })
 
         $(".bar").peity("bar", {
@@ -157,12 +203,12 @@
 
         $(".bar_dashboard").peity("bar", {
             fill: ["#1ab394", "#d7d7d7"],
-            width:100
+            width: 100
         })
 
-        var updatingChart = $(".updating-chart").peity("line", { fill: '#1ab394',stroke:'#169c81', width: 64 })
+        var updatingChart = $(".updating-chart").peity("line", {fill: '#1ab394', stroke: '#169c81', width: 64})
 
-        setInterval(function() {
+        setInterval(function () {
             var random = Math.round(Math.random() * 10)
             var values = updatingChart.text().split(",")
             values.shift()
@@ -174,6 +220,5 @@
         }, 1000);
     });
 </script>
-</body>
 </body>
 </html>
