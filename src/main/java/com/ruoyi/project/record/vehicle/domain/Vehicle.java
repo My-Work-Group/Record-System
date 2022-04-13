@@ -18,9 +18,6 @@ public class Vehicle {
     // 车型
     private String vehType;
 
-    private Integer personId;
-
-    private Integer companyId;
 
     public Integer getVehId() {
         return vehId;
@@ -62,21 +59,7 @@ public class Vehicle {
         this.vehType = vehType;
     }
 
-    public Integer getPersonId() {
-        return personId;
-    }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
-    }
-
-    public Integer getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
-    }
 
     @Override
     public String toString() {
@@ -86,8 +69,6 @@ public class Vehicle {
                 ", vehPlateColor='" + vehPlateColor + '\'' +
                 ", vehAxleNum=" + vehAxleNum +
                 ", vehType='" + vehType + '\'' +
-                ", personId=" + personId +
-                ", companyId=" + companyId +
                 '}';
     }
 
