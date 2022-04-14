@@ -49,18 +49,32 @@ public class CaseFileController extends BaseController {
     /**
      *
      * @param caseId 案件id
-     * @param fileNum 笔录文件编号
+     * @param
      * @param mmap
      * @return
      */
     @RequiresPermissions("record:offsite:export")
-    //@GetMapping("/exportRecord/caseId={caseId}?fileNum={fileNum}")
     @GetMapping("/exportRecord/{caseId}")
     public String exportRecord(@PathVariable(value = "caseId") Integer caseId, ModelMap mmap) {
 
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
-//        System.out.println(caseFile.toString());
+        mmap.put("caseFile",caseFile);
         return prefix + "/exportRecord";
+    }
+
+    /**
+     * 下载笔录
+     * @param caseId  案件id
+     * @param fileId  笔录文件id
+     * @return
+     */
+    @RequiresPermissions("record:offsite:export")
+    @PostMapping("/exportRecord/download")
+    @ResponseBody
+    public String recordDownLoad(Integer caseId, Integer fileId) {
+        System.out.println(caseId);
+        System.out.println(fileId);
+        return null;
     }
 
 

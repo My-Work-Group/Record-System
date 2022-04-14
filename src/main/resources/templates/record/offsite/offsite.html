@@ -89,7 +89,7 @@
             $('#scroll-up').toTop(opt);
         }
         queryRecordList();
-        queryDeptTree();
+
     });
 
     function queryRecordList() {
@@ -167,32 +167,14 @@
         };
         $.table.init(options);
     }
-
-    $('#btnExpand').click(function () {
-        $._tree.expandAll(true);
-        $(this).hide();
-        $('#btnCollapse').show();
-    });
-
-    $('#btnCollapse').click(function () {
-        $._tree.expandAll(false);
-        $(this).hide();
-        $('#btnExpand').show();
-    });
-
-    $('#btnRefresh').click(function () {
-        queryDeptTree();
-    });
-
     function exportRecord(caseId) {
         //var url = prefix + '/export/' + caseId;
         var url = prefix + '/exportRecord/' + caseId;
         $.modal.openTab("导出笔录", url);
     }
-
-
 </script>
 </body>
+
 <!-- 导入区域 -->
 <script id="importTpl" type="text/template">
     <form enctype="multipart/form-data" class="mt20 mb10">
