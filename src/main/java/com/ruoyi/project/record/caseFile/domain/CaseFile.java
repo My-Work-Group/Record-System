@@ -5,6 +5,8 @@ import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.overload.domain.Overload;
 import com.ruoyi.project.record.person.domain.Person;
 import com.ruoyi.project.record.vehicle.domain.Vehicle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class CaseFile {
 
@@ -65,12 +67,13 @@ public class CaseFile {
 
     @Override
     public String toString() {
-        return "CaseFile{" +
-                "caseInfo=" + caseInfo +
-                ", company=" + company +
-                ", person=" + person +
-                ", vehicle=" + vehicle +
-                ", overload=" + overload +
-                '}';
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("caseInfo",getCaseInfo())
+                .append("company",getCompany())
+                .append("person",getPerson())
+                .append("vehicle",getVehicle())
+                .append("overload",getOverload())
+                .toString();
+
     }
 }

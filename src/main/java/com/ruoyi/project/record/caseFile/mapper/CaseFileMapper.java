@@ -2,6 +2,7 @@ package com.ruoyi.project.record.caseFile.mapper;
 
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
+import com.ruoyi.project.system.user.domain.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,9 +15,16 @@ import java.util.List;
 public interface CaseFileMapper {
 
     /**
-     *
-     * @param caseInfo 查询笔录，用于显示首页的笔录列表
+     *  用于显示首页的笔录列表
      * @return
      */
     public List<CaseInfo> selectRecordList();
+
+    /**
+     * 通过案件ID查询笔录
+     *
+     * @param caseId 用户ID
+     * @return 用户对象信息
+     */
+    public CaseFile selectRecordById(Integer caseId);
 }

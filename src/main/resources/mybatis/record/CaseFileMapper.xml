@@ -74,13 +74,23 @@
         <result property="dest" column="dest"/>
     </resultMap>
 
-<!--    <select id="selectRecordList"  resultMap="CaseRecordResult">-->
-<!--        select c.case_id, c.case_number, c.case_object,c.create_time, c.veh_plate_num,-->
-<!--        o.check_time, o.check_site, o.total_weight, o.out_weight-->
-<!--        from rec_offsite_case c join rec_offsite_overload o-->
-<!--        on c.case_id = o.overload_id-->
-<!--    </select>-->
 
+    <!--    查询所有笔录信息-->
+    <sql id="selectRecordList">
+        select
+            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_plate_num, c.person_id, c.company_id,
+            v. veh_plate_color, v. veh_type, v. veh_axes,
+            o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,
+            p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,
+            cp.company_name, cp.credit_code, cp. director_name, cp. director_num_id, cp. company_address, cp. company_phone
+        from rec_offsite_case c
+                 left join rec_offsite_overload  o  on c.case_id = o.overload_id
+                 left join rec_offsite_veh  v on c.veh_plate_num=v. veh_plate_num
+                 left join rec_offsite_person p on c.person_id = p.person_id
+                 left join rec_offsite_company cp on c.company_id = cp.company_id
+    </sql>
+
+    <!--    查询所有笔录信息-->
     <select id="selectRecordList"  resultMap="CaseRecordResult">
         select
             c.case_id, c.case_number, c.case_object,c.create_time, c.veh_plate_num, c.person_id, c.company_id,
@@ -95,6 +105,11 @@
              left join rec_offsite_company cp on c.company_id = cp.company_id;
     </select>
 
+    <!--    通过案件id查询笔录-->
+    <select id="selectRecordById" parameterType="Integer" resultMap="CaseRecordResult">
+        <include refid="selectRecordList"/>
+        where c.case_id = #{caseId}
+    </select>
 
 
 </mapper>

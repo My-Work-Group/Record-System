@@ -9,6 +9,8 @@ import com.ruoyi.project.record.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.caseFile.service.ICaseFileService;
 import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.caseInfo.service.ICaseInfoService;
+import com.ruoyi.project.system.role.domain.Role;
+import com.ruoyi.project.system.user.domain.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: 庞沛东
@@ -43,10 +46,21 @@ public class CaseFileController extends BaseController {
     }
 
 
+    /**
+     *
+     * @param caseId 案件id
+     * @param fileNum 笔录文件编号
+     * @param mmap
+     * @return
+     */
     @RequiresPermissions("record:offsite:export")
-    @GetMapping("/exportRecord")
-    public String file(ModelMap mmap) {
-        return  prefix + "/exportRecord";
+    //@GetMapping("/exportRecord/caseId={caseId}?fileNum={fileNum}")
+    @GetMapping("/exportRecord/{caseId}")
+    public String exportRecord(@PathVariable(value = "caseId") Integer caseId, ModelMap mmap) {
+
+        CaseFile caseFile = caseFileService.selectRecordById(caseId);
+//        System.out.println(caseFile.toString());
+        return prefix + "/exportRecord";
     }
 
 
@@ -57,9 +71,7 @@ public class CaseFileController extends BaseController {
     {
         startPage();
         List<CaseInfo> list = caseFileService.selectRecordList();
-        System.out.println(list.toString());
         return getDataTable(list);
-        //String string = caseFileService.selectRecordList();
     }
 
     /**

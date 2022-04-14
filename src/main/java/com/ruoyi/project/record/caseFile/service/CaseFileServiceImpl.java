@@ -1,7 +1,6 @@
 package com.ruoyi.project.record.caseFile.service;
 
-import com.ruoyi.common.constant.UserConstants;
-import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
+
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.company.domain.Company;
 import com.ruoyi.project.record.company.mapper.CompanyMapper;
@@ -14,8 +13,6 @@ import com.ruoyi.project.record.vehicle.domain.Vehicle;
 import com.ruoyi.project.record.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper;
 import com.ruoyi.project.record.vehicle.mapper.VehicleMapper;
-import com.ruoyi.project.system.user.domain.User;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,14 +89,23 @@ public class CaseFileServiceImpl implements ICaseFileService {
     /**
      * 根据条件分页查询笔录列表
      *
-     * @param caseInfo 案件信息
+     * @param
      * @return 案件信息集合信息
      */
     @Override
-    //@DataScope(caseAlias = "a", vehicleAlias = "v", personAlias = "p", companyAlias = "c", overloadAlias = "o")
     public List<CaseInfo> selectRecordList() {
         return caseFileMapper.selectRecordList();
+    }
 
+    /**
+     * 通过案件ID查询笔录
+     *
+     * @param caseId 用户ID
+     * @return 用户对象信息
+     */
+    @Override
+    public CaseFile selectRecordById(Integer caseId) {
+        return caseFileMapper.selectRecordById(caseId);
     }
 
 
