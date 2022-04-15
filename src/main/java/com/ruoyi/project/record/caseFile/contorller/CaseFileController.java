@@ -1,5 +1,7 @@
 package com.ruoyi.project.record.caseFile.contorller;
 
+import com.ruoyi.common.utils.XWPFHandler.WordTemplate;
+import com.ruoyi.common.utils.XWPFHandler.WordUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -17,8 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.ruoyi.common.utils.DateUtils.*;
 
 /**
  * @Author: 庞沛东
@@ -65,15 +73,75 @@ public class CaseFileController extends BaseController {
     /**
      * 下载笔录
      * @param caseId  案件id
-     * @param fileId  笔录文件id
+     * @param docxFileId  笔录文件id
      * @return
      */
     @RequiresPermissions("record:offsite:export")
     @PostMapping("/exportRecord/download")
     @ResponseBody
-    public String recordDownLoad(Integer caseId, Integer fileId) {
-        System.out.println(caseId);
-        System.out.println(fileId);
+    public String recordDownLoad(Integer caseId, Integer docxFileId) {
+        CaseFile caseFile = caseFileService.selectRecordById(caseId);
+
+        Date createDate= caseFile.getCaseInfo().getcreateTime();
+        String createYear =String.valueOf(getYear(createDate));
+        String createMonth =String.valueOf(getMonth(createDate));
+        String createDay =String.valueOf(getDay(createDate));
+        String createHour =String.valueOf(getHour(createDate));
+        String createMinute =String.valueOf(getMinute(createDate));
+
+        String caseNumber = caseFile.getCaseInfo().getCaseNumber();
+        String personName =caseFile.getPerson().getPersonName();
+        System.out.println(personName);
+        String age = Integer.toString(caseFile.getPerson().getAge());
+        String sex = caseFile.getPerson().getSex();
+        String numberId = caseFile.getPerson().getNumberId();
+        String personPhone =caseFile.getPerson().getPersonPhone();
+        String homeAddress = caseFile.getPerson().getHomeAddress();
+
+        Date checkDate = caseFile.getOverload().getCheckTime();
+        String checkYear =String.valueOf(getYear(checkDate));
+        String checkMonth =String.valueOf(getMonth(checkDate));
+        String checkDay =String.valueOf(getDay(checkDate));
+        String checkHour =String.valueOf(getHour(checkDate));
+        String checkMinute =String.valueOf(getMinute(checkDate));
+
+        String vehPlateNum = caseFile.getVehicle().getVehPlateNum();
+        String vehAxleNum =  Integer.toString(caseFile.getVehicle().getVehAxleNum());
+        String vehType = caseFile.getVehicle().getVehType();
+        String checkSite = caseFile.getOverload().getCheckSite();
+        String totalWeight = Double.toString(caseFile.getOverload().getTotalWeight());
+        String outWeight = Double.toString(caseFile.getOverload().getOutWeight());
+        WordUtil wordUtil = new WordUtil();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("createYear",createYear );
+        map.put("createMonth",createMonth );
+        map.put("createDay",createDay );
+        map.put("createHour",createHour);
+        map.put("createMinute",createMinute);
+
+        map.put("caseNumber",caseNumber);
+        map.put("personName" , personName);
+        map.put("age" ,age);
+        map.put("sex" ,sex );
+        map.put("numberId" ,numberId);
+        map.put("personPhone" ,personPhone);
+        map.put("homeAddress" ,homeAddress);
+
+        map.put("checkYear",checkYear );
+        map.put("checkMonth", checkMonth);
+        map.put("checkDay", checkDay);
+        map.put("checkHour", checkHour);
+        map.put("checkMinute", checkMinute);
+
+        map.put("vehPlateNum" ,vehPlateNum);
+        map.put("vehAxleNum" ,vehAxleNum );
+        map.put("vehType" ,vehType);
+        map.put("checkSite" ,checkSite);
+        map.put("totalWeight" ,totalWeight);
+        map.put("outWeight" ,outWeight);
+        wordUtil.ExportDocument(map,docxFileId);
+
         return null;
     }
 

@@ -1,6 +1,7 @@
 package com.ruoyi.common.utils;
 
 import java.lang.management.ManagementFactory;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -159,5 +160,63 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         // 计算差多少秒//输出结果
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
+    }
+
+
+    public static String convertDate2String(Date date, String pattern) {
+        if (date == null)
+            return null;
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        return dateFormat.format(date);
+    }
+
+    /**
+     * 根据时间字符串获取年月日时分秒,格式2019-1-21 13:06:06
+     *
+     * @param timeString
+     * @return
+     */
+    public static Date parseTimeString2Date(String timeString) {
+        if ((timeString == null) || (timeString.equals(""))) {
+            return null;
+        }
+        Date date = null;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            date = new Date(dateFormat.parse(timeString).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public static int getYear(Date date) {
+        String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
+        return Integer.parseInt(timeStr.substring(0, 4));
+    }
+
+    public static int getMonth(Date date) {
+        String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
+        return Integer.parseInt(timeStr.substring(5, 7));
+    }
+
+    public static int getDay(Date date) {
+        String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
+        return Integer.parseInt(timeStr.substring(8, 10));
+    }
+
+    public static int getHour(Date date) {
+        String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
+        return Integer.parseInt(timeStr.substring(11, 13));
+    }
+
+    public static int getMinute(Date date) {
+        String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
+        return Integer.parseInt(timeStr.substring(14, 16));
+    }
+
+    public static int getSecond(Date date) {
+        String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
+        return Integer.parseInt(timeStr.substring(17, 19));
     }
 }
