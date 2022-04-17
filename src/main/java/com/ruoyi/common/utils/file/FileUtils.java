@@ -28,6 +28,17 @@ public class FileUtils
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
 
     /**
+     * 创建路径-目录
+     * @param destDirName 路径目录
+     */
+    public static void createDir(String destDirName) {
+        File dir = new File(destDirName);
+        if (!dir.exists()) {// 判断目录是否存在
+            dir.mkdirs();  //多层目录需要调用mkdirs
+        }
+    }
+
+    /**
      * 输出指定文件的byte数组
      * 
      * @param filePath 文件路径

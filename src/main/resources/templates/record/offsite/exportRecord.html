@@ -164,12 +164,23 @@
     $(function() {
         $("div.ibox-content").on("click", function(){
             var prefix = ctx + "record/offsite";
-            var fileId = $(this).attr('id');
+            var docxFileId = $(this).attr('id');
             var caseId = [[${caseFile.caseInfo.caseId}]];
-            console.log(fileId);
-            console.log(caseId);
             //$.operate.post(ctx+"/export", { "caseId": caseId, "fileId":fileId});
-            $.operate.post(prefix+"/exportRecord/download?caseId="+caseId+"&fileId="+fileId);
+            // $.operate.post(prefix+"/exportRecord/download?caseId="+caseId+"&docxFileId="+docxFileId);
+            var downloadUrl = prefix+"/exportRecord/download?caseId="+caseId+"&docxFileId="+docxFileId;
+            $.operate.post(downloadUrl,{ "caseId": caseId, "fileId":docxFileId}, function(result) {
+                console.log(result)
+                if (result.code == web_status.SUCCESS) {
+                    // window.location.href = downloadUrl;
+                    $.modal.success("导出成功");
+                } else if (result.code == web_status.WARNING) {
+                    $.modal.alertWarning(result.msg);
+                } else {
+                    $.modal.alertError(result.msg);
+                }
+                $.modal.closeLoading();
+            });
         });
     });
 </script>

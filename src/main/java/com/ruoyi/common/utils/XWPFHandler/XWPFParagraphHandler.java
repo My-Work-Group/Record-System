@@ -34,7 +34,7 @@ public class XWPFParagraphHandler {
 	
 	/**
 	 * 设置XWPFRun相关的参数
-	 * @param run
+	 * @param
 	 * @throws Exception
 	 */
 	private void setXWPFRun() {
