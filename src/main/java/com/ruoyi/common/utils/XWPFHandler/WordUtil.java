@@ -1,5 +1,7 @@
 package com.ruoyi.common.utils.XWPFHandler;
 
+import com.ruoyi.framework.config.RuoYiConfig;
+import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
 
 import java.io.*;
@@ -7,23 +9,22 @@ import java.util.*;
 
 import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
-import static com.ruoyi.common.utils.file.FileUtils.createDir;
+import static com.ruoyi.framework.enumerate.DocxFileName.getName;
 
 
 public class WordUtil {
 
     private static WordTemplate template;
     // docx模板路径
-    //private static final String DOCX_TEMPLATES_PATH = "main/resources/docxTemplate/";
     private static final String DOCX_TEMPLATES_PATH = "D:\\Codes\\Java\\Record-System\\src\\main\\resources\\docxTemplate\\";
-    // 生成文件产生路径
-    private static final String DOCX_GEN_PATH = "C:\\Users\\pangpd\\Desktop\\templates\\";
 
-    public static boolean ExportDocument(CaseFile caseFile, int docxFileId) {
+    public static AjaxResult ExportDocument(CaseFile caseFile, int docxFileId) {
         Map<String, String> map = data(caseFile);
+        String vehPlateNum = map.get("vehPlateNum");
         String docxTemplatesFile = DOCX_TEMPLATES_PATH + docxFileId + ".docx";
-        String docxGenFile = DOCX_GEN_PATH + docxFileId + ".docx";
-
+        // 车牌号+表名
+        String docxName = vehPlateNum + "_" + getName(docxFileId);
+        String filename = encodingFilename(docxName);
         File file = new File(docxTemplatesFile);
         FileInputStream fileInputStream = null;
         try {
@@ -31,25 +32,53 @@ public class WordUtil {
             template = new WordTemplate(fileInputStream);
         } catch (IOException exception) {
             exception.printStackTrace();
-            return false;
         }
-
         template.replaceTag(map);
-        createDir(DOCX_GEN_PATH);
-        File newDocx = new File(docxGenFile);
         FileOutputStream out;
         try {
-            out = new FileOutputStream(newDocx);
+            out = new FileOutputStream(getAbsoluteFile(filename));
             BufferedOutputStream bos = new BufferedOutputStream(out);
             template.write(bos);
             bos.flush();
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
+        return AjaxResult.success(filename);
     }
+
+//    /**
+//     * 批量下载
+//     * @param caseFile
+//     */
+//    public static void ExportDocumentToZip(CaseFile caseFile) {
+//        Map<String, String> map = data(caseFile);
+//        String vehPlateNum = map.get("vehPlateNum");
+//        String docxTemplatesFile = DOCX_TEMPLATES_PATH + docxFileId + ".docx";
+//        // 车牌号+表名
+//        String docxName = vehPlateNum + "_" + getName(docxFileId);
+//        String filename = encodingFilename(docxName);
+//        File file = new File(docxTemplatesFile);
+//        FileInputStream fileInputStream = null;
+//        try {
+//            fileInputStream = new FileInputStream(file);
+//            template = new WordTemplate(fileInputStream);
+//        } catch (IOException exception) {
+//            exception.printStackTrace();
+//        }
+//        template.replaceTag(map);
+//        FileOutputStream out;
+//        try {
+//            out = new FileOutputStream(getAbsoluteFile(filename));
+//            BufferedOutputStream bos = new BufferedOutputStream(out);
+//            template.write(bos);
+//            bos.flush();
+//            bos.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
     public static Map<String, String> data(CaseFile caseFile) {
 
@@ -99,6 +128,31 @@ public class WordUtil {
         map.put("dest", caseFile.getOverload().getDest());
         return map;
     }
+
+    /**
+     * 编码文件名
+     */
+    public static String encodingFilename(String name) {
+
+        String fileName;
+        fileName = name + "_" + UUID.randomUUID().toString() + ".docx";
+        return fileName;
+    }
+
+    /**
+     * 获取下载路径
+     *
+     * @param filename 文件名称
+     */
+    public static String getAbsoluteFile(String filename) {
+        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        File desc = new File(downloadPath);
+        if (!desc.getParentFile().exists()) {
+            desc.getParentFile().mkdirs();
+        }
+        return downloadPath;
+    }
+
 
 }
 

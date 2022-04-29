@@ -13,13 +13,16 @@ import com.ruoyi.project.record.vehicle.domain.Vehicle;
 import com.ruoyi.project.record.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper;
 import com.ruoyi.project.record.vehicle.mapper.VehicleMapper;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.zip.ZipOutputStream;
 
 import static com.ruoyi.common.utils.StringUtils.isAllFieldNull;
 
@@ -85,6 +88,15 @@ public class CaseFileServiceImpl implements ICaseFileService {
         int row = overloadMapper.insertOverload(overload);
         return row;
     }
+
+//    @Override
+//    public byte[] downloadRecord(String[] tableNames) {
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        ZipOutputStream zip = new ZipOutputStream(outputStream);
+//        generatorCode(tableName, zip);
+//        IOUtils.closeQuietly(zip);
+//        return outputStream.toByteArray();
+//    }
 
     /**
      * 根据条件分页查询笔录列表

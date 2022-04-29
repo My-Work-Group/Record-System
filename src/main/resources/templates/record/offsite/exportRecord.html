@@ -4,7 +4,7 @@
 <head>
     <th:block th:include="include :: header('笔录导出')"/>
 </head>
-<body >
+<body>
 <div class="wrapper wrapper-content animated fadeInRight" th:object="${caseFile}">
     <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
         <div class="col-sm-2">
@@ -31,7 +31,7 @@
             <div class="ibox">
                 <div class="ibox-content" id="3">
                     <h2 style="color: #007fff;text-align:center">
-                        <i class="fa fa-cloud-download" ></i>
+                        <i class="fa fa-cloud-download"></i>
                     </h2>
                     <h3 class="m-b-none" style="text-align:center">3. 案卷调查报告</h3>
                 </div>
@@ -52,7 +52,7 @@
             <div class="ibox">
                 <div class="ibox-content" id="5">
                     <h2 style="color: #007fff;text-align:center">
-                        <i class="fa fa-cloud-download" ></i>
+                        <i class="fa fa-cloud-download"></i>
                     </h2>
                     <h3 class="m-b-none" style="text-align:center">5. 通知书送达回证</h3>
                 </div>
@@ -63,7 +63,7 @@
         <div class="col-sm-2">
             <div class="ibox">
                 <div class="ibox-content" id="6">
-                    <h2 style="color: #007fff;text-align:center" >
+                    <h2 style="color: #007fff;text-align:center">
                         <i class="fa fa-cloud-download"></i>
                     </h2>
                     <h3 class="m-b-none" style="text-align:center">6. 陈述申辩笔录</h3>
@@ -117,10 +117,10 @@
 
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
-            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>一键导出
+            <button type="button" class="btn btn-sm btn-primary" onclick='batchExportRecord(caseFile.caseInfo.caseId)'>
+                <i class="fa fa-check"></i>一键导出
             </button>&nbsp;
             <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭
-            </button>
         </div>
     </div>
 </div>
@@ -161,21 +161,18 @@
         }, 1000);
     });
 
-    $(function() {
-        $("div.ibox-content").on("click", function(){
+    $(function () {
+        $("div.ibox-content").on("click", function () {
             var prefix = ctx + "record/offsite";
             var docxFileId = $(this).attr('id');
             var caseId = [[${caseFile.caseInfo.caseId}]];
-            //$.operate.post(ctx+"/export", { "caseId": caseId, "fileId":fileId});
-            // $.operate.post(prefix+"/exportRecord/download?caseId="+caseId+"&docxFileId="+docxFileId);
-            var downloadUrl = prefix+"/exportRecord/download?caseId="+caseId+"&docxFileId="+docxFileId;
-            $.operate.post(downloadUrl,{ "caseId": caseId, "fileId":docxFileId}, function(result) {
-                console.log(result)
+            var downloadUrl = prefix + "/exportRecord/download?caseId=" + caseId + "&docxFileId=" + docxFileId;
+            $.modal.loading("正在导出数据，请稍候...");
+            $.post(downloadUrl, {"caseId": caseId, "fileId": docxFileId}, function (result) {
                 if (result.code == web_status.SUCCESS) {
-                    // window.location.href = downloadUrl;
-                    $.modal.success("导出成功");
+                    window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
                 } else if (result.code == web_status.WARNING) {
-                    $.modal.alertWarning(result.msg);
+                    $.modal.alertWarning(result.msg)
                 } else {
                     $.modal.alertError(result.msg);
                 }
@@ -183,6 +180,18 @@
             });
         });
     });
+
+
+    // 生成代码
+    function batchExportRecord() {
+        var caseId = [[${caseFile.caseInfo.caseId}]];
+        $.modal.confirm("确定要一键导出吗？", function () {
+            //location.href = prefix + "/batchExportRecord/" + caseId;
+            layer.msg('执行成功,正在生成代码请稍候…', {icon: 1});
+            $.operate.get(prefix + "/batchExportRecord/");
+        })
+    }
+
 </script>
 </body>
 </html>

@@ -23,6 +23,15 @@ public interface ICaseFileService {
     public int insertCaseFile(CaseFile caseFile);
 
     /**
+     * 批量生成代码（下载方式）
+     *
+     * @param tableNames 表数组
+     * @return 数据
+     */
+   // public byte[] downloadRecord(String[] tableNames);
+
+
+    /**
      * 根据条件分页查询笔录列表
      *
      * @return 案件信息集合信息

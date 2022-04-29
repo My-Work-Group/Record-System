@@ -10,6 +10,8 @@
         <if test="caseInfo.vehPlateNum != null ">veh_plate_num,</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number,</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object,</if>
+        <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id,</if>
+        <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id,</if>
 <!--        <if test="caseInfo.caseTime != null">create_time</if>-->
         create_time
         )values(
@@ -17,6 +19,8 @@
         <if test="caseInfo.vehPlateNum != null and caseInfo.vehPlateNum != ''">#{caseInfo.vehPlateNum},</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">#{caseInfo.caseNumber},</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">#{caseInfo.caseObject},</if>
+        <if test="caseInfo.personId != null and caseInfo.personId != ''">#{caseInfo.personId},</if>
+        <if test="caseInfo.companyId != null and caseInfo.companyId != ''">#{caseInfo.companyId},</if>
 <!--        <if test="caseInfo.caseTime != null">#{caseInfo.caseTime}</if>-->
         sysdate()
         )
