@@ -1,6 +1,8 @@
 package com.ruoyi.project.record.caseFile.service;
 
 
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.framework.enumerate.DocxFileName;
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.company.domain.Company;
 import com.ruoyi.project.record.company.mapper.CompanyMapper;
@@ -13,7 +15,13 @@ import com.ruoyi.project.record.vehicle.domain.Vehicle;
 import com.ruoyi.project.record.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper;
 import com.ruoyi.project.record.vehicle.mapper.VehicleMapper;
+import com.ruoyi.project.tool.gen.domain.GenTable;
+import com.ruoyi.project.tool.gen.util.VelocityInitializer;
+import com.ruoyi.project.tool.gen.util.VelocityUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +29,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import static com.ruoyi.common.utils.StringUtils.isAllFieldNull;
@@ -89,15 +100,6 @@ public class CaseFileServiceImpl implements ICaseFileService {
         return row;
     }
 
-//    @Override
-//    public byte[] downloadRecord(String[] tableNames) {
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        ZipOutputStream zip = new ZipOutputStream(outputStream);
-//        generatorCode(tableName, zip);
-//        IOUtils.closeQuietly(zip);
-//        return outputStream.toByteArray();
-//    }
-
     /**
      * 根据条件分页查询笔录列表
      *
@@ -119,6 +121,46 @@ public class CaseFileServiceImpl implements ICaseFileService {
     public CaseFile selectRecordById(Integer caseId) {
         return caseFileMapper.selectRecordById(caseId);
     }
+
+//
+//    /**
+//     * 批量生成代码（下载方式）
+//     *
+//     * @param tableNames 表数组
+//     * @return 数据
+//     */
+//    @Override
+//    public byte[] downloadCode(String[] tableNames) {
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        ZipOutputStream zip = new ZipOutputStream(outputStream);
+//        for (String tableName : tableNames) {
+//            generatorCode(tableName, zip);
+//        }
+//        IOUtils.closeQuietly(zip);
+//        return outputStream.toByteArray();
+//    }
+//
+//    /**
+//     * 查询表信息并生成
+//     */
+//    private void generatorCode(Integer caseId, ZipOutputStream zip) {
+//        // 查询表信息
+//        CaseFile caseFile = caseFileMapper.selectRecordById(caseId);
+//        // 获取模板列表
+//        for (int i = 0; i < DocxFileName.values().length; i++) {
+//            // 渲染模板
+//            try {
+//                // 添加到zip
+//                zip.putNextEntry(new ZipEntry(getAbsoluteFile(DocxFileName.getName(i+1))));
+//                IOUtils.write(sw.toString(), zip, Constants.UTF8);
+//                IOUtils.closeQuietly(sw);
+//                zip.flush();
+//                zip.closeEntry();
+//            } catch (IOException e) {
+//                log.error("渲染模板失败，表名：" + DocxFileName.getName(i+1), e);
+//            }
+//        }
+//    }
 
 
 }

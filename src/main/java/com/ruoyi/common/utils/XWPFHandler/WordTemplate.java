@@ -45,7 +45,11 @@ public class WordTemplate {
 	public void write(OutputStream outputStream) throws IOException{
 		document.write(outputStream);
 	}
-	
+
+	public void close() throws IOException {
+		document.close();
+	}
+
 	/**
 	 * 替换文本中的标签
 	 * @param map key(待替换标签)-value(文本内容)

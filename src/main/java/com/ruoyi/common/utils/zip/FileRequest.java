@@ -11,6 +11,7 @@ public class FileRequest{
     private String realUrl;
     private String fileName;
 
+    public FileRequest(){}
     public FileRequest(String realUrl, String fileName) {
         this.realUrl = realUrl;
         this.fileName = fileName;

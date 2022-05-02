@@ -117,7 +117,7 @@
 
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
-            <button type="button" class="btn btn-sm btn-primary" onclick='batchExportRecord(caseFile.caseInfo.caseId)'>
+            <button type="button" class="btn btn-sm btn-primary" onclick='batchExportRecord()'>
                 <i class="fa fa-check"></i>一键导出
             </button>&nbsp;
             <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭
@@ -170,7 +170,7 @@
             $.modal.loading("正在导出数据，请稍候...");
             $.post(downloadUrl, {"caseId": caseId, "fileId": docxFileId}, function (result) {
                 if (result.code == web_status.SUCCESS) {
-                    window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+                    window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + false;
                 } else if (result.code == web_status.WARNING) {
                     $.modal.alertWarning(result.msg)
                 } else {
@@ -181,16 +181,16 @@
         });
     });
 
-
-    // 生成代码
+    /* 一键导出 */
     function batchExportRecord() {
+        var prefix = ctx + "record/offsite";
         var caseId = [[${caseFile.caseInfo.caseId}]];
         $.modal.confirm("确定要一键导出吗？", function () {
-            //location.href = prefix + "/batchExportRecord/" + caseId;
-            layer.msg('执行成功,正在生成代码请稍候…', {icon: 1});
-            $.operate.get(prefix + "/batchExportRecord/");
-        })
-    }
+            layer.msg('正在生成，请稍候…', {icon: 1});
+            // $.operate.get(prefix + "/batchExportRecord/download?caseId=" + caseId,{"caseId": caseId});
+            window.location.href = prefix + "/batchExportRecord/download?caseId=" + caseId;
+    })}
+
 
 </script>
 </body>

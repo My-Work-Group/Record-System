@@ -365,20 +365,6 @@ var table = {
                     $("#" + table.options.id).bootstrapTable('refresh', params);
                 }
             },
-            // exportDocx: function(caseId, fileId) {
-            //     // table.set();
-            //     $.post(table.options.exportRecordUrl, function(result) {
-            //         if (result.code == web_status.SUCCESS) {
-            //             window.location.href = ctx + "export/{caseId}/{fileId}";
-            //         } else if (result.code == web_status.WARNING) {
-            //             $.modal.alertWarning(result.msg)
-            //         } else {
-            //             $.modal.alertError(result.msg);
-            //         }
-            //         $.modal.closeLoading();
-            //     });
-            // },
-
             // 导出数据
             exportExcel: function(formId) {
                 table.set();

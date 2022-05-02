@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : pangpd
+Source Server         : localhost
 Source Server Version : 50725
 Source Host           : localhost:3306
 Source Database       : ry
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-04-11 21:01:37
+Date: 2022-05-02 23:39:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;

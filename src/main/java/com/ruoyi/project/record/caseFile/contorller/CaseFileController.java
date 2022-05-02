@@ -1,7 +1,6 @@
 package com.ruoyi.project.record.caseFile.contorller;
 
 import com.ruoyi.common.utils.XWPFHandler.WordUtil;
-import com.ruoyi.common.utils.zip.FileRequest;
 import com.ruoyi.common.utils.zip.ZipUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -12,19 +11,17 @@ import com.ruoyi.project.record.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.caseFile.service.ICaseFileService;
 import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.caseInfo.service.ICaseInfoService;
-import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 import java.util.List;
+
+import static com.ruoyi.common.utils.XWPFHandler.WordUtil.downloadFileist;
 
 /**
  * @Author: 庞沛东
@@ -51,9 +48,7 @@ public class CaseFileController extends BaseController {
         return prefix + "/offsite";
     }
 
-
     /**
-     *
      * @param caseId 案件id
      * @param
      * @param mmap
@@ -64,14 +59,15 @@ public class CaseFileController extends BaseController {
     public String exportRecord(@PathVariable(value = "caseId") Integer caseId, ModelMap mmap) {
 
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        mmap.put("caseFile",caseFile);
+        mmap.put("caseFile", caseFile);
         return prefix + "/exportRecord";
     }
 
     /**
      * 下载笔录案件
-     * @param caseId  案件id
-     * @param docxFileId  笔录文件id
+     *
+     * @param caseId     案件id
+     * @param docxFileId 笔录文件id
      * @return
      */
     @RequiresPermissions("record:offsite:export")
@@ -79,37 +75,35 @@ public class CaseFileController extends BaseController {
     @ResponseBody
     public AjaxResult recordDownLoad(Integer caseId, Integer docxFileId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        return WordUtil.ExportDocument(caseFile,docxFileId);
+        return WordUtil.ExportDocument(caseFile, docxFileId);
     }
 
     /**
      * 批量下载案件word文档（一键导出）
      */
-    //@RequiresPermissions("tool:gen:code")
-    //@Log(title = "代码生成", businessType = BusinessType.GENCODE)
-    @GetMapping("/batchExportRecord")
+    @GetMapping("/batchExportRecord/download")
     @ResponseBody
-    public AjaxResult zipDownload(@RequestBody List<FileRequest> requestList){
-        if(requestList.size() <= 0){
-            return new AjaxResult(AjaxResult.Type.ERROR,"文件路径为空");
-        }
-        String zipName = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        ZipUtil.downZip(requestList, "test");
-        return new AjaxResult(AjaxResult.Type.SUCCESS,"压缩包下载完成");
+    public void zipDownload(HttpServletResponse response, Integer caseId) {
+        //响应头的设置
+        response.reset();
+        response.setHeader("Content-Disposition", "attachment; filename=\"test.zip\"");
+        response.setContentType("application/zip; charset=UTF-8");
+        response.setHeader("Content-type", "application-download");
+        CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        List<String> downloadFileist = downloadFileist(caseFile);
+        ZipUtil.downZip(response,downloadFileist);
     }
 
     /**
-     *
      * 展示案件信息
+     *
      * @param caseInfo
      * @return
      */
-
     @RequiresPermissions("record:offsite:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(CaseInfo caseInfo)
-    {
+    public TableDataInfo list(CaseInfo caseInfo) {
         startPage();
         List<CaseInfo> list = caseFileService.selectRecordList();
         return getDataTable(list);
@@ -134,9 +128,8 @@ public class CaseFileController extends BaseController {
 
         String caseNum = caseFile.getCaseInfo().getCaseNumber();
         // 校验案件编号是否存在
-        if ("1".equals(caseInfoService.checkCaseNumUnique(caseNum)))
-        {
-            return error( caseNum + "，该案件编号已存在！");
+        if ("1".equals(caseInfoService.checkCaseNumUnique(caseNum))) {
+            return error(caseNum + "，该案件编号已存在！");
         }
         return toAjax(caseFileService.insertCaseFile(caseFile));
     }
