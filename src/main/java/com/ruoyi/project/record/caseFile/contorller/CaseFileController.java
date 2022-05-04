@@ -21,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
-import static com.ruoyi.common.utils.XWPFHandler.WordUtil.downloadFileist;
+import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
+import static com.ruoyi.common.utils.zip.ZipUtil.encodingFileName;
 
 /**
  * @Author: 庞沛东
@@ -57,7 +58,6 @@ public class CaseFileController extends BaseController {
     @RequiresPermissions("record:offsite:export")
     @GetMapping("/exportRecord/{caseId}")
     public String exportRecord(@PathVariable(value = "caseId") Integer caseId, ModelMap mmap) {
-
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
         mmap.put("caseFile", caseFile);
         return prefix + "/exportRecord";
@@ -78,24 +78,9 @@ public class CaseFileController extends BaseController {
         return WordUtil.ExportDocument(caseFile, docxFileId);
     }
 
-    /**
-     * 批量下载案件word文档（一键导出）
-     */
-    @GetMapping("/batchExportRecord/download")
-    @ResponseBody
-    public void zipDownload(HttpServletResponse response, Integer caseId) {
-        //响应头的设置
-        response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"test.zip\"");
-        response.setContentType("application/zip; charset=UTF-8");
-        response.setHeader("Content-type", "application-download");
-        CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        List<String> downloadFileist = downloadFileist(caseFile);
-        ZipUtil.downZip(response,downloadFileist);
-    }
 
     /**
-     * 展示案件信息
+     * 显示案件信息
      *
      * @param caseInfo
      * @return
@@ -134,4 +119,27 @@ public class CaseFileController extends BaseController {
         return toAjax(caseFileService.insertCaseFile(caseFile));
     }
 
+    /**
+     * 批量下载案件word文档（一键导出）
+     */
+    @GetMapping("/batchExportRecord/download")
+    @ResponseBody
+    public void zipDownload(HttpServletResponse response, Integer caseId) {
+        CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        String zipName = caseFile.getCaseInfo().getCaseNumber() + ".zip";
+        List<String> filePathList = filePathList(caseFile);
+        genZip(response, zipName, filePathList);
+    }
+
+    /**
+     * 生成zip文件
+     */
+    private void genZip(HttpServletResponse response, String zipName, List<String> filePathList) {
+        //响应头的设置
+        response.reset();
+        response.setHeader("Content-Disposition", "attachment; filename=" + encodingFileName(zipName) + "");
+        response.setContentType("application/zip; charset=UTF-8");
+        response.setHeader("Content-type", "application-download");
+        ZipUtil.downZip(response, filePathList);
+    }
 }

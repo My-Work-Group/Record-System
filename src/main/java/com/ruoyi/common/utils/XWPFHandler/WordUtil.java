@@ -3,10 +3,16 @@ package com.ruoyi.common.utils.XWPFHandler;
 import com.ruoyi.framework.enumerate.DocxFileName;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.caseFile.domain.CaseFile;
+import com.ruoyi.test.test;
+
 import java.io.*;
+import java.net.URL;
 import java.util.*;
+
 import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
+import static com.ruoyi.common.utils.StringUtils.containsAnyIgnoreCase;
+import static com.ruoyi.common.utils.StringUtils.deleteCharString;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
 import static com.ruoyi.framework.enumerate.DocxFileName.getName;
@@ -15,23 +21,21 @@ import static com.ruoyi.framework.enumerate.DocxFileName.getName;
 public class WordUtil {
 
     private static WordTemplate template;
-    // docx模板路径
-    private static final String DOCX_TEMPLATES_PATH = "D:\\Codes\\Java\\Record-System\\src\\main\\resources\\docxTemplate\\";
 
     /**
-     *
      * @param caseFile
      * @param docxFileId
      * @return
      */
     public static AjaxResult ExportDocument(CaseFile caseFile, int docxFileId) {
-        String absoluteFileName =  replaceTag(caseFile,docxFileId);
+        String absoluteFileName = replaceTag(caseFile, docxFileId);
         String fileName = getFileNameWithSuffix(absoluteFileName);
         return AjaxResult.success(fileName);
     }
 
     /**
-     *  根据数据替换模板中关键字
+     * 根据数据替换模板中关键字
+     *
      * @param caseFile
      * @param docxFileId docx文档id号
      * @return 返回当前docx文件的绝对路径
@@ -39,7 +43,7 @@ public class WordUtil {
     public static String replaceTag(CaseFile caseFile, int docxFileId) {
         Map<String, String> map = data(caseFile);
         String vehPlateNum = map.get("vehPlateNum");
-        String docxTemplatesFile = DOCX_TEMPLATES_PATH + docxFileId + ".docx";
+        String docxTemplatesFile = getDocxTemplatesPath() + "/" + docxFileId + ".docx";
         // 车牌号 + 表名
         String filename = vehPlateNum + "_" + getName(docxFileId) + ".docx";
         File file = new File(docxTemplatesFile);
@@ -67,18 +71,36 @@ public class WordUtil {
 
     /**
      * @param caseFile
-     * @return 批量下载的url list
+     * @return 批量下载的文件路径 list
      */
-    public static List<String> downloadFileist(CaseFile caseFile) {
+    public static List<String> filePathList(CaseFile caseFile) {
         String filePath;
-        List<String> downloadFileist = new ArrayList<>();
+        List<String> filePathList = new ArrayList<>();
         for (int i = 0; i < DocxFileName.values().length; i++) {
             filePath = replaceTag(caseFile, i + 1);
-            downloadFileist.add(filePath);
+            filePathList.add(filePath);
         }
-        return downloadFileist;
+        return filePathList;
     }
 
+    /**
+     * @return 获取resources 目录下docxTemplate路径
+     */
+    public static String getDocxTemplatesPath() {
+        URL url =  WordUtil.class.getClassLoader().getResource("");
+        String path = url.getPath() + "docxTemplate";
+        if (containsAnyIgnoreCase(path, "!")) {
+            path = deleteCharString(path, '!');
+        }
+        return path;
+    }
+
+    /**
+     * 将要导出的数据封装成map
+     *
+     * @param caseFile
+     * @return
+     */
     public static Map<String, String> data(CaseFile caseFile) {
 
         Map<String, String> map = new HashMap<>();//要插入的数据
