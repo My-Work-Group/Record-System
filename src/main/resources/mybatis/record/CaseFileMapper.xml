@@ -18,8 +18,6 @@
         <id property="caseId" column="case_id"/>
         <result property="personId" column="person_id"/>
         <result property="companyId" column="company_id"/>
-        <result property="personId" column="person_id"/>
-        <result property="companyId" column="company_id"/>
         <result property="caseNumber" column="case_number"/>
         <result property="createTime" column="create_time"/>
         <result property="caseObject" column="case_object"/>

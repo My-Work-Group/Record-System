@@ -1,22 +1,32 @@
-//package com.ruoyi.project.record.caseInfo.controller;
-//import com.ruoyi.framework.aspectj.lang.annotation.Log;
-//import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-//import com.ruoyi.framework.web.controller.BaseController;
-//import com.ruoyi.framework.web.domain.AjaxResult;
-//import com.ruoyi.project.record.caseFile.domain.CaseFile;
-//import com.ruoyi.project.record.caseFile.service.ICaseFileService;
-//import com.ruoyi.project.record.caseInfo.service.ICaseInfoService;
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.ModelMap;
-//import org.springframework.web.bind.annotation.*;
-//
-//
-///**
-// * @Author: 庞沛东
-// * @Description:
-// * @Date: create in 2022/4/1 12:57
-// */
-//
-//
+package com.ruoyi.project.record.caseInfo.controller;
+
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.project.record.caseFile.domain.CaseFile;
+import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
+import com.ruoyi.project.record.caseInfo.service.ICaseInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@RequestMapping("/record/offsite")
+public class CaseInfoController extends BaseController {
+
+    @Autowired
+    private ICaseInfoService caseInfoService;
+
+    /**
+     * 检验案件编号是否唯一
+     */
+    @PostMapping("/caseInfo/checkCaseNumUnique")
+    @ResponseBody
+    public String checkCaseNumUnique(String caseNum) {
+//        CaseInfo caseInfo = caseFile.getCaseInfo();
+//        return caseInfoService.checkCaseNumUnique(caseInfo);
+        return caseInfoService.checkCaseNumUnique(caseNum);
+
+    }
+}
+

@@ -4,6 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper">
 
+    <!--    案件信息-->
+    <resultMap type="CaseInfo" id="CaseInfoResult">
+        <id property="caseId" column="case_id"/>
+        <result property="personId" column="person_id"/>
+        <result property="companyId" column="company_id"/>
+        <result property="caseNumber" column="case_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="caseObject" column="case_object"/>
+        <result property="vehPlateNum" column="veh_plate_Num"/>
+    </resultMap>
+
+    <sql id="selectCaseInfoVo">
+        select c.case_id, c.case_number, c.case_object, c.veh_plate_num, c.person_id, c.company_id, c.create_time
+        from rec_offsite_case c
+    </sql>
+
+
     <insert id="insertCase" parameterType="CaseInfo" useGeneratedKeys="true" keyProperty="caseId">
         insert into rec_offsite_case(
         <if test="caseInfo.caseId != null">case_id,</if>
@@ -12,7 +29,7 @@
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object,</if>
         <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id,</if>
         <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id,</if>
-<!--        <if test="caseInfo.caseTime != null">create_time</if>-->
+        <!--        <if test="caseInfo.caseTime != null">create_time</if>-->
         create_time
         )values(
         <if test="caseInfo.caseId != null and caseInfo.caseId != ''">#{caseInfo.caseId},</if>
@@ -21,15 +38,15 @@
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">#{caseInfo.caseObject},</if>
         <if test="caseInfo.personId != null and caseInfo.personId != ''">#{caseInfo.personId},</if>
         <if test="caseInfo.companyId != null and caseInfo.companyId != ''">#{caseInfo.companyId},</if>
-<!--        <if test="caseInfo.caseTime != null">#{caseInfo.caseTime}</if>-->
+        <!--        <if test="caseInfo.caseTime != null">#{caseInfo.caseTime}</if>-->
         sysdate()
         )
     </insert>
 
-    <select id="checkCaseNumUnique" parameterType="String" resultType="int">
-        select count(1) from rec_offsite_case where case_number=#{caseInfo.caseNumber} limit 1
+    <select id="checkCaseNumUnique" parameterType="String" resultMap="CaseInfoResult">
+        <include refid="selectCaseInfoVo"/>
+        where c.case_number=#{caseNum} limit 1
     </select>
-
 
 
 </mapper>

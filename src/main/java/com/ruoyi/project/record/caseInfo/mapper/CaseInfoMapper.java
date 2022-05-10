@@ -21,10 +21,10 @@ public interface CaseInfoMapper {
     /**
      * 校验案件编号名称是否唯一
      *
-     * @param caseNum 登录名称
+     * @param caseInfo
      * @return 结果
      */
-    public int checkCaseNumUnique(String caseNum);
+    public CaseInfo checkCaseNumUnique(String caseInfo);
 
 }
 

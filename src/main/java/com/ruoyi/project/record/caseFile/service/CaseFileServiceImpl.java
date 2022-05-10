@@ -122,45 +122,4 @@ public class CaseFileServiceImpl implements ICaseFileService {
         return caseFileMapper.selectRecordById(caseId);
     }
 
-//
-//    /**
-//     * 批量生成代码（下载方式）
-//     *
-//     * @param tableNames 表数组
-//     * @return 数据
-//     */
-//    @Override
-//    public byte[] downloadCode(String[] tableNames) {
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        ZipOutputStream zip = new ZipOutputStream(outputStream);
-//        for (String tableName : tableNames) {
-//            generatorCode(tableName, zip);
-//        }
-//        IOUtils.closeQuietly(zip);
-//        return outputStream.toByteArray();
-//    }
-//
-//    /**
-//     * 查询表信息并生成
-//     */
-//    private void generatorCode(Integer caseId, ZipOutputStream zip) {
-//        // 查询表信息
-//        CaseFile caseFile = caseFileMapper.selectRecordById(caseId);
-//        // 获取模板列表
-//        for (int i = 0; i < DocxFileName.values().length; i++) {
-//            // 渲染模板
-//            try {
-//                // 添加到zip
-//                zip.putNextEntry(new ZipEntry(getAbsoluteFile(DocxFileName.getName(i+1))));
-//                IOUtils.write(sw.toString(), zip, Constants.UTF8);
-//                IOUtils.closeQuietly(sw);
-//                zip.flush();
-//                zip.closeEntry();
-//            } catch (IOException e) {
-//                log.error("渲染模板失败，表名：" + DocxFileName.getName(i+1), e);
-//            }
-//        }
-//    }
-
-
 }

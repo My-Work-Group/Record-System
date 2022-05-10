@@ -1,6 +1,8 @@
 package com.ruoyi.project.record.caseInfo.service;
 
 
+import com.ruoyi.common.constant.UserConstants;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static java.awt.SystemColor.info;
 
 /**
  * @Author: 庞沛东
@@ -45,18 +49,17 @@ public class CaseInfoServiceImpl implements ICaseInfoService {
     /**
      * 校验案件编号名称是否唯一
      *
-     * @param caseNum 登录名称
+     * @param caseNum
      * @return 结果
      */
     @Override
     public String checkCaseNumUnique(String caseNum) {
-        int count = caseInfoMapper.checkCaseNumUnique(caseNum);
-        if (count > 0) {
+        System.out.println(caseNum);
+        CaseInfo info = caseInfoMapper.checkCaseNumUnique(caseNum);
+        if (StringUtils.isNotNull(info)) {
             // 状态码：1为存在该案件编号
             return "1";
         }
-        //状态码：0 为不存在该案件编号
         return "0";
     }
-
 }

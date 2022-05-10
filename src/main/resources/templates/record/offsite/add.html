@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
-    <th:block th:include="include :: header('新增用户')"/>
+    <th:block th:include="include :: header('新增案件')"/>
     <th:block th:include="include :: select2-css"/>
 </head>
 <body>
@@ -444,7 +444,7 @@
                 minlength: 2,
                 maxlength: 20,
                 remote: {
-                    url: prefix + "/checkCaseNumUnique",
+                    url: prefix + "/caseInfo/checkCaseNumUnique",
                     type: "post",
                     dataType: "json",
                     data: {
@@ -473,12 +473,10 @@
             directorNumId: {
                 isIdentity: true,
             },
-
             // 校验手机号
             personPhone: {
                 isPhone: true,
             },
-
             // 校验公司联系电话
             companyPhone: {
                 isPhoneOrTel: true,
@@ -492,7 +490,7 @@
         },
         messages: {
             "caseNum": {
-                remote: "该案件编号已存在！"
+                remote: "该案件编号已存在!!!"
             }
         },
         focusCleanup: true
@@ -508,7 +506,7 @@
             //个人信息
             var name = document.getElementById("name").value;
             var age = document.getElementById("age").value;
-            var sex = document.getElementById("sex").value;
+            var sex = $("#sex").find("option:selected").text();
             var numberId = document.getElementById("numberId").value;
             var personPhone = document.getElementById("personPhone").value;
             var homeAddress = document.getElementById("homeAddress").value;
@@ -636,7 +634,6 @@
             //空
             $("select[name^='sex']").val(0);
              $("#sex option[value=0]").trigger('change');
-            //<option selected="selected" disabled="disabled"  style='display: none' value='0'>--请选择性别--</option>
         }
     })
     // 隐藏个人或者公司

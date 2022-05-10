@@ -111,10 +111,10 @@ public class CaseFileController extends BaseController {
     @ResponseBody
     public AjaxResult addSave(@RequestBody CaseFile caseFile) {
 
-        String caseNum = caseFile.getCaseInfo().getCaseNumber();
+        CaseInfo caseInfo = caseFile.getCaseInfo();
         // 校验案件编号是否存在
-        if ("1".equals(caseInfoService.checkCaseNumUnique(caseNum))) {
-            return error(caseNum + "，该案件编号已存在！");
+        if ("1".equals(caseInfoService.checkCaseNumUnique(caseInfo.getCaseNumber()))) {
+            return error("该案件编号已存在！");
         }
         return toAjax(caseFileService.insertCaseFile(caseFile));
     }

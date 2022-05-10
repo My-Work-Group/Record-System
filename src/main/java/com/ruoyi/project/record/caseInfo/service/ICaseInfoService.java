@@ -45,10 +45,10 @@ public interface ICaseInfoService {
         /**
          * 校验案件编号名称是否唯一
          *
-         * @param caseNum 登录名称
+         * @param caseInfo
          * @return 结果
          */
-        public String checkCaseNumUnique(String caseNum);
+        public String checkCaseNumUnique(String caseInfo);
     }
 
 
