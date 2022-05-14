@@ -3,12 +3,14 @@ package com.ruoyi.project.record.caseInfo.service;
 
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.project.record.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.caseInfo.mapper.CaseInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static java.awt.SystemColor.info;
@@ -34,6 +36,12 @@ public class CaseInfoServiceImpl implements ICaseInfoService {
     public int insertCase(CaseInfo caseInfo) {
         // 新增案件信息
         return caseInfoMapper.insertCase(caseInfo);
+    }
+
+    @Override
+    public int deleteCaseInfoByIds(String caseId) {
+        Integer[] id = Convert.toIntArray(caseId);
+        return caseInfoMapper.deleteCaseInfoByIds(id);
     }
 
     @Override

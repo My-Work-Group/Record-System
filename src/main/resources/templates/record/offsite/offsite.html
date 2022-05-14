@@ -53,7 +53,7 @@
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
-                   shiro:hasPermission="record:offsite:remove">
+                   shiro:hasPermission="record:offsite:caseInfo:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
             </div>
@@ -97,56 +97,77 @@
             url: prefix + "/list",
             createUrl: prefix + "/add",
             updateUrl: prefix + "/edit/{id}",
-            removeUrl: prefix + "/remove",
+            removeUrl: prefix + "/caseInfo/remove",
             exportRecordUrl: prefix + "/exportRecord",
             sortName: "createTime",
             sortOrder: "desc",
             modalName: "非现场笔录",
+            uniqueId : 'caseInfo.caseId',
             columns: [{
                 checkbox: true
             },
                 {
                     field: 'caseInfo.caseNumber',
-                    title: '案件编号'
+                    title: '案件编号',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     field: 'caseInfo.createTime',
                     title: '受案时间',
+                    halign:'center',//表头居中显示
+                    align:'center',
                     sortable: true
                 },
                 {
                     field: 'caseInfo.caseObject',
                     title: '处罚对象',
+                    halign:'center',//表头居中显示
+                    align:'center',
                     sortable: true
                 },
                 {
                     field: 'caseInfo.vehPlateNum',
-                    title: '车牌号'
+                    title: '车牌号',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     field: 'vehicle.vehPlateColor',
-                    title: '车牌颜色'
+                    title: '车牌颜色',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     field: 'vehicle.vehAxleNum',
                     title: '轴数',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     field: 'overload.checkTime',
                     title: '超限时间',
+                    halign:'center',//表头居中显示
+                    align:'center',
                     sortable: true
                 },
                 {
                     field: 'overload.checkSite',
-                    title: '检测站点'
+                    title: '检测站点',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     field: 'overload.totalWeight',
-                    title: '车货总重'
+                    title: '车货总重',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     field: 'overload.outWeight',
-                    title: '超限吨位'
+                    title: '超限吨位',
+                    halign:'center',//表头居中显示
+                    align:'center'
                 },
                 {
                     title: '操作',
@@ -173,24 +194,6 @@
         $.modal.openTab("导出笔录", url);
     }
 
-
 </script>
 </body>
-
-<!-- 导入区域 -->
-<script id="importTpl" type="text/template">
-    <form enctype="multipart/form-data" class="mt20 mb10">
-        <div class="col-xs-offset-1">
-            <input type="file" id="file" name="file"/>
-            <div class="mt10 pt5">
-                <input type="checkbox" id="updateSupport" name="updateSupport" title="如果登录账户已经存在，更新这条数据。"> 是否更新已经存在的用户数据
-                &nbsp; <a onclick="$.table.importTemplate()" class="btn btn-default btn-xs"><i
-                    class="fa fa-file-excel-o"></i> 下载模板</a>
-            </div>
-            <font color="red" class="pull-left mt10">
-                提示：仅允许导入“xls”或“xlsx”格式文件！
-            </font>
-        </div>
-    </form>
-</script>
 </html>

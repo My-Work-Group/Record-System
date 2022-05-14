@@ -19,6 +19,14 @@ public interface CaseInfoMapper {
     public  int insertCase(@Param("caseInfo") CaseInfo caseInfo);
 
     /**
+     * 删除案件信息
+     * @param caseId
+     * @return
+     */
+    public int deleteCaseInfoByIds(Integer[] caseId);
+
+
+    /**
      * 校验案件编号名称是否唯一
      *
      * @param caseInfo

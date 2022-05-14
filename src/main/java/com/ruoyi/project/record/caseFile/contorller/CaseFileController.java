@@ -50,6 +50,7 @@ public class CaseFileController extends BaseController {
     }
 
     /**
+     * 导出笔录页面
      * @param caseId 案件id
      * @param
      * @param mmap
@@ -77,7 +78,6 @@ public class CaseFileController extends BaseController {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
         return WordUtil.ExportDocument(caseFile, docxFileId);
     }
-
 
     /**
      * 显示案件信息

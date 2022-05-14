@@ -27,6 +27,13 @@ public interface ICaseInfoService {
         public int insertCase(CaseInfo caseInfoEntity);
 
         /**
+         * 删除案件信息
+         * @param caseId
+         * @return
+         */
+        public int deleteCaseInfoByIds(String caseId);
+
+        /**
          * 修改后，保存用户信息
          *
          * @param caseInfoEntity 保存案件信息

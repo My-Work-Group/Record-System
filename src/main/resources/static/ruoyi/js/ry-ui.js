@@ -1088,6 +1088,7 @@ var table = {
                     $.operate.submit(url, "post", "json", data);
                 });
             },
+
             // 清空信息
             clean: function() {
                 table.set();

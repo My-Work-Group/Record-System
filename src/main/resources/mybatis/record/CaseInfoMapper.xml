@@ -48,5 +48,12 @@
         where c.case_number=#{caseNum} limit 1
     </select>
 
+    <delete id="deleteCaseInfoByIds" parameterType="Integer">
+        delete from rec_offsite_case where case_id in
+        <foreach collection="array" item="caseId" open="(" separator="," close=")">
+            #{caseId}
+        </foreach>
+    </delete>
+
 
 </mapper>
