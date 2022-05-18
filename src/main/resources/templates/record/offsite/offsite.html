@@ -102,72 +102,72 @@
             sortName: "createTime",
             sortOrder: "desc",
             modalName: "非现场笔录",
-            uniqueId : 'caseInfo.caseId',
+            uniqueId: 'caseInfo.caseId',
             columns: [{
                 checkbox: true
             },
                 {
                     field: 'caseInfo.caseNumber',
                     title: '案件编号',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     field: 'caseInfo.createTime',
                     title: '受案时间',
-                    halign:'center',//表头居中显示
-                    align:'center',
+                    halign: 'center',//表头居中显示
+                    align: 'center',
                     sortable: true
                 },
                 {
                     field: 'caseInfo.caseObject',
                     title: '处罚对象',
-                    halign:'center',//表头居中显示
-                    align:'center',
+                    halign: 'center',//表头居中显示
+                    align: 'center',
                     sortable: true
                 },
                 {
                     field: 'caseInfo.vehPlateNum',
                     title: '车牌号',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     field: 'vehicle.vehPlateColor',
                     title: '车牌颜色',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     field: 'vehicle.vehAxleNum',
                     title: '轴数',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     field: 'overload.checkTime',
                     title: '超限时间',
-                    halign:'center',//表头居中显示
-                    align:'center',
+                    halign: 'center',//表头居中显示
+                    align: 'center',
                     sortable: true
                 },
                 {
                     field: 'overload.checkSite',
                     title: '检测站点',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     field: 'overload.totalWeight',
                     title: '车货总重',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     field: 'overload.outWeight',
                     title: '超限吨位',
-                    halign:'center',//表头居中显示
-                    align:'center'
+                    halign: 'center',//表头居中显示
+                    align: 'center'
                 },
                 {
                     title: '操作',
@@ -189,11 +189,38 @@
         $.table.init(options);
     }
 
+    // 预览
+    function preview(tableId) {
+        var items = [];
+        items.push({
+            title: "111",
+            content: 'https://api.idocv.com/view/url?url=http%3A%2F%2Fapi.idocv.com%2Fdata%2Fdoc%2Fmanual.docx'
+        });
+        items.push({
+            title: "222",
+            content: 'https://api.idocv.com/view/url?url=http%3A%2F%2Fapi.idocv.com%2Fdata%2Fdoc%2Fmanual.docx'
+        })
+        openLayerUrl("111", "https://api.idocv.com/view/url?url=http%3A%2F%2Fapi.idocv.com%2Fdata%2Fdoc%2Fmanual.docx");
+        openLayerUrl("222", "https://api.idocv.com/view/url?url=http%3A%2F%2Fapi.idocv.com%2Fdata%2Fdoc%2Fmanual.docx");
+    }
+
+    function openLayerUrl(title, url) {
+        parent.layer.open({
+            type: 2,
+            title: title,
+            closeBtn: true,
+            shadeClose: false,
+            shade: 0.6,
+            border: [0],
+            area: ['90%', '90%'],  // 弹框大小
+            content: url,
+        })
+    }
+
     function exportRecord(caseId) {
         var url = prefix + '/exportRecord/' + caseId;
         $.modal.openTab("导出笔录", url);
     }
-
 </script>
 </body>
 </html>

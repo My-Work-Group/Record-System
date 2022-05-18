@@ -16,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.List;
 
 import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
@@ -49,35 +47,6 @@ public class CaseFileController extends BaseController {
         return prefix + "/offsite";
     }
 
-    /**
-     * 导出笔录页面
-     * @param caseId 案件id
-     * @param
-     * @param mmap
-     * @return
-     */
-    @RequiresPermissions("record:offsite:export")
-    @GetMapping("/exportRecord/{caseId}")
-    public String exportRecord(@PathVariable(value = "caseId") Integer caseId, ModelMap mmap) {
-        CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        mmap.put("caseFile", caseFile);
-        return prefix + "/exportRecord";
-    }
-
-    /**
-     * 下载笔录案件
-     *
-     * @param caseId     案件id
-     * @param docxFileId 笔录文件id
-     * @return
-     */
-    @RequiresPermissions("record:offsite:export")
-    @PostMapping("/exportRecord/download")
-    @ResponseBody
-    public AjaxResult recordDownLoad(Integer caseId, Integer docxFileId) {
-        CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        return WordUtil.ExportDocument(caseFile, docxFileId);
-    }
 
     /**
      * 显示案件信息
@@ -117,6 +86,37 @@ public class CaseFileController extends BaseController {
             return error("该案件编号已存在！");
         }
         return toAjax(caseFileService.insertCaseFile(caseFile));
+    }
+
+    /**
+     * 导出笔录页面
+     *
+     * @param caseId 案件id
+     * @param
+     * @param mmap
+     * @return
+     */
+    @RequiresPermissions("record:offsite:export")
+    @GetMapping("/exportRecord/{caseId}")
+    public String exportRecord(@PathVariable(value = "caseId") Integer caseId, ModelMap mmap) {
+        CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        mmap.put("caseFile", caseFile);
+        return prefix + "/exportRecord";
+    }
+
+    /**
+     * 下载笔录案件
+     *
+     * @param caseId     案件id
+     * @param docxFileId 笔录文件id
+     * @return
+     */
+    @RequiresPermissions("record:offsite:export")
+    @PostMapping("/exportRecord/download")
+    @ResponseBody
+    public AjaxResult recordDownLoad(Integer caseId, Integer docxFileId) {
+        CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        return WordUtil.ExportDocument(caseFile, docxFileId);
     }
 
     /**

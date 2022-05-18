@@ -215,9 +215,7 @@ public class GenTableServiceImpl implements IGenTableService
         // 设置主键列信息
         setPkColumn(table);
         VelocityInitializer.initVelocity();
-
         VelocityContext context = VelocityUtils.prepareContext(table);
-
         // 获取模板列表
         List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
         for (String template : templates)
