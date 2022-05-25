@@ -15,26 +15,29 @@
 <body class="main">
 <div class="box">
     <div class="item">
-        <img th:src="@{/img/info_edit.png}" alt=""/>
+        <img th:src="@{/img/index/info_edit.png}" alt=""/>
         <el-link type="primary" href="/admin/person">完善个人资料</el-link>
 
     </div>
     <div class="item">
-        <img th:src="@{/img/site_record.png}" alt=""/>
-        <el-link type="primary" href="/admin/person">现场笔录制作</el-link>
+        <img th:src="@{/img/index/site_record.png}" alt=""/>
+        <a href="/record/site"  class="anchor" >现场笔录制作</a>
     </div>
     <div class="item">
-        <img th:src="@{/img/offsite_record.png}" alt=""/>
+        <img th:src="@{/img/index/offsite_record.png}" alt=""/>
         <a href="/record/offsite"  class="anchor" >非现场笔录制作</a>
     </div>
     <div class="item">
-        <img th:src="@{/img/offsite_platform.png}" alt=""/>
+        <img th:src="@{/img/index/offsite_platform.png}" alt=""/>
         <a href="http://172.28.171.11:800/#/index/CasePredict" target="_blank">非现场治超平台</a>
     </div>
 </div>
+
+
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+
 <script type="text/javascript">
     $('#pay-qrcode').click(function () {
         var html = $(this).html();

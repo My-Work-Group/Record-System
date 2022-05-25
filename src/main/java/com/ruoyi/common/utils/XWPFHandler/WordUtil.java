@@ -2,8 +2,7 @@ package com.ruoyi.common.utils.XWPFHandler;
 
 import com.ruoyi.framework.enumerate.DocxFileName;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.project.record.caseFile.domain.CaseFile;
-import com.ruoyi.test.test;
+import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
 
 import java.io.*;
 import java.net.URL;
@@ -44,8 +43,8 @@ public class WordUtil {
         Map<String, String> map = data(caseFile);
         String vehPlateNum = map.get("vehPlateNum");
         String docxTemplatesFile = getDocxTemplatesPath() + "/" + docxFileId + ".docx";
-        // 车牌号 + 表名
-        String filename = vehPlateNum + "_" + getName(docxFileId) + ".docx";
+        // FileId + 表名
+        String filename = docxFileId + "." + getName(docxFileId) + ".docx";
         File file = new File(docxTemplatesFile);
         FileInputStream fileInputStream = null;
         try {
@@ -87,7 +86,7 @@ public class WordUtil {
      * @return 获取resources 目录下docxTemplate路径
      */
     public static String getDocxTemplatesPath() {
-        URL url =  WordUtil.class.getClassLoader().getResource("");
+        URL url = WordUtil.class.getClassLoader().getResource("");
         String path = url.getPath() + "docxTemplate";
         if (containsAnyIgnoreCase(path, "!")) {
             path = deleteCharString(path, '!');
