@@ -47,7 +47,6 @@ public class CaseFileController extends BaseController {
         return prefix + "/offsite";
     }
 
-
     /**
      * 显示案件信息
      *

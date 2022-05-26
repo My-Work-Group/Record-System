@@ -86,12 +86,15 @@ public class WordUtil {
      * @return 获取resources 目录下docxTemplate路径
      */
     public static String getDocxTemplatesPath() {
-        URL url = WordUtil.class.getClassLoader().getResource("");
+        /* URL url = WordUtil.class.getClassLoader().getResource("");
         String path = url.getPath() + "docxTemplate";
         if (containsAnyIgnoreCase(path, "!")) {
             path = deleteCharString(path, '!');
         }
-        return path;
+        return path; */
+
+        //模板文件和jar包同一路径
+        return getJarPath() +"\\docxTemplate\\";
     }
 
     /**
@@ -147,6 +150,32 @@ public class WordUtil {
         map.put("goods", caseFile.getOverload().getGoods());
         map.put("dest", caseFile.getOverload().getDest());
         return map;
+    }
+
+    /**
+     * 获取jar包中的绝对路径
+     * @return
+     */
+    public static String getJarPath() {
+        //jar包编译后的相对路径
+        String path = WordUtil.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+        //消除乱码
+        try {
+            path = java.net.URLDecoder.decode(path, "UTF-8");
+        } catch (java.io.UnsupportedEncodingException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+        //根据路径获取目标文件
+        java.io.File jarFile = new java.io.File(path);
+        //获取文件的绝对路径
+        String jarFilepath = jarFile.getAbsolutePath();
+        //我们需要得到 file 的上级目录
+        int end = jarFilepath.indexOf("file");
+        if (end > 0) {
+            return jarFilepath.substring(0, end);
+        }
+        return jarFilepath + "\\";
+
     }
 }
 
