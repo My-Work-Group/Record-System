@@ -582,12 +582,6 @@
                 contentType: "application/json",
                 data: JSON.stringify(json),
                 async: false,
-                // error: function (request) {
-                //     $.modal.alertError("系统错误");
-                // },
-                // success: function (data) {
-                //     $.operate.successCallback(data);
-                // }
                 beforeSend: function () {
                     $.modal.loading("正在处理中，请稍候...");
                 },
