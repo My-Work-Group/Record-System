@@ -15,7 +15,8 @@
         <if test="person.homeAddress != null and person.homeAddress != ''">home_address,</if>
         <if test="person.workUnit != null and person.workUnit != ''">work_unit,</if>
         <if test="person.post != null and person.post != ''">post,</if>
-        <if test="person.contactAddress != null and person.contactAddress != ''">contact_address</if>
+        <if test="person.contactAddress != null and person.contactAddress != ''">contact_address,</if>
+        <if test="person.postCode != null and person.postCode != ''">post_code</if>
         ) values (
         <if test="person.personId != null and person.personId != ''">#{person.personId},</if>
         <if test="person.personName != null and person.personName != ''">#{person.personName},</if>
@@ -26,7 +27,8 @@
         <if test="person.homeAddress != null and person.homeAddress != ''">#{person.homeAddress},</if>
         <if test="person.workUnit != null and person.workUnit != ''">#{person.workUnit},</if>
         <if test="person.post != null and person.post != ''">#{person.post},</if>
-        <if test="person.contactAddress != null and person.contactAddress != ''">#{person.contactAddress}</if>
+        <if test="person.contactAddress != null and person.contactAddress != ''">#{person.contactAddress},</if>
+        <if test="person.postCode != null and person.postCode != ''">#{person.postCode}</if>
         )
         ON DUPLICATE KEY UPDATE
         <if test="person.personName != null and person.personName != ''">person_name=values(person_name),</if>
@@ -37,6 +39,7 @@
         <if test="person.homeAddress != null and person.homeAddress != ''">home_address=values(home_address),</if>
         <if test="person.workUnit != null and person.workUnit != ''">work_unit=values(work_unit),</if>
         <if test="person.post != null and person.post != ''">post=values(post),</if>
-        <if test="person.contactAddress != null and person.contactAddress != ''">contact_address=values(contact_address)</if>
+        <if test="person.contactAddress != null and person.contactAddress != ''">contact_address=values(contact_address),</if>
+        <if test="person.postCode != null and person.postCode != ''">post_code=values(post_code)</if>
     </insert>
 </mapper> 

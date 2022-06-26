@@ -34,7 +34,6 @@
                     </div>
                 </div>
             </div>
-
 <!--            <div class="col-sm-6">-->
 <!--                <div class="form-group">-->
 <!--                    <label class="col-sm-4 control-label is-required">受案时间：</label>-->
@@ -45,9 +44,8 @@
 <!--            </div>-->
         </div>
 
-
         <div class="person-info" id="person-info">
-            <h4 class="form-header h4">个人信息</h4>
+            <h4 class="form-header h4">个人（受委托人）信息</h4>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -155,6 +153,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">邮编：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="postCode" name="postCode" placeholder="请输入邮编" class="form-control"
+                                       type="text" maxlength="6" required>
+                                <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -245,7 +256,7 @@
                             <div class="input-group">
                                 <input name="vehPlate" id="vehPlate" placeholder="请输入车牌号" class="form-control"
                                        type="text"
-                                       maxlength="15"
+                                       maxlength="20"
                                        required>
                                 <span class="input-group-addon"><i class="fa fa-cc-jcb"></i></span>
                             </div>
@@ -272,7 +283,7 @@
                         <label class="col-sm-4 control-label is-required">车型：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input id="vehType" name="vehType" placeholder="请输入车型" class="form-control"
+                                <input id="vehType" name="vehType" placeholder="请输入车型，如重型半挂牵引车" class="form-control"
                                        type="text" maxlength="18" required>
                                 <span class="input-group-addon"><i class="fa fa-car"></i></span>
                             </div>
@@ -284,17 +295,20 @@
                         <label class="col-sm-4 control-label is-required">轴数：</label>
                         <div class="col-sm-8">
                             <select name="vehAxleNum" id="vehAxleNum" class="form-control m-b" required>
+                                <option>6</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
-                                <option>6</option>
                                 <option>8</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="overload-info">
+            <h4 class="form-header h4">超限信息</h4>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -385,7 +399,7 @@
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <input id="loadTime" name="loadTime" type="datetime-local" value=""
-                                       class="form-control">
+                                       class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -419,7 +433,6 @@
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 
@@ -481,12 +494,10 @@
             companyPhone: {
                 isPhoneOrTel: true,
             },
-
             // 校验车牌号，暂时不启用
             vehPlate: {
                 // isPhone: true,
             },
-
         },
         messages: {
             "caseNum": {
@@ -513,6 +524,8 @@
             var workUnit = document.getElementById("workUnit").value;
             var post = document.getElementById("post").value;
             var contactAddress = document.getElementById("contactAddress").value;
+            var postCode = document.getElementById("postCode").value;
+
             // 公司信息
             var companyName = document.getElementById("companyName").value;
             var creditCode = document.getElementById("creditCode").value;
@@ -547,7 +560,8 @@
                     "homeAddress": homeAddress,
                     "workUnit": workUnit,
                     "post": post,
-                    "contactAddress": contactAddress
+                    "contactAddress": contactAddress,
+                    "postCode":postCode
                 },
                 "vehicle": {
                     "vehPlateNum": vehPlateNum,
@@ -592,7 +606,6 @@
                     $.operate.successTabCallback(result);
                 }
             });
-
         }
     }
 

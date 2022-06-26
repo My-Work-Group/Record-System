@@ -94,7 +94,7 @@ public class WordUtil {
         return path; */
 
         //模板文件和jar包同一路径
-        return getJarPath() +"\\docxTemplate\\";
+        return getJarPath() + "\\docxTemplate\\";
     }
 
     /**
@@ -110,6 +110,9 @@ public class WordUtil {
         Date checkDate = caseFile.getOverload().getCheckTime();
         Date loadDate = caseFile.getOverload().getLoadTime();
 
+        double outWeight = caseFile.getOverload().getOutWeight();
+        outWeight = Math.floor(outWeight); // 向下取整
+        int fine = (int) (500 * outWeight);
         // 案件信息
         map.put("createYear", String.valueOf(getYear(createDate)));
         map.put("createMonth", String.valueOf(getMonth(createDate)));
@@ -117,6 +120,7 @@ public class WordUtil {
         map.put("createHour", String.valueOf(getHour(createDate)));
         map.put("createMinute", String.valueOf(getMinute(createDate)));
         map.put("caseNumber", caseFile.getCaseInfo().getCaseNumber());
+        map.put("fine", String.valueOf(fine)); // 罚款金额，没有存储到数据库
         // 个人信息
         map.put("personName", caseFile.getPerson().getPersonName());
         map.put("age", Integer.toString(caseFile.getPerson().getAge()));
@@ -127,6 +131,7 @@ public class WordUtil {
         map.put("contactAddress", caseFile.getPerson().getContactAddress());
         map.put("workUnit", caseFile.getPerson().getWorkUnit());
         map.put("post", caseFile.getPerson().getPost());
+        map.put("postCode", caseFile.getPerson().getPostCode());
         // 车辆信息
         map.put("vehPlateNum", caseFile.getVehicle().getVehPlateNum());
         map.put("vehPlateColor", caseFile.getVehicle().getVehPlateColor());
@@ -154,6 +159,7 @@ public class WordUtil {
 
     /**
      * 获取jar包中的绝对路径
+     *
      * @return
      */
     public static String getJarPath() {

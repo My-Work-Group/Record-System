@@ -32,6 +32,9 @@ public class Person {
     // 职务
     private String post;
 
+    // 邮编
+    private String postCode;
+
     public Integer getPersonId() {
         return personId;
     }
@@ -112,6 +115,14 @@ public class Person {
         this.post = post;
     }
 
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -124,6 +135,7 @@ public class Person {
                 ", workUnit='" + workUnit + '\'' +
                 ", contactAddress='" + contactAddress + '\'' +
                 ", post='" + post + '\'' +
+                ", postCode='" + postCode + '\'' +
                 '}';
     }
 }
