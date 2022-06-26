@@ -643,17 +643,26 @@
              $("#sex option[value=0]").trigger('change');
         }
     })
+    // // 隐藏个人或者公司
+    // $('#object').off('change').on('change', function () {
+    //     if (document.getElementById('object').value === "公司") {
+    //         $('#company-info').show();
+    //         $('#person-info').hide();
+    //     } else {
+    //         $('#person-info').show();
+    //         $('#company-info').hide();
+    //     }
+    // })
+
     // 隐藏个人或者公司
     $('#object').off('change').on('change', function () {
         if (document.getElementById('object').value === "公司") {
             $('#company-info').show();
-            $('#person-info').hide();
         } else {
             $('#person-info').show();
             $('#company-info').hide();
         }
     })
-
 </script>
 </body>
 </html>

@@ -71,8 +71,11 @@ public class CaseFileServiceImpl implements ICaseFileService {
             caseInfo.setPersonId(person.getPersonId());
         }
         if (!isAllFieldNull(company) && caseInfo.getCaseObject().equals("公司")) {
+            personMapper.insertPerson(person);
+            // 案件信息关联个人（受委托人）id
+            caseInfo.setPersonId(person.getPersonId());
             companyMapper.insertCompany(company);
-            // 案件信息关联公司id
+            // 案件信息关联个人（受委托人），公司id
             caseInfo.setCompanyId(company.getCompanyId());
         }
         // 插入案件信息
