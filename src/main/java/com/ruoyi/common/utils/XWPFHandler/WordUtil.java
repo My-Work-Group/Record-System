@@ -5,13 +5,10 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
 
 import java.io.*;
-import java.net.URL;
 import java.util.*;
 
 import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
-import static com.ruoyi.common.utils.StringUtils.containsAnyIgnoreCase;
-import static com.ruoyi.common.utils.StringUtils.deleteCharString;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
 import static com.ruoyi.framework.enumerate.DocxFileName.getName;
@@ -41,8 +38,11 @@ public class WordUtil {
      */
     public static String replaceTag(CaseFile caseFile, int docxFileId) {
         Map<String, String> map = data(caseFile);
+        // 获取处罚对象
+        String object = caseFile.getCaseInfo().getCaseObject();
         String vehPlateNum = map.get("vehPlateNum");
-        String docxTemplatesFile = getDocxTemplatesPath() + "/" + docxFileId + ".docx";
+        String docxTemplatesFile;
+        docxTemplatesFile = getDocxTemplatesPath(object, docxFileId);
         // FileId + 表名
         String filename = docxFileId + "." + getName(docxFileId) + ".docx";
         File file = new File(docxTemplatesFile);
@@ -85,16 +85,21 @@ public class WordUtil {
     /**
      * @return 获取resources 目录下docxTemplate路径
      */
-    public static String getDocxTemplatesPath() {
+    public static String getDocxTemplatesPath(String object, int docxFileId) {
         /* URL url = WordUtil.class.getClassLoader().getResource("");
         String path = url.getPath() + "docxTemplate";
         if (containsAnyIgnoreCase(path, "!")) {
             path = deleteCharString(path, '!');
         }
         return path; */
-
+        String docxTemplatesFile;
+        String path = getJarPath() + "\\docxTemplate\\";
+        docxTemplatesFile = path + "\\person\\" + docxFileId + ".docx";
+        if (object.equals("公司")) {
+            docxTemplatesFile = path + "\\company\\" + docxFileId + ".docx";
+        }
         //模板文件和jar包同一路径
-        return getJarPath() + "\\docxTemplate\\";
+        return  docxTemplatesFile;
     }
 
     /**
@@ -109,7 +114,8 @@ public class WordUtil {
         Date createDate = caseFile.getCaseInfo().getcreateTime();
         Date checkDate = caseFile.getOverload().getCheckTime();
         Date loadDate = caseFile.getOverload().getLoadTime();
-
+        //  获取处罚对象
+        String object = caseFile.getCaseInfo().getCaseObject();
         double outWeight = caseFile.getOverload().getOutWeight();
         outWeight = Math.floor(outWeight); // 向下取整
         int fine = (int) (500 * outWeight);
@@ -132,6 +138,16 @@ public class WordUtil {
         map.put("workUnit", caseFile.getPerson().getWorkUnit());
         map.put("post", caseFile.getPerson().getPost());
         map.put("postCode", caseFile.getPerson().getPostCode());
+        // 公司信息
+        if (object.equals("公司")) {
+            map.put("companyName", caseFile.getCompany().getCompanyName());
+            map.put("companyAddress", caseFile.getCompany().getCompanyAddress());
+            map.put("companyPhone", caseFile.getCompany().getCompanyPhone());
+            map.put("creditCode", caseFile.getCompany().getCreditCode());
+            map.put("directorName", caseFile.getCompany().getDirectorName());
+            map.put("directorNumId", caseFile.getCompany().getDirectorNumId());
+        }
+
         // 车辆信息
         map.put("vehPlateNum", caseFile.getVehicle().getVehPlateNum());
         map.put("vehPlateColor", caseFile.getVehicle().getVehPlateColor());

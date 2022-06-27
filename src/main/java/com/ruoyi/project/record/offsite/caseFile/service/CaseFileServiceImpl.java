@@ -62,7 +62,7 @@ public class CaseFileServiceImpl implements ICaseFileService {
         Overload overload = caseFile.getOverload();
         // 获取车牌号
         String vehPlate = vehicle.getVehPlateNum();
-        //【案件， 超限信息】注入车牌号
+        //【案件，超限信息】注入车牌号
         caseInfo.setVehPlateNum(vehPlate);
         overload.setVehPlateNum(vehPlate);
         if (!isAllFieldNull(person) && caseInfo.getCaseObject().equals("个人")) {
