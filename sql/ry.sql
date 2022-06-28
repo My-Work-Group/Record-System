@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : pangpd
+Source Server         : localhost
 Source Server Version : 50725
 Source Host           : localhost:3306
 Source Database       : ry
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2022-06-26 13:29:28
+Date: 2022-06-28 13:04:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -229,7 +229,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'Lenovo-Laptop1656221261952', '1656221325379', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-S5DFQGT1656382261890', '1656392675904', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -306,9 +306,9 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', null, '1656221270000', '-1', '5', 'PAUSED', 'CRON', '1656221262000', '0', null, '2', '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', null, '1656221265000', '-1', '5', 'PAUSED', 'CRON', '1656221262000', '0', null, '2', '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', null, '1656221280000', '-1', '5', 'PAUSED', 'CRON', '1656221262000', '0', null, '2', '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', null, '1656382270000', '-1', '5', 'PAUSED', 'CRON', '1656382262000', '0', null, '2', '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', null, '1656382275000', '-1', '5', 'PAUSED', 'CRON', '1656382262000', '0', null, '2', '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', null, '1656382280000', '-1', '5', 'PAUSED', 'CRON', '1656382262000', '0', null, '2', '');
 
 -- ----------------------------
 -- Table structure for rec_offsite_case
@@ -324,7 +324,7 @@ CREATE TABLE `rec_offsite_case` (
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`case_id`),
   UNIQUE KEY `case_number` (`case_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='案件信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COMMENT='案件信息表';
 
 -- ----------------------------
 -- Records of rec_offsite_case
@@ -336,6 +336,12 @@ INSERT INTO `rec_offsite_case` VALUES ('106', '锡交路罚字〔2022〕30026号
 INSERT INTO `rec_offsite_case` VALUES ('107', '锡交路罚字〔2022〕30023号', '个人', '2022-06-09 10:04:29', '苏BV0550', '60', null);
 INSERT INTO `rec_offsite_case` VALUES ('108', '锡交路罚字〔2022〕30030号', '个人', '2022-06-21 09:52:54', '苏E6C208', '61', null);
 INSERT INTO `rec_offsite_case` VALUES ('109', '锡交路罚字〔2022〕30031号', '个人', '2022-06-21 14:46:44', '苏E6T875', '62', null);
+INSERT INTO `rec_offsite_case` VALUES ('114', '锡交路罚字〔2022〕30040号', '个人', '2022-06-27 09:15:52', '苏D19919', '67', null);
+INSERT INTO `rec_offsite_case` VALUES ('115', '锡交路罚字〔2022〕30041号', '个人', '2022-06-27 10:04:27', '苏DFX353', '68', null);
+INSERT INTO `rec_offsite_case` VALUES ('116', '锡交路罚字〔2022〕30043号', '个人', '2022-06-27 16:01:31', '苏H7477R', '69', null);
+INSERT INTO `rec_offsite_case` VALUES ('117', '锡交路罚字〔2022〕30044号', '个人', '2022-06-28 09:02:05', '苏EY3365', '70', null);
+INSERT INTO `rec_offsite_case` VALUES ('118', '锡交路罚字〔2022〕30099号', '公司', '2022-06-28 09:25:02', '苏B8888', '56', '8');
+INSERT INTO `rec_offsite_case` VALUES ('119', '锡交路罚字〔2022〕30045号', '公司', '2022-06-28 11:08:19', '苏L73889（黄）/苏LG708挂', '73', '9');
 
 -- ----------------------------
 -- Table structure for rec_offsite_company
@@ -346,17 +352,19 @@ CREATE TABLE `rec_offsite_company` (
   `company_name` varchar(30) NOT NULL COMMENT '公司名称',
   `credit_code` varchar(20) NOT NULL COMMENT '统一社会信用代码',
   `director_name` varchar(30) NOT NULL COMMENT '法人姓名',
-  `director_num_id` bigint(20) NOT NULL COMMENT '法人身份证号',
+  `director_num_id` longtext NOT NULL COMMENT '法人身份证号',
   `company_address` varchar(30) NOT NULL COMMENT '公司地址',
   `company_phone` varchar(11) DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`company_id`),
   UNIQUE KEY `company_name` (`company_name`,`credit_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='公司信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='公司信息表';
 
 -- ----------------------------
 -- Records of rec_offsite_company
 -- ----------------------------
 INSERT INTO `rec_offsite_company` VALUES ('7', '申通物流有限 公司', '88888', '庞沛东', '411402199509166736', '澄江街道春申路8号黄山小区13幢209室', '13007608847');
+INSERT INTO `rec_offsite_company` VALUES ('8', '交通运输局11', '2113', '庞沛东', '411402199509166736', '澄江街道春申路8号黄山小区13幢209室', '18151506311');
+INSERT INTO `rec_offsite_company` VALUES ('9', '镇江华兴建材物资有限公司', '91321112MA1TCD6F7C', '张兴华', '32110219700825241X', '镇江市丹徒区高资街道石马北路229号-1', '13815158070');
 
 -- ----------------------------
 -- Table structure for rec_offsite_overload
@@ -374,7 +382,7 @@ CREATE TABLE `rec_offsite_overload` (
   `dest` varchar(50) NOT NULL COMMENT '送往目的地',
   `veh_plate_num` varchar(20) NOT NULL COMMENT '车辆号',
   PRIMARY KEY (`overload_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='超限信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COMMENT='超限信息表';
 
 -- ----------------------------
 -- Records of rec_offsite_overload
@@ -398,6 +406,12 @@ INSERT INTO `rec_offsite_overload` VALUES ('109', '2022-02-25 14:43:00', 'S259 K
 INSERT INTO `rec_offsite_overload` VALUES ('110', '2022-07-01 15:40:00', 'S122 K156+50云亭江阴大道西向东', '88.00', '22.00', '111', '2022-07-01 15:40:00', '嗯嗯嗯', '云亭', '苏B8888');
 INSERT INTO `rec_offsite_overload` VALUES ('111', '2022-06-30 10:42:00', 'S122 K178+460华士芙蓉大道东向西', '78.98', '123.80', '棉纱', '2022-07-07 10:42:00', '江苏省常州市', '云亭', '苏B3333');
 INSERT INTO `rec_offsite_overload` VALUES ('113', '2022-06-23 13:24:00', 'S122 K159+500云亭江阴大道东向西', '88.00', '6.89', '棉纱', '2022-06-08 13:24:00', '江苏省常州市', '云亭', '苏B3333');
+INSERT INTO `rec_offsite_overload` VALUES ('114', '2022-03-07 03:55:00', 'X302 K23+320璜土镇澄路西向东', '22.55', '4.55', '石材', '2022-03-06 16:30:00', '常州黄河路', '江阴小湖路', '苏D19919');
+INSERT INTO `rec_offsite_overload` VALUES ('115', '2022-03-09 10:07:00', 'X257 K1+480璜土扬子大道南向北', '21.75', '3.75', '瓶装水', '2022-03-09 07:30:00', '常州市段前路', '江阴市滨江路', '苏DFX353');
+INSERT INTO `rec_offsite_overload` VALUES ('116', '2022-03-22 17:44:00', 'S259 K15+475华士红旗路北向南', '21.90', '3.90', '木材', '2022-03-22 14:30:00', '张家港市', '无锡市惠山区物流园', '苏H7477R');
+INSERT INTO `rec_offsite_overload` VALUES ('117', '2022-03-15 21:16:00', 'S357 K10+005顾山暨南大道东向西', '22.45', '4.45', '布卷', '2022-03-15 15:00:00', '常熟市梅李镇', '江阴市长泾花园村', '苏EY3365');
+INSERT INTO `rec_offsite_overload` VALUES ('118', '2022-07-08 09:24:00', 'S122 K115+475璜土港城大道西向东', '88.00', '7.90', '泥土', '2022-06-07 09:24:00', '张家港', '江阴申港', '苏B8888');
+INSERT INTO `rec_offsite_overload` VALUES ('119', '2022-03-29 04:48:00', 'S122 K115+475璜土港城大道西向东', '59.50', '10.50', '石粉', '2022-03-29 03:02:00', '镇江市京口区焦湾路', '常州市武进区崔北村', '苏L73889（黄）/苏LG708挂');
 
 -- ----------------------------
 -- Table structure for rec_offsite_person
@@ -417,7 +431,7 @@ CREATE TABLE `rec_offsite_person` (
   `post_code` varchar(11) NOT NULL,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_name` (`person_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COMMENT='个人信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='个人信息表';
 
 -- ----------------------------
 -- Records of rec_offsite_person
@@ -425,13 +439,18 @@ CREATE TABLE `rec_offsite_person` (
 INSERT INTO `rec_offsite_person` VALUES ('38', '刘德华', '男', '412587954236545155', '24', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室', '214400');
 INSERT INTO `rec_offsite_person` VALUES ('52', '黎明', '男', '411402199509166736', '26', '13007608841', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室', '214400');
 INSERT INTO `rec_offsite_person` VALUES ('55', '陈恒山', '男', '320825196603184930', '55', '18626359798', '江苏省泗阳县爱园镇倪圩村一组64号', '驻马店市路龙汽车销售服务有限公司', '驾驶员', '澄江街道春申路8号黄山小区13幢209室', '214400');
-INSERT INTO `rec_offsite_person` VALUES ('56', '庞沛东', '女', '371521198709010768', '34', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '法人代表', '澄江街道春申路8号黄山小区13幢209室', '214400');
+INSERT INTO `rec_offsite_person` VALUES ('56', '庞沛东', '男', '411402199509166736', '26', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室', '214400');
 INSERT INTO `rec_offsite_person` VALUES ('57', '测试', '男', '411402199909166736', '22', '13013131321', '测试1号', '江苏省无锡市江阴市五星路18号交通运输局', '测试', '澄江街道春申路8号黄山小区13幢209室', '214400');
 INSERT INTO `rec_offsite_person` VALUES ('59', '舒志雄', '男', '422325198102050536', '41', '15272706109', '湖北省崇阳县肖岭乡白马村一组470号', '江苏路安物流有限公司', '驾驶员', '盐城市滨海县天场镇民营创业园坎场路东侧', '224000');
 INSERT INTO `rec_offsite_person` VALUES ('60', '罗乃军', '男', '320922197009212012', '53', '18861704018', '江苏省滨海县蔡桥镇永裕村四组92号', '江阴锦龙运输有限公司', '驾驶员', '江阴市澄杨路52号', '214400');
 INSERT INTO `rec_offsite_person` VALUES ('61', '赵华叶', '男', '340421197904252854', '43', '13921958608', '安徽省淮南市凤台县朱马店镇李庙村三咀孜041', '张家港市杨舍镇赵华叶货运服务部', '法人', '江苏省苏州市张家港市杨舍镇横泾花园17幢301（非独立住宅）', '215600');
 INSERT INTO `rec_offsite_person` VALUES ('62', '焦军', '男', '340421197903105211', '42', '13451581995', '安徽省亳州市蒙城县蒙凤路1区69-191号', '张家港市顺安运输有限公司', '驾驶员', '张家港市杨舍镇塘市办事处西塘公路601号2005-2006室', '215600');
 INSERT INTO `rec_offsite_person` VALUES ('66', '庞沛东懂', '女', '371521198709010768', '34', '13007608847', '澄江街道春申路8号黄山小区13幢209室', '江苏省无锡市江阴市五星路18号交通运输局', '无', '澄江街道春申路8号黄山小区13幢209室', '214400');
+INSERT INTO `rec_offsite_person` VALUES ('67', '陶备', '男', '342201197803287930', '43', '13584565995', '安徽省苏州市埇桥区蒿沟乡赵楼村楼东组52号', '个体户', '驾驶员', '江苏省常州市钟楼区新闻花苑96幢丙单元202室', '213000');
+INSERT INTO `rec_offsite_person` VALUES ('68', '王洪彬', '男', '320826197205012210', '49', '13915846771', '江苏省常州市戚墅堰区站北新村34幢丙单元102室', '常州经开区丁堰美随达副食品店', '驾驶员', '江苏省常州市戚墅堰区站北新村34幢丙单元102室', '213000');
+INSERT INTO `rec_offsite_person` VALUES ('69', '代宇驰', '男', '320826197909164212', '42', '13057289901', '江苏省涟水县义兴镇苗戴村陈庄组19号', '个体户', '驾驶员', '苏州市张家港市经港镇蟠港东路施家厂70号', '215600');
+INSERT INTO `rec_offsite_person` VALUES ('70', '吴雪领', '男', '342221197807020518', '43', '18098719775', '安徽省宿州市砀山县玄庙镇董庄行政村吴楼一队002', '常熟市梅李镇陆美英汽车货运户', '驾驶员', '江苏省苏州市常熟市梅李镇聚沙村（23）汤家桥19号', '234000');
+INSERT INTO `rec_offsite_person` VALUES ('73', '王水', '男', '342224197912191115', '42', '13196865396', '江苏省镇江市丹徒区高资镇高姿花园10幢102室', '镇江华兴建材物资有限公司', '驾驶员', '江苏省镇江市丹徒区高资镇高姿花园10幢102室', '212100');
 
 -- ----------------------------
 -- Table structure for rec_offsite_veh
@@ -445,7 +464,7 @@ CREATE TABLE `rec_offsite_veh` (
   `veh_axes` int(4) NOT NULL COMMENT '轴数',
   PRIMARY KEY (`veh_id`),
   UNIQUE KEY `veh_plate_num` (`veh_plate_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='车辆信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='车辆信息表';
 
 -- ----------------------------
 -- Records of rec_offsite_veh
@@ -457,11 +476,16 @@ INSERT INTO `rec_offsite_veh` VALUES ('34', '苏B1234', '黄', '半挂166', '6')
 INSERT INTO `rec_offsite_veh` VALUES ('35', '苏B8910', '黄', '小型货车', '2');
 INSERT INTO `rec_offsite_veh` VALUES ('36', '苏B987', '黄', '半挂', '2');
 INSERT INTO `rec_offsite_veh` VALUES ('39', '豫QC7332', '黄', '重型自卸货车 ', '4');
-INSERT INTO `rec_offsite_veh` VALUES ('41', '苏B8888', '黄', '半挂', '2');
+INSERT INTO `rec_offsite_veh` VALUES ('41', '苏B8888', '黄', '半挂', '6');
 INSERT INTO `rec_offsite_veh` VALUES ('44', '苏JM5083/苏JXW88挂', '黄', '重型半挂牵引车', '6');
 INSERT INTO `rec_offsite_veh` VALUES ('45', '苏BV0550', '黄', '重型栏板货车', '4');
 INSERT INTO `rec_offsite_veh` VALUES ('46', '苏E6C208', '黄', '重型自卸货车', '2');
 INSERT INTO `rec_offsite_veh` VALUES ('47', '苏E6T875', '黄', '重型普通货车', '2');
+INSERT INTO `rec_offsite_veh` VALUES ('52', '苏D19919', '黄', '重型普通货车', '2');
+INSERT INTO `rec_offsite_veh` VALUES ('53', '苏DFX353', '黄', '重型自卸货车', '2');
+INSERT INTO `rec_offsite_veh` VALUES ('54', '苏H7477R', '黄', '重型栏板货车', '2');
+INSERT INTO `rec_offsite_veh` VALUES ('55', '苏EY3365', '黄', '重型仓栅式货车', '2');
+INSERT INTO `rec_offsite_veh` VALUES ('57', '苏L73889（黄）/苏LG708挂', '黄', '重型半挂牵引车', '6');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -678,7 +702,7 @@ CREATE TABLE `sys_logininfor` (
   `msg` varchar(255) DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=916 DEFAULT CHARSET=utf8 COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=925 DEFAULT CHARSET=utf8 COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1499,6 +1523,15 @@ INSERT INTO `sys_logininfor` VALUES ('912', 'admin', '127.0.0.1', '内网IP', 'C
 INSERT INTO `sys_logininfor` VALUES ('913', 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2022-06-26 13:18:33');
 INSERT INTO `sys_logininfor` VALUES ('914', 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2022-06-26 13:22:26');
 INSERT INTO `sys_logininfor` VALUES ('915', 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2022-06-26 13:27:47');
+INSERT INTO `sys_logininfor` VALUES ('916', 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-27 12:30:25');
+INSERT INTO `sys_logininfor` VALUES ('917', 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-27 15:54:16');
+INSERT INTO `sys_logininfor` VALUES ('918', 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-28 08:53:05');
+INSERT INTO `sys_logininfor` VALUES ('919', 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-28 09:23:15');
+INSERT INTO `sys_logininfor` VALUES ('920', 'admin', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-28 10:11:09');
+INSERT INTO `sys_logininfor` VALUES ('921', 'admin', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-28 10:57:47');
+INSERT INTO `sys_logininfor` VALUES ('922', 'admin', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', '0', '登录成功', '2022-06-28 11:51:45');
+INSERT INTO `sys_logininfor` VALUES ('923', 'admin', '192.168.100.240', '内网IP', 'Chrome 8', 'Windows 7', '0', '登录成功', '2022-06-28 12:11:26');
+INSERT INTO `sys_logininfor` VALUES ('924', 'admin', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2022-06-28 12:59:39');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1605,7 +1638,7 @@ CREATE TABLE `sys_oper_log` (
   `error_msg` varchar(2000) DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=376 DEFAULT CHARSET=utf8 COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=385 DEFAULT CHARSET=utf8 COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -1886,6 +1919,15 @@ INSERT INTO `sys_oper_log` VALUES ('372', '个人信息', '2', 'com.ruoyi.projec
 INSERT INTO `sys_oper_log` VALUES ('373', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":112,\"caseNumber\":\"锡交路罚字〔2022〕30056号\",\"caseObject\":\"个人\",\"loginName\":\"admin\",\"personId\":65,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656220713000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏B3333\"},\"company\":{\"companyAddress\":\"\",\"companyName\":\"\",\"companyPhone\":\"\",\"creditCode\":\"\",\"directorName\":\"\",\"directorNumId\":\"\"},\"overload\":{\"checkSite\":\"S122 K159+500云亭江阴大道东向西\",\"checkTime\":1655961840000,\"dest\":\"云亭\",\"goods\":\"棉纱\",\"loadSite\":\"江苏省常州市\",\"outWeight\":6.89,\"overloadId\":112,\"totalWeight\":88.0,\"vehPlateNum\":\"苏B3333\"},\"person\":{\"age\":34,\"contactAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"homeAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"numberId\":\"371521198709010768\",\"personId\":65,\"personName\":\"庞沛东懂\",\"personPhone\":\"13007608847\",\"post\":\"无\",\"postCode\":\"214400\",\"sex\":\"女\",\"workUnit\":\"江苏省无锡市江阴市五星路18号交通运输局\"},\"vehicle\":{\"vehAxleNum\":6,\"vehId\":32,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏B3333\",\"vehType\":\"半挂1122\"}}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'load_time\' doesn\'t have a default value\r\n### The error may exist in file [D:\\Codes\\Java\\Record-System\\target\\classes\\mybatis\\record\\OverloadMapper.xml]\r\n### The error may involve com.ruoyi.project.record.offsite.overload.mapper.OverloadMapper.insertOverload-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into rec_offsite_overload(          overload_id,           check_time,           check_site,           total_weight,           out_weight,           goods,                     load_site,           dest,           veh_plate_num          ) values (          ?,           ?,           ?,           ?,           ?,           ?,                     ?,           ?,           ?          )\r\n### Cause: java.sql.SQLException: Field \'load_time\' doesn\'t have a default value\n; Field \'load_time\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'load_time\' doesn\'t have a default value', '2022-06-26 13:24:24');
 INSERT INTO `sys_oper_log` VALUES ('374', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":113,\"caseNumber\":\"锡交路罚字〔2022〕30056号\",\"caseObject\":\"个人\",\"loginName\":\"admin\",\"personId\":66,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656220713000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏B3333\"},\"company\":{\"companyAddress\":\"\",\"companyName\":\"\",\"companyPhone\":\"\",\"creditCode\":\"\",\"directorName\":\"\",\"directorNumId\":\"\"},\"overload\":{\"checkSite\":\"S122 K159+500云亭江阴大道东向西\",\"checkTime\":1655961840000,\"dest\":\"云亭\",\"goods\":\"棉纱\",\"loadSite\":\"江苏省常州市\",\"loadTime\":1654665840000,\"outWeight\":6.89,\"overloadId\":113,\"totalWeight\":88.0,\"vehPlateNum\":\"苏B3333\"},\"person\":{\"age\":34,\"contactAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"homeAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"numberId\":\"371521198709010768\",\"personId\":66,\"personName\":\"庞沛东懂\",\"personPhone\":\"13007608847\",\"post\":\"无\",\"postCode\":\"214400\",\"sex\":\"女\",\"workUnit\":\"江苏省无锡市江阴市五星路18号交通运输局\"},\"vehicle\":{\"vehAxleNum\":6,\"vehId\":32,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏B3333\",\"vehType\":\"半挂1122\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-26 13:24:35');
 INSERT INTO `sys_oper_log` VALUES ('375', '案件管理', '3', 'com.ruoyi.project.record.offsite.caseInfo.controller.CaseInfoController.remove()', 'POST', '1', 'admin', '治超中队', '/record/offsite/caseInfo/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"113\"]}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-26 13:26:20');
+INSERT INTO `sys_oper_log` VALUES ('376', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '研发部门', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":114,\"caseNumber\":\"锡交路罚字〔2022〕30040号\",\"caseObject\":\"个人\",\"loginName\":\"admin\",\"personId\":67,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/03/28/14724b1a-9874-45b2-b478-4f5724510072.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":103,\"deptName\":\"研发部门\",\"leader\":\"若依\",\"orderNum\":\"1\",\"params\":{},\"parentId\":101,\"status\":\"0\"},\"deptId\":103,\"email\":\"ry@163.com\",\"loginDate\":1653546408000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"1\",\"status\":\"0\",\"userId\":1,\"userName\":\"test\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏D19919\"},\"company\":{\"companyAddress\":\"\",\"companyName\":\"\",\"companyPhone\":\"\",\"creditCode\":\"\",\"directorName\":\"\",\"directorNumId\":\"\"},\"overload\":{\"checkSite\":\"X302 K23+320璜土镇澄路西向东\",\"checkTime\":1646596500000,\"dest\":\"江阴小湖路\",\"goods\":\"石材\",\"loadSite\":\"常州黄河路\",\"loadTime\":1646555400000,\"outWeight\":4.55,\"overloadId\":114,\"totalWeight\":22.55,\"vehPlateNum\":\"苏D19919\"},\"person\":{\"age\":43,\"contactAddress\":\"江苏省常州市钟楼区新闻花苑96幢丙单元202室\",\"homeAddress\":\"安徽省苏州市埇桥区蒿沟乡赵楼村楼东组52号\",\"numberId\":\"342201197803287930\",\"personId\":67,\"personName\":\"淘备\",\"personPhone\":\"13584565995\",\"post\":\"驾驶员\",\"postCode\":\"213000\",\"sex\":\"男\",\"workUnit\":\"个体户\"},\"vehicle\":{\"vehAxleNum\":2,\"vehId\":52,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏D19919\",\"vehType\":\"重型普通货车\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-27 09:15:53');
+INSERT INTO `sys_oper_log` VALUES ('377', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '研发部门', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":115,\"caseNumber\":\"锡交路罚字〔2022〕30041号\",\"caseObject\":\"个人\",\"loginName\":\"admin\",\"personId\":68,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/03/28/14724b1a-9874-45b2-b478-4f5724510072.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":103,\"deptName\":\"研发部门\",\"leader\":\"若依\",\"orderNum\":\"1\",\"params\":{},\"parentId\":101,\"status\":\"0\"},\"deptId\":103,\"email\":\"ry@163.com\",\"loginDate\":1653546408000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"1\",\"status\":\"0\",\"userId\":1,\"userName\":\"test\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏DFX353\"},\"company\":{\"companyAddress\":\"\",\"companyName\":\"\",\"companyPhone\":\"\",\"creditCode\":\"\",\"directorName\":\"\",\"directorNumId\":\"\"},\"overload\":{\"checkSite\":\"X257 K1+480璜土扬子大道南向北\",\"checkTime\":1646791620000,\"dest\":\"江阴市滨江路\",\"goods\":\"瓶装水\",\"loadSite\":\"常州市段前路\",\"loadTime\":1646782200000,\"outWeight\":3.75,\"overloadId\":115,\"totalWeight\":21.75,\"vehPlateNum\":\"苏DFX353\"},\"person\":{\"age\":49,\"contactAddress\":\"江苏省常州市戚墅堰区站北新村34幢丙单元102室\",\"homeAddress\":\"江苏省常州市戚墅堰区站北新村34幢丙单元102室\",\"numberId\":\"320826197205012210\",\"personId\":68,\"personName\":\"王洪彬\",\"personPhone\":\"13915846771\",\"post\":\"驾驶员\",\"postCode\":\"213000\",\"sex\":\"男\",\"workUnit\":\"常州经开区丁堰美随达副食品店\"},\"vehicle\":{\"vehAxleNum\":2,\"vehId\":53,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏DFX353\",\"vehType\":\"重型自卸货车\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-27 10:04:28');
+INSERT INTO `sys_oper_log` VALUES ('378', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":116,\"caseNumber\":\"锡交路罚字〔2022〕30043号\",\"caseObject\":\"个人\",\"loginName\":\"admin\",\"personId\":69,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656304226000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏H7477R\"},\"company\":{\"companyAddress\":\"\",\"companyName\":\"\",\"companyPhone\":\"\",\"creditCode\":\"\",\"directorName\":\"\",\"directorNumId\":\"\"},\"overload\":{\"checkSite\":\"S259 K15+475华士红旗路北向南\",\"checkTime\":1647942240000,\"dest\":\"无锡市惠山区物流园\",\"goods\":\"木材\",\"loadSite\":\"张家港市\",\"loadTime\":1647930600000,\"outWeight\":3.9,\"overloadId\":116,\"totalWeight\":21.9,\"vehPlateNum\":\"苏H7477R\"},\"person\":{\"age\":42,\"contactAddress\":\"苏州市张家港市经港镇蟠港东路施家厂70号\",\"homeAddress\":\"江苏省涟水县义兴镇苗戴村陈庄组19号\",\"numberId\":\"320826197909164212\",\"personId\":69,\"personName\":\"代宇驰\",\"personPhone\":\"13057289901\",\"post\":\"驾驶员\",\"postCode\":\"215600\",\"sex\":\"男\",\"workUnit\":\"个体户\"},\"vehicle\":{\"vehAxleNum\":2,\"vehId\":54,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏H7477R\",\"vehType\":\"重型栏板货车\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-27 16:01:31');
+INSERT INTO `sys_oper_log` VALUES ('379', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":117,\"caseNumber\":\"锡交路罚字〔2022〕30044号\",\"caseObject\":\"个人\",\"loginName\":\"admin\",\"personId\":70,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656316457000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏EY3365\"},\"company\":{\"companyAddress\":\"\",\"companyName\":\"\",\"companyPhone\":\"\",\"creditCode\":\"\",\"directorName\":\"\",\"directorNumId\":\"\"},\"overload\":{\"checkSite\":\"S357 K10+005顾山暨南大道东向西\",\"checkTime\":1647350160000,\"dest\":\"江阴市长泾花园村\",\"goods\":\"布卷\",\"loadSite\":\"常熟市梅李镇\",\"loadTime\":1647327600000,\"outWeight\":4.45,\"overloadId\":117,\"totalWeight\":22.45,\"vehPlateNum\":\"苏EY3365\"},\"person\":{\"age\":43,\"contactAddress\":\"江苏省苏州市常熟市梅李镇聚沙村（23）汤家桥19号\",\"homeAddress\":\"安徽省宿州市砀山县玄庙镇董庄行政村吴楼一队002\",\"numberId\":\"342221197807020518\",\"personId\":70,\"personName\":\"吴雪领\",\"personPhone\":\"18098719775\",\"post\":\"驾驶员\",\"postCode\":\"234000\",\"sex\":\"男\",\"workUnit\":\"常熟市梅李镇陆美英汽车货运户\"},\"vehicle\":{\"vehAxleNum\":2,\"vehId\":55,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏EY3365\",\"vehType\":\"重型仓栅式货车\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-28 09:02:05');
+INSERT INTO `sys_oper_log` VALUES ('380', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseNumber\":\"锡交路罚字〔2022〕30012号\",\"caseObject\":\"公司\",\"loginName\":\"admin\",\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656377585000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1},\"company\":{\"companyAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"companyName\":\"交通运输局11\",\"companyPhone\":\"18151506311\",\"creditCode\":\"2113\",\"directorName\":\"庞沛东\",\"directorNumId\":\"411402199509166736\"},\"overload\":{\"checkSite\":\"S122 K115+475璜土港城大道西向东\",\"checkTime\":1657243440000,\"dest\":\"江阴申港\",\"goods\":\"泥土\",\"loadSite\":\"张家港\",\"loadTime\":1654565040000,\"outWeight\":7.9,\"totalWeight\":88.0},\"person\":{\"age\":26,\"contactAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"homeAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"numberId\":\"411402199509166736\",\"personName\":\"庞沛东\",\"personPhone\":\"13007608847\",\"post\":\"无\",\"postCode\":\"214400\",\"sex\":\"男\",\"workUnit\":\"江苏省无锡市江阴市五星路18号交通运输局\"},\"vehicle\":{\"vehAxleNum\":6,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏B8888\",\"vehType\":\"半挂\"}}', '{\"msg\":\"该案件编号已存在！\",\"code\":500}', '0', null, '2022-06-28 09:24:54');
+INSERT INTO `sys_oper_log` VALUES ('381', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '127.0.0.1', '内网IP', '{\"caseInfo\":{\"caseId\":118,\"caseNumber\":\"锡交路罚字〔2022〕30099号\",\"caseObject\":\"公司\",\"companyId\":8,\"loginName\":\"admin\",\"personId\":56,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656377585000,\"loginIp\":\"127.0.0.1\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏B8888\"},\"company\":{\"companyAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"companyId\":8,\"companyName\":\"交通运输局11\",\"companyPhone\":\"18151506311\",\"creditCode\":\"2113\",\"directorName\":\"庞沛东\",\"directorNumId\":\"411402199509166736\"},\"overload\":{\"checkSite\":\"S122 K115+475璜土港城大道西向东\",\"checkTime\":1657243440000,\"dest\":\"江阴申港\",\"goods\":\"泥土\",\"loadSite\":\"张家港\",\"loadTime\":1654565040000,\"outWeight\":7.9,\"overloadId\":118,\"totalWeight\":88.0,\"vehPlateNum\":\"苏B8888\"},\"person\":{\"age\":26,\"contactAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"homeAddress\":\"澄江街道春申路8号黄山小区13幢209室\",\"numberId\":\"411402199509166736\",\"personId\":56,\"personName\":\"庞沛东\",\"personPhone\":\"13007608847\",\"post\":\"无\",\"postCode\":\"214400\",\"sex\":\"男\",\"workUnit\":\"江苏省无锡市江阴市五星路18号交通运输局\"},\"vehicle\":{\"vehAxleNum\":6,\"vehId\":41,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏B8888\",\"vehType\":\"半挂\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-28 09:25:02');
+INSERT INTO `sys_oper_log` VALUES ('382', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '192.168.100.241', '内网IP', '{\"caseInfo\":{\"caseNumber\":\"锡交路罚字〔2022〕30012号\",\"caseObject\":\"公司\",\"loginName\":\"admin\",\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656382269000,\"loginIp\":\"192.168.100.241\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1},\"company\":{\"companyAddress\":\"镇江市丹徒区高资街道石马北路229号-1\",\"companyName\":\"镇江华兴建材物资有限公司\",\"companyPhone\":\"13815158070\",\"creditCode\":\"91321112MA1TCD6F7C\",\"directorName\":\"张兴华\",\"directorNumId\":\"32110219700825241X\"},\"overload\":{\"checkSite\":\"S122 K115+475璜土港城大道西向东\",\"checkTime\":1648500480000,\"dest\":\"常州市武进区崔北村\",\"goods\":\"石粉\",\"loadSite\":\"镇江市京口区焦湾路\",\"loadTime\":1648494120000,\"outWeight\":10.5,\"totalWeight\":59.5},\"person\":{\"age\":42,\"contactAddress\":\"江苏省镇江市丹徒区高资镇高姿花园10幢102室\",\"homeAddress\":\"江苏省镇江市丹徒区高资镇高姿花园10幢102室\",\"numberId\":\"342224197912191115\",\"personName\":\"王水\",\"personPhone\":\"13196865396\",\"post\":\"驾驶员\",\"postCode\":\"212100\",\"sex\":\"男\",\"workUnit\":\"镇江华兴建材物资有限公司\"},\"vehicle\":{\"vehAxleNum\":6,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\",\"vehType\":\"重型半挂牵引车\"}}', '{\"msg\":\"该案件编号已存在！\",\"code\":500}', '0', null, '2022-06-28 11:06:20');
+INSERT INTO `sys_oper_log` VALUES ('383', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '192.168.100.241', '内网IP', '{\"caseInfo\":{\"caseNumber\":\"锡交路罚字〔2022〕30045号\",\"caseObject\":\"公司\",\"loginName\":\"admin\",\"personId\":72,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656382269000,\"loginIp\":\"192.168.100.241\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\"},\"company\":{\"companyAddress\":\"镇江市丹徒区高资街道石马北路229号-1\",\"companyName\":\"镇江华兴建材物资有限公司\",\"companyPhone\":\"13815158070\",\"creditCode\":\"91321112MA1TCD6F7C\",\"directorName\":\"张兴华\",\"directorNumId\":\"32110219700825241X\"},\"overload\":{\"checkSite\":\"S122 K115+475璜土港城大道西向东\",\"checkTime\":1648500480000,\"dest\":\"常州市武进区崔北村\",\"goods\":\"石粉\",\"loadSite\":\"镇江市京口区焦湾路\",\"loadTime\":1648494120000,\"outWeight\":10.5,\"totalWeight\":59.5,\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\"},\"person\":{\"age\":42,\"contactAddress\":\"江苏省镇江市丹徒区高资镇高姿花园10幢102室\",\"homeAddress\":\"江苏省镇江市丹徒区高资镇高姿花园10幢102室\",\"numberId\":\"342224197912191115\",\"personId\":72,\"personName\":\"王水\",\"personPhone\":\"13196865396\",\"post\":\"驾驶员\",\"postCode\":\"212100\",\"sex\":\"男\",\"workUnit\":\"镇江华兴建材物资有限公司\"},\"vehicle\":{\"vehAxleNum\":6,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\",\"vehType\":\"重型半挂牵引车\"}}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Data truncated for column \'director_num_id\' at row 1\r\n### The error may exist in class path resource [mybatis/record/CompanyMapper.xml]\r\n### The error may involve com.ruoyi.project.record.offsite.company.mapper.CompanyMapper.insertCompany-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into rec_offsite_company(                    company_name,           credit_code,           director_name,           director_num_id,           company_address,           company_phone          ) values (                    ?,            ?,           ?,           ?,           ?,           ?          )         ON DUPLICATE KEY UPDATE          credit_code=values(credit_code),           director_name=values(director_name),           director_num_id=values(director_num_id),           company_address=values(company_address),           company_phone=values(company_phone)\r\n### Cause: java.sql.SQLException: Data truncated for column \'director_num_id\' at row 1\n; Data truncated for column \'director_num_id\' at row 1; nested exception is java.sql.SQLException: Data truncated for column \'director_num_id\' at row 1', '2022-06-28 11:06:34');
+INSERT INTO `sys_oper_log` VALUES ('384', '案件管理', '1', 'com.ruoyi.project.record.offsite.caseFile.contorller.CaseFileController.addSave()', 'POST', '1', 'admin', '治超中队', '/record/offsite/add', '192.168.100.241', '内网IP', '{\"caseInfo\":{\"caseId\":119,\"caseNumber\":\"锡交路罚字〔2022〕30045号\",\"caseObject\":\"公司\",\"companyId\":9,\"loginName\":\"admin\",\"personId\":73,\"sysUser\":{\"admin\":true,\"avatar\":\"/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png\",\"createTime\":1648006900000,\"delFlag\":\"0\",\"dept\":{\"deptId\":109,\"deptName\":\"治超中队\",\"leader\":\"若依\",\"orderNum\":\"2\",\"params\":{},\"parentId\":102,\"status\":\"0\"},\"deptId\":109,\"email\":\"abc@163.com\",\"loginDate\":1656382269000,\"loginIp\":\"192.168.100.241\",\"loginName\":\"admin\",\"params\":{},\"phonenumber\":\"15888888888\",\"pwdUpdateDate\":1648006900000,\"remark\":\"管理员\",\"roles\":[{\"admin\":true,\"dataScope\":\"1\",\"flag\":false,\"params\":{},\"roleId\":1,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"roleSort\":\"1\",\"status\":\"0\"}],\"salt\":\"111111\",\"sex\":\"0\",\"status\":\"0\",\"userId\":1,\"userName\":\"测试专用\",\"userType\":\"00\"},\"userId\":1,\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\"},\"company\":{\"companyAddress\":\"镇江市丹徒区高资街道石马北路229号-1\",\"companyId\":9,\"companyName\":\"镇江华兴建材物资有限公司\",\"companyPhone\":\"13815158070\",\"creditCode\":\"91321112MA1TCD6F7C\",\"directorName\":\"张兴华\",\"directorNumId\":\"32110219700825241X\"},\"overload\":{\"checkSite\":\"S122 K115+475璜土港城大道西向东\",\"checkTime\":1648500480000,\"dest\":\"常州市武进区崔北村\",\"goods\":\"石粉\",\"loadSite\":\"镇江市京口区焦湾路\",\"loadTime\":1648494120000,\"outWeight\":10.5,\"overloadId\":119,\"totalWeight\":59.5,\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\"},\"person\":{\"age\":42,\"contactAddress\":\"江苏省镇江市丹徒区高资镇高姿花园10幢102室\",\"homeAddress\":\"江苏省镇江市丹徒区高资镇高姿花园10幢102室\",\"numberId\":\"342224197912191115\",\"personId\":73,\"personName\":\"王水\",\"personPhone\":\"13196865396\",\"post\":\"驾驶员\",\"postCode\":\"212100\",\"sex\":\"男\",\"workUnit\":\"镇江华兴建材物资有限公司\"},\"vehicle\":{\"vehAxleNum\":6,\"vehId\":57,\"vehPlateColor\":\"黄\",\"vehPlateNum\":\"苏L73889（黄）/苏LG708挂\",\"vehType\":\"重型半挂牵引车\"}}', '{\"msg\":\"操作成功\",\"code\":0}', '0', null, '2022-06-28 11:08:19');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2014,7 +2056,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '109', 'admin', '测试专用', '00', 'abc@163.com', '15888888888', '0', '/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2022-06-26 13:27:48', '2022-03-23 11:41:40', 'admin', '2022-03-23 11:41:40', '', '2022-06-26 13:27:47', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '109', 'admin', '测试专用', '00', 'abc@163.com', '15888888888', '0', '/profile/avatar/2022/06/26/562cb5e3-f796-42f2-ae29-a811fd9ede1b.png', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '192.168.100.241', '2022-06-28 12:59:40', '2022-03-23 11:41:40', 'admin', '2022-03-23 11:41:40', '', '2022-06-28 12:59:39', '管理员');
 INSERT INTO `sys_user` VALUES ('105', '109', 'pangpd', '庞沛东', '00', '', '', '0', '', 'c653e29cd4bbf38d2c0c295a38a6ec75', '8a966d', '0', '0', '192.168.100.241', '2022-05-25 15:53:13', null, 'admin', '2022-05-25 15:16:25', 'admin', '2022-05-25 15:53:13', '');
 
 -- ----------------------------
@@ -2040,8 +2082,16 @@ CREATE TABLE `sys_user_online` (
 -- Records of sys_user_online
 -- ----------------------------
 INSERT INTO `sys_user_online` VALUES ('39d01f86-3dc2-4d77-bca1-07cdfab62495', 'admin', '治超中队', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2022-06-26 13:27:46', '2022-06-26 13:27:48', '1800000');
+INSERT INTO `sys_user_online` VALUES ('447c9c53-9366-42ed-abe2-ea78feaf856e', 'admin', '治超中队', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-28 12:59:38', '2022-06-28 13:02:34', '-60000');
+INSERT INTO `sys_user_online` VALUES ('5d68187a-0a12-42de-80e1-abac4cbe808b', 'admin', '治超中队', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-28 10:11:08', '2022-06-28 10:11:09', '-60000');
 INSERT INTO `sys_user_online` VALUES ('65064026-7f42-484a-b201-3996d1559b64', 'admin', '治超中队', '192.168.100.240', '内网IP', 'Chrome 8', 'Windows 7', 'on_line', '2022-06-21 14:32:43', '2022-06-21 14:46:45', '6000000');
+INSERT INTO `sys_user_online` VALUES ('7ce80cc8-9fef-4e80-bd65-cd85e9ca59c5', 'admin', '治超中队', '192.168.100.240', '内网IP', 'Chrome 8', 'Windows 7', 'on_line', '2022-06-28 12:11:24', '2022-06-28 12:11:27', '-60000');
+INSERT INTO `sys_user_online` VALUES ('9777528d-4bbb-4dcf-8775-75861d052ba5', 'admin', '治超中队', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-27 15:54:15', '2022-06-27 16:01:31', '-60000');
+INSERT INTO `sys_user_online` VALUES ('a7330dcc-6b8e-49c1-8977-56446f94795e', 'admin', '治超中队', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-28 10:57:20', '2022-06-28 12:16:33', '-60000');
+INSERT INTO `sys_user_online` VALUES ('d3690e51-3fb0-43ae-bf28-1b8edce5895f', 'admin', '治超中队', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-28 09:23:14', '2022-06-28 09:24:55', '1800000');
+INSERT INTO `sys_user_online` VALUES ('d7d3e56e-cd31-4544-9b7e-b93265ab4275', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-27 08:48:04', '2022-06-27 12:30:26', '-60000');
 INSERT INTO `sys_user_online` VALUES ('dcd6506e-b4d9-4bef-8d89-2875662e257b', 'admin', '治超中队', '192.168.100.241', '内网IP', 'Chrome 9', 'Windows 10', 'on_line', '2022-06-21 15:39:55', '2022-06-21 15:49:26', '6000000');
+INSERT INTO `sys_user_online` VALUES ('e41972ef-5888-4cba-91eb-9f6204286f32', 'admin', '治超中队', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', 'on_line', '2022-06-28 11:51:44', '2022-06-28 12:16:51', '-60000');
 
 -- ----------------------------
 -- Table structure for sys_user_post
