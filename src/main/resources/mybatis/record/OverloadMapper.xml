@@ -28,6 +28,32 @@
         <if test="overload.dest != null and overload.dest != ''">#{overload.dest},</if>
         <if test="overload.vehPlateNum != null and overload.vehPlateNum != ''">#{overload.vehPlateNum }</if>
         )
+<!--        ON DUPLICATE KEY UPDATE-->
+<!--        <if test="overload.checkTime != null">check_time=values(check_time),</if>-->
+<!--        <if test="overload.checkSite != null and overload.checkSite != ''">check_site=values(check_site),</if>-->
+<!--        <if test="overload.totalWeight != null and overload.totalWeight != ''">total_weight=values(total_weight),</if>-->
+<!--        <if test="overload.outWeight != null and overload.outWeight != ''">out_weight=values(out_weight),</if>-->
+<!--        <if test="overload.goods != null and overload.goods != ''">goods=values(goods),</if>-->
+<!--        <if test="overload.loadTime != null">load_time=values(load_time),</if>-->
+<!--        <if test="overload.loadSite != null and overload.loadSite != ''">load_site=values(load_site),</if>-->
+<!--        <if test="overload.dest != null and overload.dest != ''">dest=values(dest),</if>-->
+<!--        <if test="overload.vehPlateNum != null and overload.vehPlateNum != ''">veh_plate_num=values(veh_plate_num)</if>-->
     </insert>
+
+    <update id="updateOverload" parameterType="Overload">
+        update rec_offsite_overload
+        <set>
+            <if test="overload.checkTime != null">check_time=#{overload.checkTime},</if>
+            <if test="overload.checkSite != null and overload.checkSite != ''">check_site=#{overload.checkSite},</if>
+            <if test="overload.totalWeight != null and overload.totalWeight != ''">total_weight=#{overload.totalWeight},</if>
+            <if test="overload.outWeight != null and overload.outWeight != ''">out_weight=#{overload.outWeight},</if>
+            <if test="overload.goods != null and overload.goods != ''">goods=#{overload.goods},</if>
+            <if test="overload.loadTime != null">load_time=#{overload.loadTime},</if>
+            <if test="overload.loadSite != null and overload.loadSite != ''">load_site=#{overload.loadSite},</if>
+            <if test="overload.dest != null and overload.dest != ''">dest=#{overload.dest},</if>
+        </set>
+        where overload_id = #{overload.overloadId}
+    </update>
+
 
 </mapper> 

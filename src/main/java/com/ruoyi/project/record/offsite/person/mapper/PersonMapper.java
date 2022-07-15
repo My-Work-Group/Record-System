@@ -10,4 +10,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface PersonMapper {
     public int insertPerson(@Param("person") Person person);
+    public int updatePerson(@Param("person") Person person);
 }

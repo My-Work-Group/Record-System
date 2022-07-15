@@ -17,6 +17,11 @@ public class OverloadServiceImpl implements IOverloadService {
 
     @Override
     public int insertOverload(Overload overload) {
-        return  overloadMapper.insertOverload(overload);
+        return overloadMapper.insertOverload(overload);
+    }
+
+    @Override
+    public int updateOverload(Overload overload) {
+        return overloadMapper.updateOverload(overload);
     }
 }

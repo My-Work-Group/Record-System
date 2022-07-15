@@ -16,4 +16,12 @@ public interface ICompanyService {
      * @return 结果
      */
     public int insertCompany(Company company);
+
+    /**
+     * 修改公司信息
+     *
+     * @param company 公司信息
+     * @return 结果
+     */
+    public int updateCompany(Company company);
 }

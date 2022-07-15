@@ -42,4 +42,23 @@
         <if test="person.contactAddress != null and person.contactAddress != ''">contact_address=values(contact_address),</if>
         <if test="person.postCode != null and person.postCode != ''">post_code=values(post_code)</if>
     </insert>
+
+    <update id="updatePerson" parameterType="Person">
+        update rec_offsite_person
+        <set>
+            <if test="person.personName != null and person.personName != ''">person_name=#{person.personName},</if>
+            <if test="person.numberId != null and person.numberId != ''">number_id=#{person.numberId},</if>
+            <if test="person.age != null and person.age != ''">age=#{person.age},</if>
+            <if test="person.sex != null and person.sex != ''">sex=#{person.sex},</if>
+            <if test="person.personPhone != null and person.personPhone != ''">person_phone=#{person.personPhone},</if>
+            <if test="person.homeAddress != null and person.homeAddress != ''">home_address=#{person.homeAddress},</if>
+            <if test="person.workUnit != null and person.workUnit != ''">work_unit=#{person.workUnit},</if>
+            <if test="person.post != null and person.post != ''">post=#{person.post},</if>
+            <if test="person.contactAddress != null and person.contactAddress != ''">contact_address=#{person.contactAddress},</if>
+            <if test="person.postCode != null and person.postCode != ''">post_code=#{person.postCode}</if>
+        </set>
+        where person_id = #{person.personId}
+    </update>
+
+
 </mapper> 

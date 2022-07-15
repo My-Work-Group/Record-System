@@ -12,4 +12,6 @@ public interface CompanyMapper {
 
     public int insertCompany(@Param("company") Company company);
 
+    public int updateCompany(@Param("company") Company company);
+
 }

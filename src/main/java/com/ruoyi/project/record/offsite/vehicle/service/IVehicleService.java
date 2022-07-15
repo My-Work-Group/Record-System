@@ -10,4 +10,6 @@ import com.ruoyi.project.record.offsite.vehicle.domain.Vehicle;
 
 public interface IVehicleService {
     public int insertVehicle(Vehicle vehicle);
+
+    public int updateVehicle(Vehicle vehicle);
 }

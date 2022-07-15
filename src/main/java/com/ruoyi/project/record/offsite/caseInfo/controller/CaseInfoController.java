@@ -19,6 +19,7 @@ public class CaseInfoController extends BaseController {
 
     /**
      * 删除案件信息（可批量删除）
+     *
      * @param caseId
      * @return
      */
@@ -29,7 +30,6 @@ public class CaseInfoController extends BaseController {
     public AjaxResult remove(@RequestParam("ids") String caseId) {
         return toAjax(caseInfoService.deleteCaseInfoByIds(caseId));
     }
-
 
     /**
      * 检验案件编号是否唯一

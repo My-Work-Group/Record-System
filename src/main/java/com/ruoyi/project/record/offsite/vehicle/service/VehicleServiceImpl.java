@@ -19,4 +19,10 @@ public class VehicleServiceImpl implements IVehicleService {
     public int insertVehicle(Vehicle vehicle) {
         return vehicleMapper.insertVehicle(vehicle);
     }
+
+    @Override
+    public int updateVehicle(Vehicle vehicle) {
+        return vehicleMapper.updateVehicle(vehicle);
+    }
+
 }

@@ -16,17 +16,35 @@
         ) values (
         <if test="company.companyId != null and vehicle.companyId != ''">#{company.companyId},</if>
         <if test="company.companyName != null and company.companyName != ''">#{company.companyName},</if>
-        <if test="company.creditCode != null and company.creditCode != ''"> #{company.creditCode},</if>
+        <if test="company.creditCode != null and company.creditCode != ''">#{company.creditCode},</if>
         <if test="company.directorName != null and company.directorName != ''">#{company.directorName},</if>
         <if test="company.directorNumId != null and company.directorNumId != ''">#{company.directorNumId},</if>
         <if test="company.companyAddress != null and company.companyAddress != ''">#{company.companyAddress},</if>
         <if test="company.companyPhone != null and company.companyPhone != ''">#{company.companyPhone}</if>
         )
         ON DUPLICATE KEY UPDATE
-        <if test="company.directorName != null and company.directorName != ''">credit_code=values(credit_code),</if>
+        <if test="company.creditCode != null and company.creditCode != ''">credit_code=values(credit_code),</if>
         <if test="company.directorName != null and company.directorName != ''">director_name=values(director_name),</if>
-        <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id=values(director_num_id),</if>
-        <if test="company.companyAddress != null and company.companyAddress != ''">company_address=values(company_address),</if>
+        <if test="company.directorNumId != null and company.directorNumId != ''">
+            director_num_id=values(director_num_id),
+        </if>
+        <if test="company.companyAddress != null and company.companyAddress != ''">
+            company_address=values(company_address),
+        </if>
         <if test="company.companyPhone != null and company.companyPhone != ''">company_phone=values(company_phone)</if>
     </insert>
+
+    <update id="updateCompany" parameterType="Company">
+        update rec_offsite_company
+        <set>
+            <if test="company.companyName != null and company.companyName != ''">company_name=#{company.companyName},</if>
+            <if test="company.creditCode != null and company.creditCode != ''">credit_code=#{company.creditCode},</if>
+            <if test="company.directorName != null and company.directorName != ''">director_name=#{company.directorName},</if>
+            <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id=#{company.directorNumId},</if>
+            <if test="company.companyAddress != null and company.companyAddress != ''">company_address=#{company.companyAddress},</if>
+            <if test="company.companyPhone != null and company.companyPhone != ''">company_phone=#{company.companyPhone}</if>
+        </set>
+        where company_id = #{company.companyId}
+    </update>
+
 </mapper> 

@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface OverloadMapper {
     public int insertOverload(@Param("overload") Overload overload);
+
+    public int updateOverload(@Param("overload") Overload overload);
 }

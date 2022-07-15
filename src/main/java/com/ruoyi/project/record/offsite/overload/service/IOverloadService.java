@@ -10,4 +10,5 @@ import com.ruoyi.project.record.offsite.overload.domain.Overload;
 
 public interface IOverloadService {
     public int insertOverload(Overload overload);
+    public int updateOverload(Overload overload);
 }

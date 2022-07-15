@@ -1,6 +1,7 @@
 package com.ruoyi.project.record.offsite.caseInfo.mapper;
 
 import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
+import com.ruoyi.project.record.offsite.person.domain.Person;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -17,6 +18,14 @@ public interface CaseInfoMapper {
      * @return 结果
      */
     public  int insertCase(@Param("caseInfo") CaseInfo caseInfo);
+
+    /**
+     * 更新案件信息
+     *
+     * @param caseInfo 案件信息
+     * @return 结果
+     */
+    public  int updateCaseInfo(@Param("caseInfo") CaseInfo caseInfo);
 
     /**
      * 删除案件信息

@@ -27,27 +27,24 @@ public class CaseInfoServiceImpl implements ICaseInfoService {
         return null;
     }
 
+    // 新增案件信息
     @Override
     @Transactional
     public int insertCase(CaseInfo caseInfo) {
-        // 新增案件信息
         return caseInfoMapper.insertCase(caseInfo);
     }
 
+    // 删除信息
     @Override
     public int deleteCaseInfoByIds(String caseId) {
         Integer[] id = Convert.toIntArray(caseId);
         return caseInfoMapper.deleteCaseInfoByIds(id);
     }
 
+    // 更新案件信息
     @Override
-    public int updateCase(CaseInfo caseInfoEntity) {
-        return 0;
-    }
-
-    @Override
-    public int updateCaseInfo(CaseInfo caseInfoEntity) {
-        return 0;
+    public int updateCaseInfo(CaseInfo caseInfo) {
+        return caseInfoMapper.updateCaseInfo(caseInfo);
     }
 
     /**
@@ -58,7 +55,6 @@ public class CaseInfoServiceImpl implements ICaseInfoService {
      */
     @Override
     public String checkCaseNumUnique(String caseNum) {
-        System.out.println(caseNum);
         CaseInfo info = caseInfoMapper.checkCaseNumUnique(caseNum);
         if (StringUtils.isNotNull(info)) {
             // 状态码：1为存在该案件编号

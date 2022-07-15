@@ -1,6 +1,7 @@
 package com.ruoyi.project.record.offsite.caseFile.service;
 
 
+import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.offsite.company.domain.Company;
 import com.ruoyi.project.record.offsite.company.mapper.CompanyMapper;
@@ -13,6 +14,7 @@ import com.ruoyi.project.record.offsite.vehicle.domain.Vehicle;
 import com.ruoyi.project.record.offsite.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.offsite.caseInfo.mapper.CaseInfoMapper;
 import com.ruoyi.project.record.offsite.vehicle.mapper.VehicleMapper;
+import com.ruoyi.project.system.user.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +88,30 @@ public class CaseFileServiceImpl implements ICaseFileService {
         vehicleMapper.insertVehicle(vehicle);
         // 插入超限信息
         int row = overloadMapper.insertOverload(overload);
+        return row;
+    }
+
+    /**
+     * 修改案件信息
+     *
+     * @param caseFile 案件信息
+     * @return 结果
+     */
+    @Override
+    @Transactional
+    public int updateCaseFile(CaseFile caseFile) {
+        // 接受实体
+        CaseInfo caseInfo = caseFile.getCaseInfo();
+        Person person = caseFile.getPerson();
+        Company company = caseFile.getCompany();
+        Vehicle vehicle = caseFile.getVehicle();
+        Overload overload = caseFile.getOverload();
+        // 执行更新
+        caseInfoMapper.updateCaseInfo(caseInfo);
+        personMapper.updatePerson(person);
+        companyMapper.updateCompany(company);
+        vehicleMapper.updateVehicle(vehicle);
+        int row = overloadMapper.updateOverload(overload);
         return row;
     }
 

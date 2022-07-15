@@ -13,7 +13,8 @@ import java.util.List;
 public interface CaseFileMapper {
 
     /**
-     *  用于显示首页的笔录列表
+     * 用于显示首页的笔录列表
+     *
      * @return
      */
     public List<CaseInfo> selectRecordList();
@@ -25,4 +26,6 @@ public interface CaseFileMapper {
      * @return 用户对象信息
      */
     public CaseFile selectRecordById(Integer caseId);
+
+
 }

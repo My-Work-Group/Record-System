@@ -20,4 +20,10 @@ public class CompanyServiceImpl implements ICompanyService {
 
         return companyMapper.insertCompany(company);
     }
+
+    @Override
+    public int updateCompany(Company company) {
+
+        return companyMapper.updateCompany(company);
+    }
 }

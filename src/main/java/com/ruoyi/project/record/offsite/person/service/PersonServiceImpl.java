@@ -21,4 +21,10 @@ public class PersonServiceImpl implements IPersonService {
     public int insertPerson(Person person) {
         return personMapper.insertPerson(person);
     }
+
+    @Override
+    public int updatePerson(Person person) {
+        return personMapper.updatePerson(person);
+    }
+
 }

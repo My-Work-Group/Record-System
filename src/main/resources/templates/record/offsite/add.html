@@ -10,7 +10,7 @@
     <form id="form-info" class="form-horizontal">
         <input name="caseInfo" type="hidden" id="treeId"/>
         <h4 class="form-header h4">案件信息</h4>
-        <div class="row" >
+        <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="col-sm-4 control-label is-required">案件编号：</label>
@@ -28,20 +28,20 @@
                     <label class="col-sm-4 control-label is-required">处罚对象：</label>
                     <div class="col-sm-8">
                         <select id="object" name="object" class="form-control m-b">
-                            <option>个人</option>
                             <option>公司</option>
+                            <option>个人</option>
                         </select>
                     </div>
                 </div>
             </div>
-<!--            <div class="col-sm-6">-->
-<!--                <div class="form-group">-->
-<!--                    <label class="col-sm-4 control-label is-required">受案时间：</label>-->
-<!--                    <div class="col-sm-8">-->
-<!--                        <input id="caseTime" name="caseTime" type="datetime-local" value="" class="form-control">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="col-sm-6">-->
+            <!--                <div class="form-group">-->
+            <!--                    <label class="col-sm-4 control-label is-required">受案时间：</label>-->
+            <!--                    <div class="col-sm-8">-->
+            <!--                        <input id="caseTime" name="caseTime" type="datetime-local" value="" class="form-control">-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
 
         <div class="person-info" id="person-info">
@@ -60,8 +60,10 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">性别：</label>
                         <div class="col-sm-8">
-                            <select name="sex" id="sex" class="form-control m-b"  required>
-                                <option selected="selected" disabled="disabled"  style='display: none' value='0'>--请选择性别--</option>
+                            <select name="sex" id="sex" class="form-control m-b" required>
+                                <option selected="selected" disabled="disabled" style='display: none' value='0'>
+                                    --请选择性别--
+                                </option>
                                 <option value="1" name="男">男</option>
                                 <option value="2" name="女">女</option>
                             </select>
@@ -169,7 +171,7 @@
             </div>
         </div>
 
-        <div class="company-info" id="company-info" style="display:none;">
+        <div class="company-info" id="company-info">
             <h4 class="form-header h4">公司信息</h4>
             <div class="row">
                 <div class="col-sm-6">
@@ -295,6 +297,7 @@
                         <label class="col-sm-4 control-label is-required">轴数：</label>
                         <div class="col-sm-8">
                             <select name="vehAxleNum" id="vehAxleNum" class="form-control m-b" required>
+                                <option selected="selected" disabled="disabled" style='display: none'  value=''></option>
                                 <option>6</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -343,27 +346,9 @@
                             <div class="input-group">
                                 <select id="checkSite" name="checkSite" class="form-control" style='display: none'
                                         value='' required>
-                                    <option selected="selected" disabled="disabled" style='display: none'
-                                            value=''></option>
-                                    <option>G346 K152+500高新区澄张公路东向西</option>
-                                    <option>G346 K194+400璜土滨江西路西向东</option>
-                                    <option>S122 K115+475璜土港城大道西向东</option>
-                                    <option>S122 K156+50云亭江阴大道西向东</option>
-                                    <option>S122 K159+500云亭江阴大道东向西</option>
-                                    <option>S122 K178+460华士芙蓉大道东向西</option>
-                                    <option>S229 K181+450申港海港大道北向南</option>
-                                    <option>S229 K181+520申港海港大道南向北</option>
-                                    <option>S232 K310+335利港省庄大道南向北</option>
-                                    <option>S259 K15+475华士红旗路北向南</option>
-                                    <option>S261 K3+635申港亚包大道南向北</option>
-                                    <option>S340 K10+564顾山云顾路东向西</option>
-                                    <option>S357 K10+005顾山暨南大道东向西</option>
-                                    <option>S442 K5+785顾山锡张路北向南</option>
-                                    <option>X257 K1+480璜土扬子大道南向北</option>
-                                    <option>X258 K1+850周庄砂山大道北向南</option>
-                                    <option>X302 K23+320璜土镇澄路西向东</option>
+                                    <option selected="selected" disabled="disabled" style='display: none'  value=''></option>
+                                    <option th:each="sites:${sites}" th:text="${sites.siteName}"></option>
                                 </select>
-                                <!--                                <span class="input-group-addon"><i class="fa fa-road"></i></span>-->
                             </div>
                         </div>
                     </div>
@@ -509,7 +494,7 @@
 
     function submitHandler() {
 
-        if ($.validate.form()){
+        if ($.validate.form()) {
             // 案件信息
             var caseNum = $("input[name='caseNum']").val();
             var caseObject = document.getElementById("object").value;
@@ -525,7 +510,6 @@
             var post = document.getElementById("post").value;
             var contactAddress = document.getElementById("contactAddress").value;
             var postCode = document.getElementById("postCode").value;
-
             // 公司信息
             var companyName = document.getElementById("companyName").value;
             var creditCode = document.getElementById("creditCode").value;
@@ -549,7 +533,6 @@
             var dest = document.getElementById("dest").value;
 
             var json = {
-                //"caseInfo": {"caseNumber": caseNum, "caseObject": caseObject, "caseTime": caseTime},
                 "caseInfo": {"caseNumber": caseNum, "caseObject": caseObject},
                 "person": {
                     "personName": name,
@@ -561,7 +544,7 @@
                     "workUnit": workUnit,
                     "post": post,
                     "contactAddress": contactAddress,
-                    "postCode":postCode
+                    "postCode": postCode
                 },
                 "vehicle": {
                     "vehPlateNum": vehPlateNum,
@@ -599,7 +582,7 @@
                 beforeSend: function () {
                     $.modal.loading("正在处理中，请稍候...");
                 },
-                success: function(result) {
+                success: function (result) {
                     if (typeof callback == "function") {
                         callback(result);
                     }
@@ -609,7 +592,8 @@
         }
     }
 
-    $("#numberId").blur(function() {
+    // 根据身份证号码识别年龄和性别
+    $("#numberId").blur(function () {
         var idNumber = $("#numberId").val();
         // 定义籍贯、出生日期、性别、年龄等变量
         var currDate, month, date, age;
@@ -620,7 +604,7 @@
         if (idNumber !== "") {
             age = currDate.getFullYear() - idNumber.substring(6, 10) - 1;
             $("#age").val(age);
-        }else {
+        } else {
             $("#age").val("");
         }
         //判断年龄
@@ -632,35 +616,24 @@
             //男
             $("select[name^='sex']").val(1);
             $("#sex option[value=1]").trigger('change');
-        } else if (parseInt(idNumber.substr(16, 1)) % 2 == 0)
-        {
+        } else if (parseInt(idNumber.substr(16, 1)) % 2 == 0) {
             //女
             $("select[name^='sex']").val(2);
             $("#sex option[value=2]").trigger('change');
-        }  else {
+        } else {
             //空
             $("select[name^='sex']").val(0);
-             $("#sex option[value=0]").trigger('change');
+            $("#sex option[value=0]").trigger('change');
         }
     })
-    // // 隐藏个人或者公司
-    // $('#object').off('change').on('change', function () {
-    //     if (document.getElementById('object').value === "公司") {
-    //         $('#company-info').show();
-    //         $('#person-info').hide();
-    //     } else {
-    //         $('#person-info').show();
-    //         $('#company-info').hide();
-    //     }
-    // })
 
     // 隐藏个人或者公司
     $('#object').off('change').on('change', function () {
-        if (document.getElementById('object').value === "公司") {
-            $('#company-info').show();
-        } else {
+        if (document.getElementById('object').value === "个人") {
             $('#person-info').show();
             $('#company-info').hide();
+        } else {
+            $('#company-info').show();
         }
     })
 </script>
