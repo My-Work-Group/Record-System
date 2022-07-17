@@ -4,15 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.record.offsite.vehicle.mapper.VehicleMapper">
 
-<!--    <resultMap type="Vehicle" id="VehicleResult">-->
-<!--        <result property="vehId" column="veh_id"/>-->
-<!--        <result property="vehPlateNumber" column="veh_plate_number"/>-->
-<!--        <result property="vehPlateColor" column="veh_plate_color"/>-->
-<!--        <result property="vehType" column="veh_type"/>-->
-<!--        <result property="vehAxes" column="veh_axes"/>-->
-<!--        <result property="personId" column="person_id"/>-->
-<!--        <result property="companyId" column="company_id"/>-->
-<!--    </resultMap>-->
+    <!--    车辆信息-->
+    <resultMap id="VehicleResult" type="Vehicle">
+        <id property="vehId" column="veh_id"/>
+        <result property="vehPlateNum" column="veh_plate_Num"/>
+        <result property="vehPlateColor" column="veh_plate_color"/>
+        <result property="vehAxleNum" column="veh_axes"/>
+        <result property="vehType" column="veh_type"/>
+    </resultMap>
+
+    <sql id="selectVehicleVo">
+        select v.veh_id,
+               v.veh_plate_num,
+               v.veh_plate_color,
+               v.veh_type,
+               v.veh_axes
+        from rec_offsite_vehicle v
+    </sql>
 
     <insert id="insertVehicle" parameterType="Vehicle" useGeneratedKeys="true" keyProperty="vehId">
         insert into rec_offsite_veh(
@@ -20,31 +28,45 @@
         <if test="vehicle.vehPlateNum != null and vehicle.vehPlateNum != ''">veh_plate_num,</if>
         <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">veh_plate_color,</if>
         <if test="vehicle.vehType != null and vehicle.vehType != ''">veh_type,</if>
-        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes</if>
+        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes,</if>
+        update_time
         ) values (
         <if test="vehicle.vehId != null and vehicle.vehId != ''">#{vehicle.vehId},</if>
         <if test="vehicle.vehPlateNum != null and vehicle.vehPlateNum != ''">#{vehicle.vehPlateNum},</if>
         <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">#{vehicle.vehPlateColor},</if>
         <if test="vehicle.vehType != null and vehicle.vehType != ''">#{vehicle.vehType},</if>
-        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">#{vehicle.vehAxleNum}</if>
+        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">#{vehicle.vehAxleNum},</if>
+        sysdate()
         )
         ON DUPLICATE KEY UPDATE
+        <if test="vehicle.vehPlateNum != null and vehicle.vehPlateNum != ''">veh_plate_num=values(veh_plate_num),</if>
         <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">veh_plate_color=values(veh_plate_color),</if>
         <if test="vehicle.vehType != null and vehicle.vehType != ''">veh_type=values(veh_type),</if>
-        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes=values(veh_axes)</if>
+        <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes=values(veh_axes),</if>
+        update_time=sysdate()
     </insert>
 
     <update id="updateVehicle" parameterType="Vehicle">
         update rec_offsite_veh
         <set>
+            <if test="vehicle.vehPlateNum != null and vehicle.vehPlateNum != ''">veh_plate_num=#{vehicle.vehPlateNum},</if>
             <if test="vehicle.vehPlateColor != null and vehicle.vehPlateColor != ''">veh_plate_color=#{vehicle.vehPlateColor},</if>
             <if test="vehicle.vehType != null and vehicle.vehType != ''">veh_type=#{vehicle.vehType},</if>
-            <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes=#{vehicle.vehAxleNum}</if>
+            <if test="vehicle.vehAxleNum != null and vehicle.vehAxleNum != ''">veh_axes=#{vehicle.vehAxleNum},</if>
+            update_time=sysdate()
         </set>
         where veh_id = #{vehicle.vehId}
     </update>
 
+    <!--    通过车辆车牌查询车辆信息-->
+    <select id="selectVehicleByPlateName" parameterType="String" resultMap="VehicleResult">
+        <include refid="selectVehicleVo"/>
+        where v.veh_plate_num = #{vehPlateNum}
+    </select>
 
-
+    <select id="checkVehicleUnique" parameterType="String" resultMap="VehicleResult">
+        <include refid="selectVehicleVo"/>
+        where v.veh_plate_num=#{vehPlateNum} limit 1
+    </select>
 
 </mapper> 

@@ -12,11 +12,11 @@
         <result property="caseNumber" column="case_number"/>
         <result property="createTime" column="create_time"/>
         <result property="caseObject" column="case_object"/>
-        <result property="vehPlateNum" column="veh_plate_Num"/>
+        <result property="vehId" column="veh_id"/>
     </resultMap>
 
     <sql id="selectCaseInfoVo">
-        select c.case_id, c.case_number, c.case_object, c.veh_plate_num, c.person_id, c.company_id, c.create_time
+        select c.case_id, c.case_number, c.case_object, c.veh_id, c.person_id, c.company_id, c.create_time
         from rec_offsite_case c
     </sql>
 
@@ -24,20 +24,21 @@
     <insert id="insertCase" parameterType="CaseInfo" useGeneratedKeys="true" keyProperty="caseId">
         insert into rec_offsite_case(
         <if test="caseInfo.caseId != null">case_id,</if>
-        <if test="caseInfo.vehPlateNum != null ">veh_plate_num,</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number,</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object,</if>
         <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id,</if>
         <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id,</if>
-        <!--        <if test="caseInfo.caseTime != null">create_time</if>-->
-        create_time
+        <if test="caseInfo.vehId != null and caseInfo.vehId != ''">veh_id,</if>
+        create_time,
+        update_time
         )values(
         <if test="caseInfo.caseId != null and caseInfo.caseId != ''">#{caseInfo.caseId},</if>
-        <if test="caseInfo.vehPlateNum != null and caseInfo.vehPlateNum != ''">#{caseInfo.vehPlateNum},</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">#{caseInfo.caseNumber},</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">#{caseInfo.caseObject},</if>
         <if test="caseInfo.personId != null and caseInfo.personId != ''">#{caseInfo.personId},</if>
         <if test="caseInfo.companyId != null and caseInfo.companyId != ''">#{caseInfo.companyId},</if>
+        <if test="caseInfo.vehId != null and caseInfo.vehId != ''">#{caseInfo.vehId},</if>
+        sysdate(),
         sysdate()
         )
     </insert>
@@ -46,11 +47,9 @@
     <update id="updateCaseInfo" parameterType="CaseInfo">
         update rec_offsite_case
         <set>
-            <if test="caseInfo.vehPlateNum != null and caseInfo.vehPlateNum != ''">
-                veh_plate_num=#{caseInfo.vehPlateNum},
-            </if>
             <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number=#{caseInfo.caseNumber},</if>
-            <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object=#{caseInfo.caseObject}</if>
+            <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object=#{caseInfo.caseObject},</if>
+            update_time = sysdate()
         </set>
         where case_id = #{caseInfo.caseId}
     </update>

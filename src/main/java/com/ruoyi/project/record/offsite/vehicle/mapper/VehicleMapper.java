@@ -1,5 +1,6 @@
 package com.ruoyi.project.record.offsite.vehicle.mapper;
 
+import com.ruoyi.project.record.offsite.company.domain.Company;
 import com.ruoyi.project.record.offsite.vehicle.domain.Vehicle;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,4 +13,5 @@ public interface VehicleMapper {
 
     public  int insertVehicle(@Param("vehicle") Vehicle vehicle);
     public  int updateVehicle(@Param("vehicle") Vehicle vehicle);
+    public Vehicle checkVehicleUnique(String vehPlateNum);
 }

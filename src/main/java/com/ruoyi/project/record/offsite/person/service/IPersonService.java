@@ -11,4 +11,5 @@ import com.ruoyi.project.record.offsite.person.domain.Person;
 public interface IPersonService {
     public int insertPerson(Person person);
     public int updatePerson(Person person);
+    public String checkPersonUnique(Person person);
 }

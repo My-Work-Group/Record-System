@@ -1,5 +1,6 @@
 package com.ruoyi.project.record.offsite.company.service;
 
+import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.company.domain.Company;
 
 /**
@@ -24,4 +25,12 @@ public interface ICompanyService {
      * @return 结果
      */
     public int updateCompany(Company company);
+
+    /**
+     * 校验公司是否唯一
+     * @param company
+     * @return
+     */
+    public String checkCompanyUnique(Company company);
+
 }

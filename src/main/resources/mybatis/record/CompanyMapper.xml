@@ -4,6 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.record.offsite.company.mapper.CompanyMapper">
 
+    <!--    车辆信息-->
+    <resultMap id="VehicleResult" type="Vehicle">
+        <id property="vehId" column="veh_id"/>
+        <result property="vehPlateNum" column="veh_plate_Num"/>
+        <result property="vehPlateColor" column="veh_plate_color"/>
+        <result property="vehAxleNum" column="veh_axes"/>
+        <result property="vehType" column="veh_type"/>
+    </resultMap>
+
+    <sql id="selectCompanyVo">
+        select cp.company_id,
+               cp.company_name,
+               cp.credit_code,
+               cp.director_name,
+               cp.director_num_id,
+               cp.company_phone
+        from rec_offsite_company cp
+    </sql>
+
     <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="companyId">
         insert into rec_offsite_company(
         <if test="company.companyId != null and vehicle.companyId != ''">company_id,</if>
@@ -12,7 +31,8 @@
         <if test="company.directorName != null and company.directorName != ''">director_name,</if>
         <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id,</if>
         <if test="company.companyAddress != null and company.companyAddress != ''">company_address,</if>
-        <if test="company.companyPhone != null and company.companyPhone != ''">company_phone</if>
+        <if test="company.companyPhone != null and company.companyPhone != ''">company_phone,</if>
+        update_time
         ) values (
         <if test="company.companyId != null and vehicle.companyId != ''">#{company.companyId},</if>
         <if test="company.companyName != null and company.companyName != ''">#{company.companyName},</if>
@@ -20,7 +40,8 @@
         <if test="company.directorName != null and company.directorName != ''">#{company.directorName},</if>
         <if test="company.directorNumId != null and company.directorNumId != ''">#{company.directorNumId},</if>
         <if test="company.companyAddress != null and company.companyAddress != ''">#{company.companyAddress},</if>
-        <if test="company.companyPhone != null and company.companyPhone != ''">#{company.companyPhone}</if>
+        <if test="company.companyPhone != null and company.companyPhone != ''">#{company.companyPhone},</if>
+        sysdate()
         )
         ON DUPLICATE KEY UPDATE
         <if test="company.creditCode != null and company.creditCode != ''">credit_code=values(credit_code),</if>
@@ -31,20 +52,43 @@
         <if test="company.companyAddress != null and company.companyAddress != ''">
             company_address=values(company_address),
         </if>
-        <if test="company.companyPhone != null and company.companyPhone != ''">company_phone=values(company_phone)</if>
+        <if test="company.companyPhone != null and company.companyPhone != ''">company_phone=values(company_phone),</if>
+        update_time=sysdate()
     </insert>
 
     <update id="updateCompany" parameterType="Company">
         update rec_offsite_company
         <set>
-            <if test="company.companyName != null and company.companyName != ''">company_name=#{company.companyName},</if>
+            <if test="company.companyName != null and company.companyName != ''">company_name=#{company.companyName},
+            </if>
             <if test="company.creditCode != null and company.creditCode != ''">credit_code=#{company.creditCode},</if>
-            <if test="company.directorName != null and company.directorName != ''">director_name=#{company.directorName},</if>
-            <if test="company.directorNumId != null and company.directorNumId != ''">director_num_id=#{company.directorNumId},</if>
-            <if test="company.companyAddress != null and company.companyAddress != ''">company_address=#{company.companyAddress},</if>
-            <if test="company.companyPhone != null and company.companyPhone != ''">company_phone=#{company.companyPhone}</if>
+            <if test="company.directorName != null and company.directorName != ''">
+                director_name=#{company.directorName},
+            </if>
+            <if test="company.directorNumId != null and company.directorNumId != ''">
+                director_num_id=#{company.directorNumId},
+            </if>
+            <if test="company.companyAddress != null and company.companyAddress != ''">
+                company_address=#{company.companyAddress},
+            </if>
+            <if test="company.companyPhone != null and company.companyPhone != ''">
+                company_phone=#{company.companyPhone},
+            </if>
+            update_time=sysdate()
         </set>
         where company_id = #{company.companyId}
     </update>
+
+    <!--    通过公司名字查询公司信息-->
+    <select id="selectCompanyByName" parameterType="String" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.company_name = #{companyName}
+    </select>
+
+    <select id="checkCompanyUnique" parameterType="String" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.company_name=#{companyName}  and cp.credit_code=#{creditCode}  limit 1
+    </select>
+
 
 </mapper> 

@@ -18,7 +18,6 @@ public class Vehicle {
     // 车型
     private String vehType;
 
-
     public Integer getVehId() {
         return vehId;
     }

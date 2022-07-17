@@ -38,7 +38,6 @@ public class CaseInfoController extends BaseController {
     @ResponseBody
     public String checkCaseNumUnique(String caseNum) {
         return caseInfoService.checkCaseNumUnique(caseNum);
-
     }
 }
 

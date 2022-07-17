@@ -1,5 +1,6 @@
 package com.ruoyi.project.record.offsite.person.mapper;
 
+import com.ruoyi.project.record.offsite.company.domain.Company;
 import com.ruoyi.project.record.offsite.person.domain.Person;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,4 +12,5 @@ import org.apache.ibatis.annotations.Param;
 public interface PersonMapper {
     public int insertPerson(@Param("person") Person person);
     public int updatePerson(@Param("person") Person person);
+    public Person checkPersonUnique(String PersonName,String numberId);
 }

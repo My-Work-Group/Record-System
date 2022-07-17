@@ -21,7 +21,10 @@ public class CaseInfo extends BaseController {
     private Integer companyId;
 
     //处罚车辆的车牌号
-    private String vehPlateNum;
+   // private String vehPlateNum;
+
+    // 处罚车辆的车辆id
+     private Integer vehId;
 
     // 案卷编号
     private String caseNumber;
@@ -48,11 +51,11 @@ public class CaseInfo extends BaseController {
         this.caseNumber = caseNumber;
     }
 
-    public Date getcreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setcreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -64,12 +67,12 @@ public class CaseInfo extends BaseController {
         this.caseObject = caseObject;
     }
 
-    public String getVehPlateNum() {
-        return vehPlateNum;
+    public Integer getVehId() {
+        return vehId;
     }
 
-    public void setVehPlateNum(String vehPlateNum) {
-        this.vehPlateNum = vehPlateNum;
+    public void setVehId(Integer vehId) {
+        this.vehId = vehId;
     }
 
     public Integer getPersonId() {
@@ -94,7 +97,7 @@ public class CaseInfo extends BaseController {
                 "caseId=" + caseId +
                 ", personId=" + personId +
                 ", companyId=" + companyId +
-                ", vehPlateNum='" + vehPlateNum + '\'' +
+                ", vehId='" + vehId + '\'' +
                 ", caseNumber='" + caseNumber + '\'' +
                 ", caseObject='" + caseObject + '\'' +
                 ", createTime=" + createTime +

@@ -111,7 +111,7 @@ public class WordUtil {
     public static Map<String, String> data(CaseFile caseFile) {
 
         Map<String, String> map = new HashMap<>();//要插入的数据
-        Date createDate = caseFile.getCaseInfo().getcreateTime();
+        Date createDate = caseFile.getCaseInfo().getCreateTime();
         Date checkDate = caseFile.getOverload().getCheckTime();
         Date loadDate = caseFile.getOverload().getLoadTime();
         //  获取处罚对象

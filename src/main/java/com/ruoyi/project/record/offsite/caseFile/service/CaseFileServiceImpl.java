@@ -1,7 +1,5 @@
 package com.ruoyi.project.record.offsite.caseFile.service;
 
-
-import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
 import com.ruoyi.project.record.offsite.company.domain.Company;
 import com.ruoyi.project.record.offsite.company.mapper.CompanyMapper;
@@ -14,7 +12,6 @@ import com.ruoyi.project.record.offsite.vehicle.domain.Vehicle;
 import com.ruoyi.project.record.offsite.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.offsite.caseInfo.mapper.CaseInfoMapper;
 import com.ruoyi.project.record.offsite.vehicle.mapper.VehicleMapper;
-import com.ruoyi.project.system.user.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,31 +59,39 @@ public class CaseFileServiceImpl implements ICaseFileService {
         Person person = caseFile.getPerson();
         Company company = caseFile.getCompany();
         Overload overload = caseFile.getOverload();
-        // 获取车牌号
-        String vehPlate = vehicle.getVehPlateNum();
-        //【案件，超限信息】注入车牌号
-        caseInfo.setVehPlateNum(vehPlate);
-        overload.setVehPlateNum(vehPlate);
+//        // 获取车牌号
+//        String vehPlate = vehicle.getVehPlateNum();
+//        //【案件，超限信息】注入车牌号
+//        caseInfo.setVehPlateNum(vehPlate);
+//        overload.setVehPlateNum(vehPlate);
+
         if (!isAllFieldNull(person) && caseInfo.getCaseObject().equals("个人")) {
             personMapper.insertPerson(person);
-            // 案件信息关联个人Id
+            // 1. [案件信息]关联个人Id
             caseInfo.setPersonId(person.getPersonId());
         }
         if (!isAllFieldNull(company) && caseInfo.getCaseObject().equals("公司")) {
             personMapper.insertPerson(person);
-            // 案件信息关联个人（受委托人）id
+            System.out.println(person.getPersonId());
+            // 2. [案件信息]关联个人（受委托人）id
             caseInfo.setPersonId(person.getPersonId());
             companyMapper.insertCompany(company);
-            // 案件信息关联个人（受委托人），公司id
+            System.out.println(company.getCompanyId());
+            // 3. [案件信息]关联个人（受委托人），公司id
             caseInfo.setCompanyId(company.getCompanyId());
         }
-        // 插入案件信息
-        caseInfoMapper.insertCase(caseInfo);
-        // 案件id关联到超限信息
-        overload.setOverloadId(caseInfo.getCaseId());
-        // 插入车辆信息
+        // 3. 插入车辆信息
         vehicleMapper.insertVehicle(vehicle);
-        // 插入超限信息
+        System.out.println(vehicle.getVehId());
+        // 4. [案件信息]关联上车牌id
+        caseInfo.setVehId(vehicle.getVehId());
+        // 5. 插入[案件信息]
+        caseInfoMapper.insertCase(caseInfo);
+        // 6. [超限信息]id依赖[案件信息]id
+        overload.setOverloadId(caseInfo.getCaseId());
+        // 7. [超限信息]关联上车牌id
+        overload.setVehId(vehicle.getVehId());
+        // 8. 插入[超限信息]
         int row = overloadMapper.insertOverload(overload);
         return row;
     }
@@ -98,20 +103,28 @@ public class CaseFileServiceImpl implements ICaseFileService {
      * @return 结果
      */
     @Override
-    @Transactional
+    //@Transactional
     public int updateCaseFile(CaseFile caseFile) {
-        // 接受实体
+        // 接收实体
         CaseInfo caseInfo = caseFile.getCaseInfo();
+
         Person person = caseFile.getPerson();
         Company company = caseFile.getCompany();
         Vehicle vehicle = caseFile.getVehicle();
+
         Overload overload = caseFile.getOverload();
+
+//        // 校验案件编号是否存在
+//        if ("1".equals(caseInfoService.checkCaseNumUnique(caseInfo.getCaseNumber()))) {
+//            return error("该案件编号已存在！");
+//        }
+
         // 执行更新
-        caseInfoMapper.updateCaseInfo(caseInfo);
+        int row = caseInfoMapper.updateCaseInfo(caseInfo);
         personMapper.updatePerson(person);
         companyMapper.updateCompany(company);
         vehicleMapper.updateVehicle(vehicle);
-        int row = overloadMapper.updateOverload(overload);
+        overloadMapper.updateOverload(overload);
         return row;
     }
 

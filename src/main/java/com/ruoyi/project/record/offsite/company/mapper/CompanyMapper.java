@@ -1,5 +1,6 @@
 package com.ruoyi.project.record.offsite.company.mapper;
 
+import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.company.domain.Company;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,4 +15,11 @@ public interface CompanyMapper {
 
     public int updateCompany(@Param("company") Company company);
 
+    /**
+     * 校验公司名是否唯一
+     *
+     * @param companyName
+     * @return 结果
+     */
+    public  Company checkCompanyUnique(String companyName,String creditCode);
 }

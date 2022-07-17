@@ -21,7 +21,7 @@
         <result property="caseNumber" column="case_number"/>
         <result property="createTime" column="create_time"/>
         <result property="caseObject" column="case_object"/>
-        <result property="vehPlateNum" column="veh_plate_Num"/>
+        <result property="vehId" column="veh_id"/>
     </resultMap>
 
         <!--    车辆信息-->
@@ -35,7 +35,7 @@
 
         <!--    个人信息-->
         <resultMap id="PersonResult" type="Person">
-            <id property="personId" column="person_id;"/>
+            <id property="personId" column="person_id"/>
             <result property="personName" column="person_name"/>
             <result property="age" column="age"/>
             <result property="sex" column="sex"/>
@@ -50,7 +50,7 @@
 
         <!--    公司信息-->
         <resultMap id="CompanyResult" type="Company">
-            <id property="companyId" column="company_id;"/>
+            <id property="companyId" column="company_id"/>
             <result property="companyName" column="company_name"/>
             <result property="creditCode" column="credit_code"/>
             <result property="directorName" column="director_name"/>
@@ -61,8 +61,8 @@
 
     <!--    超限信息-->
     <resultMap id="OverloadResult" type="Overload">
-        <id property="overloadId" column="overload_id;"/>
-        <result property="vehPlateNum" column="veh_plate_num"/>
+        <id property="overloadId" column="overload_id"/>
+        <result property="vehId" column="veh_id"/>
         <result property="checkTime" column="check_time"/>
         <result property="checkSite" column="check_site"/>
         <result property="totalWeight" column="total_weight"/>
@@ -77,14 +77,14 @@
     <!--    查询所有笔录信息-->
     <sql id="selectRecordList">
         select
-            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_plate_num, c.person_id, c.company_id,
-            v. veh_plate_color, v. veh_type, v. veh_axes,
-            o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,
+            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,
+            v.veh_id, v.veh_plate_num, v. veh_plate_color, v. veh_type, v. veh_axes,
+            o.overload_id, o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,o.veh_id,
             p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,p.post_code,
             cp.company_name, cp.credit_code, cp.director_name, cp.director_num_id, cp.company_address, cp.company_phone
         from rec_offsite_case c
                  left join rec_offsite_overload  o  on c.case_id = o.overload_id
-                 left join rec_offsite_veh  v on c.veh_plate_num=v. veh_plate_num
+                 left join rec_offsite_veh  v on c.veh_id=v. veh_id
                  left join rec_offsite_person p on c.person_id = p.person_id
                  left join rec_offsite_company cp on c.company_id = cp.company_id
     </sql>
@@ -92,14 +92,14 @@
     <!--    查询所有笔录信息-->
     <select id="selectRecordList"  resultMap="CaseRecordResult">
         select
-            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_plate_num, c.person_id, c.company_id,
-            v. veh_plate_color, v. veh_type, v. veh_axes,
-            o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,
+            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,
+            v.veh_id,v.veh_plate_num, v. veh_plate_color, v. veh_type, v. veh_axes,
+            o.overload_id, o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,o.veh_id,
             p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,p.post_code,
             cp.company_name, cp.credit_code, cp.director_name, cp.director_num_id, cp.company_address, cp.company_phone
         from rec_offsite_case c
              left join rec_offsite_overload  o  on c.case_id = o.overload_id
-             left join rec_offsite_veh  v on c.veh_plate_num=v. veh_plate_num
+             left join rec_offsite_veh  v on c.veh_id=v. veh_id
              left join rec_offsite_person p on c.person_id = p.person_id
              left join rec_offsite_company cp on c.company_id = cp.company_id;
     </select>

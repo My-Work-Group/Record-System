@@ -17,8 +17,11 @@ public class Overload {
     // 超限id
     private Integer overloadId;
 
-    // 车牌号
-    private String vehPlateNum;
+    //  车牌号
+    //  private String vehPlateNum;
+
+    // 处罚车辆的车辆id
+    private Integer vehId;
 
     // 超限检测时间
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
@@ -47,12 +50,12 @@ public class Overload {
         this.overloadId = overloadId;
     }
 
-    public String getVehPlateNum() {
-        return vehPlateNum;
+    public Integer getVehId() {
+        return vehId;
     }
 
-    public void setVehPlateNum(String vehPlateNum) {
-        this.vehPlateNum = vehPlateNum;
+    public void setVehId(Integer vehId) {
+        this.vehId = vehId;
     }
 
     public Date getCheckTime() {
@@ -120,13 +123,11 @@ public class Overload {
     }
 
 
-
-
     @Override
     public String toString() {
         return "OverLoad{" +
                 "overloadId=" + overloadId +
-                ", vehPlateNum='" + vehPlateNum + '\'' +
+                ", vehId='" + vehId + '\'' +
                 ", checkTime=" + checkTime +
                 ", checkSiteCode='" + checkSite + '\'' +
                 ", totalWeight=" + totalWeight +

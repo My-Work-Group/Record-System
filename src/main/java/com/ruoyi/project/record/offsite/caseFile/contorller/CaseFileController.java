@@ -127,7 +127,7 @@ public class CaseFileController extends BaseController {
      */
     @RequiresPermissions("record:offsite:edit")
     @Log(title = "案件管理", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
+    @PostMapping(value = "/edit")
     @ResponseBody
     public AjaxResult editSave(@RequestBody CaseFile caseFile) {
         return toAjax(caseFileService.updateCaseFile(caseFile));

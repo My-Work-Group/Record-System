@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
 	<th:block th:include="include :: header('修改案件信息')" />
 	<th:block th:include="include :: select2-css" />
 </head>
 <body>
     <div class="main-content">
-        <form class="form-horizontal" id="form-user-edit" >
-<!--            <input name="userId"  type="hidden"  th:field="*{caseFile}" />-->
-<!--			<input name="deptId"  type="hidden"  th:field="*{deptId}" id="treeId"/>-->
+        <form id="form-info-edit" class="form-horizontal">
             <h4 class="form-header h4">案件信息</h4>
             <div class="row" th:object="${caseInfo}">
+                <input name="caseId"  id="caseId" type="hidden"  th:field="*{caseId}" />
+                <input name="personId"  id="personId" type="hidden"  th:field="*{personId}" />
+                <input name="companyId" id="companyId" type="hidden"  th:field="*{companyId}" />
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">案件编号：</label>
@@ -22,7 +24,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">处罚对象：</label>
@@ -53,9 +54,9 @@
                             <label class="col-sm-4 control-label is-required">性别：</label>
                             <div class="col-sm-8">
                                 <select name="sex" id="sex" class="form-control m-b"  required>
-                                    <option selected="selected" disabled="disabled"  style='display: none' value='0' th:field="*{sex}">--请选择性别--</option>
-                                    <option value="1" name="男">男</option>
-                                    <option value="2" name="女">女</option>
+<!--                                    <option selected="selected" disabled="disabled"  style='display: none' value='0'>&#45;&#45;请选择性别&#45;&#45;</option>-->
+                                    <option  th:selected="${{person.sex}} eq '男'" value="1">男</option>
+                                    <option  th:selected="${{person.sex}} eq '女'" value="2">女</option>
                                 </select>
                             </div>
                         </div>
@@ -241,6 +242,7 @@
             <div class="veh-info" id="veh-info" th:object="${vehicle}">
                 <h4 class="form-header h4">车辆信息</h4>
                 <div class="row">
+                    <input name="vehId"  id="vehId" type="hidden"  th:field="*{vehId}" />
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="col-sm-4 control-label is-required">车牌号：</label>
@@ -302,6 +304,7 @@
             <div class="overload-info" id="overload-info" th:object="${overload}">
                 <h4 class="form-header h4">超限信息</h4>
                 <div class="row">
+                    <input name="overloadId" id="overloadId" type="hidden"  th:field="*{overloadId}" />
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="col-sm-4 control-label is-required">车货总重：</label>
@@ -424,10 +427,9 @@
     </div>
     <th:block th:include="include :: footer"/>
     <th:block th:include="include :: select2-js"/>
-    <script>
+    <script type="text/javascript">
         var prefix = ctx + "record/offsite";
-
-        $("#form-info").validate({
+        $("#form-info-edit").validate({
             onkeyup: false,
             rules: {
                 // 校验案件编号
@@ -489,8 +491,11 @@
 
             if ($.validate.form()){
                 // 案件信息
-                var caseNum = $("input[name='caseNum']").val();
+                var caseId = document.getElementById("caseId").value;
+                var caseNum = document.getElementById("caseNum").value;
                 var caseObject = document.getElementById("object").value;
+                var personId = document.getElementById("personId").value;
+                var companyId = document.getElementById("companyId").value;
                 //个人信息
                 var name = document.getElementById("name").value;
                 var age = document.getElementById("age").value;
@@ -510,11 +515,13 @@
                 var companyAddress = document.getElementById("companyAddress").value;
                 var companyPhone = document.getElementById("companyPhone").value;
                 // 车辆信息
+                var vehId = document.getElementById("vehId").value;
                 var vehPlateNum = document.getElementById("vehPlate").value;
                 var vehPlateColor = document.getElementById("vehPlateColor").value;
                 var vehType = document.getElementById("vehType").value;
                 var vehAxleNum = document.getElementById("vehAxleNum").value;
                 //超限信息
+                var overloadId = document.getElementById("overloadId").value;
                 var checkTime = document.getElementById("checkTime").value.replace(/T/g, " ");
                 var checkSite = document.getElementById("checkSite").value;
                 var totalWeight = document.getElementById("totalWeight").value;
@@ -525,8 +532,15 @@
                 var dest = document.getElementById("dest").value;
 
                 var json = {
-                    "caseInfo": {"caseNumber": caseNum, "caseObject": caseObject},
+                    "caseInfo": {
+                        "caseId":caseId,
+                        "caseNumber": caseNum,
+                        "caseObject": caseObject,
+                        "personId":personId,
+                        "companyId":companyId
+                    },
                     "person": {
+                        "personId":personId,
                         "personName": name,
                         "age": age,
                         "sex": sex,
@@ -539,12 +553,14 @@
                         "postCode":postCode
                     },
                     "vehicle": {
+                        "vehId":vehId,
                         "vehPlateNum": vehPlateNum,
                         "vehPlateColor": vehPlateColor,
                         "vehType": vehType,
                         "vehAxleNum": vehAxleNum
                     },
                     "company": {
+                        "companyId":companyId,
                         "companyName": companyName,
                         "creditCode": creditCode,
                         "directorName": directorName,
@@ -553,6 +569,7 @@
                         "companyPhone": companyPhone
                     },
                     "overload": {
+                        "overloadId":overloadId,
                         "checkTime": checkTime,
                         "checkSite": checkSite,
                         "totalWeight": totalWeight,
