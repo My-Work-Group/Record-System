@@ -5,12 +5,14 @@
 <mapper namespace="com.ruoyi.project.record.offsite.company.mapper.CompanyMapper">
 
     <!--    车辆信息-->
-    <resultMap id="VehicleResult" type="Vehicle">
-        <id property="vehId" column="veh_id"/>
-        <result property="vehPlateNum" column="veh_plate_Num"/>
-        <result property="vehPlateColor" column="veh_plate_color"/>
-        <result property="vehAxleNum" column="veh_axes"/>
-        <result property="vehType" column="veh_type"/>
+    <resultMap id="CompanyResult" type="Vehicle">
+        <id property="companyId" column="company_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="creditCode" column="credit_code"/>
+        <result property="directorName" column="director_name"/>
+        <result property="directorNumId" column="director_num_id"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="companyPhone" column="company_phone"/>
     </resultMap>
 
     <sql id="selectCompanyVo">

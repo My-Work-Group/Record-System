@@ -107,11 +107,9 @@ public class CaseFileServiceImpl implements ICaseFileService {
     public int updateCaseFile(CaseFile caseFile) {
         // 接收实体
         CaseInfo caseInfo = caseFile.getCaseInfo();
-
         Person person = caseFile.getPerson();
         Company company = caseFile.getCompany();
         Vehicle vehicle = caseFile.getVehicle();
-
         Overload overload = caseFile.getOverload();
 
 //        // 校验案件编号是否存在

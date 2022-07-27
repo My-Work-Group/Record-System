@@ -18,7 +18,7 @@ public interface CompanyMapper {
     /**
      * 校验公司名是否唯一
      *
-     * @param companyName
+     * @param companyName,creditCode
      * @return 结果
      */
     public  Company checkCompanyUnique(String companyName,String creditCode);
