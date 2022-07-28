@@ -13,7 +13,7 @@ public interface IPersonService {
 
     public int updatePerson(Person person);
 
-    public int selectPersonById(Person person);
+    public Person selectPersonById(Person person);
 
     public String checkPersonUnique(Person person);
 }

@@ -26,17 +26,19 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     public int updatePerson(Person person) {
-
+        int row;
         // 校验更新的信息用户名和身份证是否存在
         if ("1".equals(checkPersonUnique(person))) {
-
+            row = insertPerson(person);// 存在即更新
+        } else {
+            row = personMapper.updatePerson(person);
         }
 
-        return personMapper.updatePerson(person);
+        return row;
     }
 
     @Override
-    public int selectPersonById(Person person) {
+    public Person selectPersonById(Person person) {
         return personMapper.selectPersonById(person.getPersonId());
     }
 

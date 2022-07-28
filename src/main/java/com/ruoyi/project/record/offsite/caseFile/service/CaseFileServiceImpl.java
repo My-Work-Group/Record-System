@@ -8,6 +8,7 @@ import com.ruoyi.project.record.offsite.overload.domain.Overload;
 import com.ruoyi.project.record.offsite.overload.mapper.OverloadMapper;
 import com.ruoyi.project.record.offsite.person.domain.Person;
 import com.ruoyi.project.record.offsite.person.mapper.PersonMapper;
+import com.ruoyi.project.record.offsite.person.service.IPersonService;
 import com.ruoyi.project.record.offsite.vehicle.domain.Vehicle;
 import com.ruoyi.project.record.offsite.caseFile.mapper.CaseFileMapper;
 import com.ruoyi.project.record.offsite.caseInfo.mapper.CaseInfoMapper;
@@ -49,6 +50,9 @@ public class CaseFileServiceImpl implements ICaseFileService {
 
     @Autowired
     private OverloadMapper overloadMapper;
+
+    @Autowired
+    private IPersonService personService;
 
     @Override
     @Transactional
@@ -108,7 +112,8 @@ public class CaseFileServiceImpl implements ICaseFileService {
 
         // 执行更新
         int row = caseInfoMapper.updateCaseInfo(caseInfo);
-        personMapper.updatePerson(person);
+        //personMapper.updatePerson(person);
+        personService.updatePerson(person);
         companyMapper.updateCompany(company);
         vehicleMapper.updateVehicle(vehicle);
         overloadMapper.updateOverload(overload);

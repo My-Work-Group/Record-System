@@ -21,7 +21,7 @@
 
     <sql id="selectPersonVo">
         select p.person_id,
-               p.company_name,
+               p.person_name,
                p.sex,
                p.number_id,
                p.age,
@@ -63,8 +63,8 @@
         sysdate()
         )
         ON DUPLICATE KEY UPDATE
-        <if test="person.personName != null and person.personName != ''">person_name=values(person_name),</if>
-        <if test="person.numberId != null and person.numberId != ''">number_id=values(number_id),</if>
+<!--        <if test="person.personName != null and person.personName != ''">person_name=values(person_name),</if>-->
+<!--        <if test="person.numberId != null and person.numberId != ''">number_id=values(number_id),</if>-->
         <if test="person.age != null and person.age != ''">age=values(age),</if>
         <if test="person.sex != null and person.sex != ''">sex=values(sex),</if>
         <if test="person.personPhone != null and person.personPhone != ''">person_phone=values(person_phone),</if>
