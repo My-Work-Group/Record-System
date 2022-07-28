@@ -27,7 +27,17 @@ public interface ICompanyService {
     public int updateCompany(Company company);
 
     /**
+     * 根据公司id查询公司信息
+     *
+     * @param company
+     * @return 结果
+     */
+    public int selectCompanyById(Company company);
+
+
+    /**
      * 校验公司是否唯一
+     *
      * @param company
      * @return
      */

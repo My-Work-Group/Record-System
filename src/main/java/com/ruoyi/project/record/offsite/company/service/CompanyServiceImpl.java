@@ -30,8 +30,13 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     @Override
+    public int selectCompanyById(Company company) {
+        return companyMapper.selectCompanyById(company.getCompanyId());
+    }
+
+    @Override
     public String checkCompanyUnique(Company company) {
-        Company info = companyMapper.checkCompanyUnique(company.getCompanyName(),company.getCreditCode());
+        Company info = companyMapper.checkCompanyUnique(company.getCompanyName(), company.getCreditCode());
         if (StringUtils.isNotNull(info)) {
             // 状态码：1为存在该案件编号
             return "1";

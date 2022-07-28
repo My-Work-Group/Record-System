@@ -87,6 +87,12 @@
         where cp.company_name = #{companyName}
     </select>
 
+    <!--    通过公司id查询公司信息-->
+    <select id="selectCompanyById" parameterType="Integer" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.company_id = #{companyId}
+    </select>
+
     <select id="checkCompanyUnique" parameterType="String" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>
         where cp.company_name=#{companyName}  and cp.credit_code=#{creditCode}  limit 1

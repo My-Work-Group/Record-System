@@ -28,6 +28,11 @@ public class VehicleServiceImpl implements IVehicleService {
     }
 
     @Override
+    public int selectVehicleById(Vehicle vehicle) {
+        return vehicleMapper.selectVehicleById(vehicle.getVehId());
+    }
+
+    @Override
     public String checkVehicleUnique(Vehicle vehicle) {
         Vehicle info = vehicleMapper.checkVehicleUnique(vehicle.getVehPlateNum());
         if (StringUtils.isNotNull(info)) {

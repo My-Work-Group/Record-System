@@ -11,7 +11,11 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface VehicleMapper {
 
-    public  int insertVehicle(@Param("vehicle") Vehicle vehicle);
-    public  int updateVehicle(@Param("vehicle") Vehicle vehicle);
+    public int insertVehicle(@Param("vehicle") Vehicle vehicle);
+
+    public int updateVehicle(@Param("vehicle") Vehicle vehicle);
+
+    public int selectVehicleById(Integer vehId);
+
     public Vehicle checkVehicleUnique(String vehPlateNum);
 }

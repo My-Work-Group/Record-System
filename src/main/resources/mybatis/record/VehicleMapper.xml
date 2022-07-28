@@ -64,6 +64,12 @@
         where v.veh_plate_num = #{vehPlateNum}
     </select>
 
+    <!--    通过车辆id查询车辆信息-->
+    <select id="selectVehicleById" parameterType="String" resultMap="VehicleResult">
+        <include refid="selectVehicleVo"/>
+        where v.vehId = #{vehId}
+    </select>
+
     <select id="checkVehicleUnique" parameterType="String" resultMap="VehicleResult">
         <include refid="selectVehicleVo"/>
         where v.veh_plate_num=#{vehPlateNum} limit 1

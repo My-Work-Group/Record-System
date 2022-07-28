@@ -59,11 +59,6 @@ public class CaseFileServiceImpl implements ICaseFileService {
         Person person = caseFile.getPerson();
         Company company = caseFile.getCompany();
         Overload overload = caseFile.getOverload();
-//        // 获取车牌号
-//        String vehPlate = vehicle.getVehPlateNum();
-//        //【案件，超限信息】注入车牌号
-//        caseInfo.setVehPlateNum(vehPlate);
-//        overload.setVehPlateNum(vehPlate);
 
         if (!isAllFieldNull(person) && caseInfo.getCaseObject().equals("个人")) {
             personMapper.insertPerson(person);
@@ -103,7 +98,6 @@ public class CaseFileServiceImpl implements ICaseFileService {
      * @return 结果
      */
     @Override
-    //@Transactional
     public int updateCaseFile(CaseFile caseFile) {
         // 接收实体
         CaseInfo caseInfo = caseFile.getCaseInfo();
@@ -111,11 +105,6 @@ public class CaseFileServiceImpl implements ICaseFileService {
         Company company = caseFile.getCompany();
         Vehicle vehicle = caseFile.getVehicle();
         Overload overload = caseFile.getOverload();
-
-//        // 校验案件编号是否存在
-//        if ("1".equals(caseInfoService.checkCaseNumUnique(caseInfo.getCaseNumber()))) {
-//            return error("该案件编号已存在！");
-//        }
 
         // 执行更新
         int row = caseInfoMapper.updateCaseInfo(caseInfo);
