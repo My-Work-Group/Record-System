@@ -1,6 +1,5 @@
 package com.ruoyi.project.record.offsite.company.service;
 
-import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.company.domain.Company;
 
 /**
@@ -29,11 +28,10 @@ public interface ICompanyService {
     /**
      * 根据公司id查询公司信息
      *
-     * @param company
+     * @param companyId
      * @return 结果
      */
-    public int selectCompanyById(Company company);
-
+    public Company selectCompanyById(Integer companyId);
 
     /**
      * 校验公司是否唯一
@@ -42,5 +40,28 @@ public interface ICompanyService {
      * @return
      */
     public String checkCompanyUnique(Company company);
+
+    /**
+     * 通过公司名和社会信用代码查询公司
+     * @param companyName 公司名
+     * @param creditCode  社会信息代码
+     * @return
+     */
+    public Company selectCompanyByNameAndCreditCode(String companyName, String creditCode);
+
+
+    /**
+     * 通过公司名查询公司
+     * @param companyName 公司名
+     * @return
+     */
+    public Company selectCompanyByName(String companyName);
+
+    /**
+     *  通过社会信用代码查询公司
+     * @param creditCode 社会信息代码
+     * @return
+     */
+    public Company selectCompanyByCreditCode(String creditCode);
 
 }

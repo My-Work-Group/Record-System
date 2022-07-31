@@ -63,8 +63,8 @@
         sysdate()
         )
         ON DUPLICATE KEY UPDATE
-<!--        <if test="person.personName != null and person.personName != ''">person_name=values(person_name),</if>-->
-<!--        <if test="person.numberId != null and person.numberId != ''">number_id=values(number_id),</if>-->
+        <!--        <if test="person.personName != null and person.personName != ''">person_name=values(person_name),</if>-->
+        <!--        <if test="person.numberId != null and person.numberId != ''">number_id=values(number_id),</if>-->
         <if test="person.age != null and person.age != ''">age=values(age),</if>
         <if test="person.sex != null and person.sex != ''">sex=values(sex),</if>
         <if test="person.personPhone != null and person.personPhone != ''">person_phone=values(person_phone),</if>
@@ -98,21 +98,16 @@
         where person_id = #{person.personId}
     </update>
 
-    <!--    通过个人姓名查询个人信息-->
-    <select id="selectPersonByName" parameterType="String" resultMap="PersonResult">
-        <include refid="selectPersonVo"/>
-        where p.person_name = #{personName}
-    </select>
-
     <!--    通过个人id查询个人信息-->
     <select id="selectPersonById" parameterType="Integer" resultMap="PersonResult">
         <include refid="selectPersonVo"/>
         where p.person_id = #{personId}
     </select>
 
-    <select id="checkPersonUnique" parameterType="String" resultMap="PersonResult">
+    <!--    通过个人身份证号码查询个人信息-->
+    <select id="selectPersonByNumId" parameterType="String" resultMap="PersonResult">
         <include refid="selectPersonVo"/>
-        where p.person_name=#{personName}  and  p.number_id = #{numberId} limit 1
+        where p.number_id = #{numberId} limit 1
     </select>
 
 

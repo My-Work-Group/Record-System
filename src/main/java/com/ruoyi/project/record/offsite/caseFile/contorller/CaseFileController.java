@@ -1,13 +1,10 @@
 package com.ruoyi.project.record.offsite.caseFile.contorller;
 
-import com.ruoyi.common.constant.UserConstants;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.XWPFHandler.WordUtil;
-import com.ruoyi.common.utils.security.AuthorizationUtils;
 import com.ruoyi.common.utils.zip.ZipUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.framework.enumerate.CheckSite;
+import com.ruoyi.project.record.offsite.enumerate.CheckSite;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
@@ -17,22 +14,16 @@ import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.caseInfo.service.ICaseInfoService;
 import com.ruoyi.project.record.offsite.company.domain.Company;
 import com.ruoyi.project.record.offsite.person.domain.Person;
-import com.ruoyi.project.system.role.domain.Role;
-import com.ruoyi.project.system.user.domain.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.ruoyi.common.utils.StringUtils.isAllFieldNull;
 import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
 import static com.ruoyi.common.utils.zip.ZipUtil.encodingFileName;
+import static com.ruoyi.project.record.offsite.caseFile.util.CaseFileUtils.isCaseFileComplete;
 
 /**
  * @Author: 庞沛东
@@ -123,13 +114,23 @@ public class CaseFileController extends BaseController {
     }
 
     /**
-     * 提交修改案件信息
+     * 提交重新编辑/修改后案件信息
      */
     @RequiresPermissions("record:offsite:edit")
     @Log(title = "案件管理", businessType = BusinessType.UPDATE)
     @PostMapping(value = "/edit")
     @ResponseBody
     public AjaxResult editSave(@RequestBody CaseFile caseFile) {
+        CaseInfo caseInfo = caseFile.getCaseInfo();
+        Integer caseInfoId = caseInfo.getCaseId();
+        String caseNumber = caseInfo.getCaseNumber();
+        // 校验案件是否存在：
+        // 1.判断修改的案件信息是否存在
+        // 2.且案件信息的id与当前id是否相等，不等即已存在，要做提示！等说明是同一个案件信息，不做提示。
+        if ("1".equals(caseInfoService.checkCaseNumUnique(caseNumber))
+                && !(caseInfoId).equals(caseInfoService.selectCaseInfoByNum(caseNumber).getCaseId())) {
+            return error("该案件编号已存在！");
+        }
         return toAjax(caseFileService.updateCaseFile(caseFile));
     }
 
@@ -161,19 +162,27 @@ public class CaseFileController extends BaseController {
     @ResponseBody
     public AjaxResult recordDownLoad(Integer caseId, Integer docxFileId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        if (isCaseFileComplete(caseFile)) {
+            return AjaxResult.error("导出失败，该案件信息填写不完整，请仔细检查！");
+        }
         return WordUtil.ExportDocument(caseFile, docxFileId);
     }
 
     /**
      * 批量下载案件word文档（一键导出）
      */
+    @RequiresPermissions("record:offsite:export")
     @GetMapping("/batchExportRecord/download")
     @ResponseBody
-    public void zipDownload(HttpServletResponse response, Integer caseId) {
+    public AjaxResult zipDownload(HttpServletResponse response, Integer caseId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        if (isCaseFileComplete(caseFile)) {
+            return AjaxResult.error("导出失败，该案件信息填写不完整，请仔细检查！");
+        }
         String zipName = caseFile.getCaseInfo().getCaseNumber() + ".zip";
         List<String> filePathList = filePathList(caseFile);
         genZip(response, zipName, filePathList);
+        return AjaxResult.success();
     }
 
     /**
@@ -183,7 +192,7 @@ public class CaseFileController extends BaseController {
         //响应头的设置
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=" + encodingFileName(zipName) + "");
-        response.setContentType("application/zip; charset=UTF-8");
+        response.setContentType("application/zip; charset=utf-8");
         response.setHeader("Content-type", "application-download");
         ZipUtil.downZip(response, filePathList);
     }

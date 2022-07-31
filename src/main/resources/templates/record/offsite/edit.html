@@ -45,7 +45,7 @@
                             <label class="col-sm-4 control-label is-required">姓名：</label>
                             <div class="col-sm-8">
                                 <input name="name" id="name" class="form-control" type="text"
-                                       maxlength="30"    th:field="*{personName}"  required>
+                                       maxlength="30"    th:value="${person?.personName}"  required>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="numberId" name="numberId" placeholder="请输入身份证号" class="form-control"
-                                           οnchange="get_baseinfo()" type="text" maxlength="18"  th:field="*{numberId}" required>
+                                           οnchange="get_baseinfo()" type="text" maxlength="18"  th:value="${person?.numberId}" required>
                                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="age" name="age" class="form-control age" type="text" maxlength="3"
-                                           placeholder="请输入年龄" th:field="*{age}" required>
+                                           placeholder="请输入年龄" th:value="${person?.age}" required>
                                     <span class="input-group-addon"><i class="fa fa-male"></i></span>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="personPhone" name="personPhone" placeholder="请输入手机号码" class="form-control"
-                                           type="text" maxlength="11" th:field="*{personPhone}" required>
+                                           type="text" maxlength="11" th:value="${person?.personPhone}" required>
                                     <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="homeAddress" name="homeAddress" class="form-control address" type="text"
-                                           maxlength="50" placeholder="请输入住址"  th:field="*{homeAddress}" required>
+                                           maxlength="50" placeholder="请输入住址"  th:value="${person?.homeAddress}" required>
                                     <span class="input-group-addon"><i class="fa fa-home"></i></span>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                             <label class="col-sm-4 control-label is-required">工作单位：</label>
                             <div class="col-sm-8">
                                 <input id="workUnit" name="workUnit" placeholder="请输入工作单位" class="form-control" type="text"
-                                       th:field="*{workUnit}"  required>
+                                       th:value="${person?.workUnit}"  required>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="post" name="post" placeholder="请输入职务" class="form-control" type="text"
-                                           th:field="*{post}"   required>
+                                           th:value="${person?.post}"   required>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                             <label class="col-sm-4 control-label is-required">联系地址：</label>
                             <div class="col-sm-8">
                                 <input id="contactAddress" name="contactAddress" placeholder="请输入联系地址"
-                                       class="form-control" type="text"  th:field="*{contactAddress}"  required>
+                                       class="form-control" type="text"  th:value="${person?.contactAddress}"  required>
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="postCode" name="postCode" placeholder="请输入邮编" class="form-control"
-                                           type="text" maxlength="6" th:field="*{postCode}" required>
+                                           type="text" maxlength="6" th:value="${person?.postCode}" required>
                                     <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
                                 <div class="input-group">
                                     <input name="vehPlate" id="vehPlate" placeholder="请输入车牌号" class="form-control"
                                            type="text"
-                                           maxlength="20"  th:field="*{vehPlateNum}" required>
+                                           maxlength="20"  th:value="${vehicle?.vehPlateNum}" required>
                                     <span class="input-group-addon"><i class="fa fa-cc-jcb"></i></span>
                                 </div>
                             </div>
@@ -277,7 +277,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="vehType" name="vehType" placeholder="请输入车型，如重型半挂牵引车" class="form-control"
-                                           type="text" maxlength="18"  th:field="*{vehType}"  required>
+                                           type="text" maxlength="18"  th:value="${vehicle?.vehType}"  required>
                                     <span class="input-group-addon"><i class="fa fa-car"></i></span>
                                 </div>
                             </div>
@@ -311,7 +311,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="totalWeight" name="totalWeight" placeholder="请输入车货总重" class="form-control"
-                                           maxlength="5" type="text" th:field="*{totalWeight}" required
+                                           maxlength="5" type="text" th:value="${overload?.totalWeight}" required
                                            onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" >
                                     <span class="input-group-addon"><i class="fa fa-truck"></i></span>
                                 </div>
@@ -355,7 +355,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="outWeight" name="outWeight" placeholder="请输入超限吨位" class="form-control"
-                                           maxlength="5" type="text"   th:field="*{outWeight}"  required
+                                           maxlength="5" type="text"   th:value="${overload?.outWeight}"  required
                                            onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" >
                                 </div>
                             </div>
@@ -368,7 +368,7 @@
                             <label class="col-sm-4 control-label is-required">装载货物：</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <input id="goods" name="goods" placeholder="请输入装载货物" class="form-control" type="text"  th:field="*{goods}">
+                                    <input id="goods" name="goods" placeholder="请输入装载货物" class="form-control" type="text"  th:value="${overload?.goods}">
                                     <span class="input-group-addon"><i class="fa fa-shopping-cart"></i></span>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                                 <div class="input-group">
                                     <input id="loadSite" name="loadSite" placeholder="请输入装载地点"
                                            class="form-control"
-                                           type="text"  th:field="*{loadSite}" required>
+                                           type="text"  th:value="${overload?.loadSite}" required>
                                     <span class="input-group-addon"><i class="fa fa-send-o"></i></span>
                                 </div>
                             </div>
@@ -406,7 +406,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input id="dest" name="dest" placeholder="请输入运往目的地" class="form-control"
-                                           type="text" th:field="*{dest}" required>
+                                           type="text" th:value="${overload?.dest}" required>
                                     <span class="input-group-addon"><i class="fa fa-send"></i></span>
                                 </div>
                             </div>

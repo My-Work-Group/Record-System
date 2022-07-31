@@ -13,7 +13,9 @@ public interface IVehicleService {
 
     public int updateVehicle(Vehicle vehicle);
 
-    public int selectVehicleById(Vehicle vehicle);
+    public Vehicle selectVehicleById(Integer vehId);
+
+    public Vehicle selectVehicleByPlateNum(String vehPlateNum);
 
     public String checkVehicleUnique(Vehicle vehicle);
 }

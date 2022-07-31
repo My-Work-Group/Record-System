@@ -5,7 +5,7 @@
 <mapper namespace="com.ruoyi.project.record.offsite.company.mapper.CompanyMapper">
 
     <!--    车辆信息-->
-    <resultMap id="CompanyResult" type="Vehicle">
+    <resultMap id="CompanyResult" type="Company">
         <id property="companyId" column="company_id"/>
         <result property="companyName" column="company_name"/>
         <result property="creditCode" column="credit_code"/>
@@ -27,7 +27,7 @@
 
     <insert id="insertCompany" parameterType="Company" useGeneratedKeys="true" keyProperty="companyId">
         insert into rec_offsite_company(
-        <if test="company.companyId != null and vehicle.companyId != ''">company_id,</if>
+        <if test="company.companyId != null and company.companyId != ''">company_id,</if>
         <if test="company.companyName != null and company.companyName != ''">company_name,</if>
         <if test="company.creditCode != null and company.creditCode != ''">credit_code,</if>
         <if test="company.directorName != null and company.directorName != ''">director_name,</if>
@@ -36,7 +36,7 @@
         <if test="company.companyPhone != null and company.companyPhone != ''">company_phone,</if>
         update_time
         ) values (
-        <if test="company.companyId != null and vehicle.companyId != ''">#{company.companyId},</if>
+        <if test="company.companyId != null and company.companyId != ''">#{company.companyId},</if>
         <if test="company.companyName != null and company.companyName != ''">#{company.companyName},</if>
         <if test="company.creditCode != null and company.creditCode != ''">#{company.creditCode},</if>
         <if test="company.directorName != null and company.directorName != ''">#{company.directorName},</if>
@@ -93,10 +93,15 @@
         where cp.company_id = #{companyId}
     </select>
 
-    <select id="checkCompanyUnique" parameterType="String" resultMap="CompanyResult">
+    <!--    通过公司社会信用代码-->
+    <select id="selectCompanyByCreditCode" parameterType="String" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.credit_code=#{creditCode}  limit 1
+    </select>
+
+    <select id="selectCompanyByNameAndCreditCode" parameterType="String" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>
         where cp.company_name=#{companyName}  and cp.credit_code=#{creditCode}  limit 1
     </select>
-
 
 </mapper> 

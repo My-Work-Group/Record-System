@@ -1,6 +1,6 @@
 package com.ruoyi.common.utils.XWPFHandler;
 
-import com.ruoyi.framework.enumerate.DocxFileName;
+import com.ruoyi.project.record.offsite.enumerate.DocxFileName;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
 
@@ -11,7 +11,7 @@ import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
-import static com.ruoyi.framework.enumerate.DocxFileName.getName;
+import static com.ruoyi.project.record.offsite.enumerate.DocxFileName.getName;
 
 
 public class WordUtil {

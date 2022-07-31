@@ -15,7 +15,7 @@ public interface VehicleMapper {
 
     public int updateVehicle(@Param("vehicle") Vehicle vehicle);
 
-    public int selectVehicleById(Integer vehId);
+    public Vehicle selectVehicleById(Integer vehId);
 
-    public Vehicle checkVehicleUnique(String vehPlateNum);
+    public Vehicle selectVehicleByPlateNum(String vehPlateNum);
 }

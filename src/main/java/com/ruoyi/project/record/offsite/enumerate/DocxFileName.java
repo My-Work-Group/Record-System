@@ -1,4 +1,4 @@
-package com.ruoyi.framework.enumerate;
+package com.ruoyi.project.record.offsite.enumerate;
 
 public enum DocxFileName{
     FilE_1(1,"立案登记表"),

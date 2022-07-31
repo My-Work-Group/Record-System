@@ -16,7 +16,15 @@ public interface CompanyMapper {
 
     public int updateCompany(@Param("company") Company company);
 
-    public int selectCompanyById(Integer companyId);
+    public Company selectCompanyById(Integer companyId);
+
+    public Company selectCompanyByNameAndCreditCode(String companyName, String creditCode);
+
+    public Company selectCompanyByCreditCode(String creditCode);
+
+    public Company selectCompanyByName(String companyName);
+
 
     public Company checkCompanyUnique(String companyName, String creditCode);
+
 }

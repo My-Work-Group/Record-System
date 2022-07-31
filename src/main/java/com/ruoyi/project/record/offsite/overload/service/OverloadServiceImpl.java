@@ -3,13 +3,14 @@ package com.ruoyi.project.record.offsite.overload.service;
 import com.ruoyi.project.record.offsite.overload.domain.Overload;
 import com.ruoyi.project.record.offsite.overload.mapper.OverloadMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author: 庞沛东
  * @Description:
  * @Date: create in 2022/4/2 10:12
  */
-
+@Service
 public class OverloadServiceImpl implements IOverloadService {
 
     @Autowired

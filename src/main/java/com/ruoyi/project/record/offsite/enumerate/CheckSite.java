@@ -1,8 +1,8 @@
-package com.ruoyi.framework.enumerate;
+package com.ruoyi.project.record.offsite.enumerate;
 
 
 /**
- * 江阴 17个非现在治超点位
+ * 江阴 17个非现场治超点位
  */
 public enum CheckSite {
     SITE_1(1, "G346 K152+500高新区澄张公路东向西"),

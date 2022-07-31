@@ -43,6 +43,7 @@
             <if test="overload.loadTime != null">load_time=#{overload.loadTime},</if>
             <if test="overload.loadSite != null and overload.loadSite != ''">load_site=#{overload.loadSite},</if>
             <if test="overload.dest != null and overload.dest != ''">dest=#{overload.dest},</if>
+            <if test="overload.vehId != null and overload.vehId != ''">veh_id=#{overload.vehId},</if>
             update_time=sysdate()
         </set>
         where overload_id = #{overload.overloadId}

@@ -5,6 +5,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.caseInfo.mapper.CaseInfoMapper;
+import com.ruoyi.project.record.offsite.company.domain.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +48,17 @@ public class CaseInfoServiceImpl implements ICaseInfoService {
         return caseInfoMapper.updateCaseInfo(caseInfo);
     }
 
+    // 通过案件编号查询案件信息
+    @Override
+    public CaseInfo selectCaseInfoByNum(String caseNum) {
+        return caseInfoMapper.selectCaseInfoByNum(caseNum);
+    }
+
+    // 通过案件id和编号查询案件信息
+    public CaseInfo selectCaseInfoByIdAndNum(Integer caseId, String caseNum) {
+        return caseInfoMapper.selectCaseInfoByIdAndNum(caseId, caseNum);
+    }
+
     /**
      * 校验案件编号名称是否唯一
      *
@@ -55,7 +67,24 @@ public class CaseInfoServiceImpl implements ICaseInfoService {
      */
     @Override
     public String checkCaseNumUnique(String caseNum) {
-        CaseInfo info = caseInfoMapper.checkCaseNumUnique(caseNum);
+        CaseInfo info = selectCaseInfoByNum(caseNum);
+        if (StringUtils.isNotNull(info)) {
+            // 状态码：1为存在该案件编号
+            return "1";
+        }
+        return "0";
+    }
+
+    /**
+     * 校验案件是否唯一
+     *
+     * @param caseId  案件id
+     * @param caseNum 案件编号
+     * @return
+     */
+    @Override
+    public String checkCaseInfoUnique(Integer caseId, String caseNum) {
+        CaseInfo info = selectCaseInfoByIdAndNum(caseId, caseNum);
         if (StringUtils.isNotNull(info)) {
             // 状态码：1为存在该案件编号
             return "1";

@@ -59,7 +59,6 @@ public class Vehicle {
     }
 
 
-
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -71,16 +70,4 @@ public class Vehicle {
                 '}';
     }
 
-    //    @Override
-//    public String toString() {
-//        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).
-//                append("vehId", getVehId()).
-//                append("personId",getPersonId()).
-//                append("companyId",getCompanyId()).
-//                append("vehPlate", getVehPlateNum()).
-//                append("vehPlateColor", getVehPlateColor()).
-//                append("VehAxleNum", getVehAxleNum()).
-//                append("vehType", getVehType()).toString();
-//
-//    }
 }

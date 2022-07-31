@@ -188,7 +188,8 @@
         $.modal.confirm("确定要一键导出吗？", function () {
             layer.msg('正在生成，请稍候…', {icon: 1});
             // $.operate.get(prefix + "/batchExportRecord/download?caseId=" + caseId,{"caseId": caseId});
-            window.location.href = prefix + "/batchExportRecord/download?caseId=" + caseId;
+            //window.location.href = prefix + "/batchExportRecord/download?caseId=" + caseId;
+            $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
     })}
 
 

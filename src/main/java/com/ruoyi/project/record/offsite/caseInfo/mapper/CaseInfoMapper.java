@@ -17,7 +17,7 @@ public interface CaseInfoMapper {
      * @param caseInfo 案件信息
      * @return 结果
      */
-    public  int insertCase(@Param("caseInfo") CaseInfo caseInfo);
+    public int insertCase(@Param("caseInfo") CaseInfo caseInfo);
 
     /**
      * 更新案件信息
@@ -25,10 +25,11 @@ public interface CaseInfoMapper {
      * @param caseInfo 案件信息
      * @return 结果
      */
-    public  int updateCaseInfo(@Param("caseInfo") CaseInfo caseInfo);
+    public int updateCaseInfo(@Param("caseInfo") CaseInfo caseInfo);
 
     /**
      * 删除案件信息
+     *
      * @param caseId
      * @return
      */
@@ -36,12 +37,21 @@ public interface CaseInfoMapper {
 
 
     /**
-     * 校验案件编号名称是否唯一
+     * 通过案件编号查询案件信息
      *
-     * @param caseInfo
+     * @param caseNum
      * @return 结果
      */
-    public CaseInfo checkCaseNumUnique(String caseInfo);
+    public CaseInfo selectCaseInfoByNum(String caseNum);
+
+    /**
+     * 通过案件id和编号查询案件信息
+     *
+     * @param caseId
+     * @param caseNum
+     * @return
+     */
+    public CaseInfo selectCaseInfoByIdAndNum(@Param("caseId")Integer caseId, @Param("caseNum")String caseNum);
 
 }
 

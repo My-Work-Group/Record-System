@@ -12,7 +12,13 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface PersonMapper {
     public int insertPerson(@Param("person") Person person);
+
     public int updatePerson(@Param("person") Person person);
+
     public Person selectPersonById(Integer personId);
-    public Person checkPersonUnique(String personName,String numberId);
+
+    public Person selectPersonByNumId(String numberId);
+
+    public Person selectPersonByNameAndId(String personName, String personId);
+
 }

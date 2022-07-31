@@ -44,14 +44,43 @@ public interface ICaseInfoService {
      */
     public int deleteCaseInfoByIds(String caseId);
 
+    /**
+     * 通过案件编号查询案件信息
+     *
+     * @param caseNum
+     * @return
+     */
+
+    public CaseInfo selectCaseInfoByNum(String caseNum);
+
+    /**
+     * 通过案件id和编号查询案件信息
+     *
+     * @param caseId
+     * @param caseNum
+     * @return
+     */
+    public CaseInfo selectCaseInfoByIdAndNum(Integer caseId, String caseNum);
+
 
     /**
      * 校验案件编号名称是否唯一
      *
-     * @param caseInfo
+     * @param caseNum
      * @return 结果
      */
-    public String checkCaseNumUnique(String caseInfo);
+    public String checkCaseNumUnique(String caseNum);
+
+    /**
+     * 校验案件（id，编号）是否唯一
+     *
+     * @param caseId
+     * @param caseInfo
+     * @return
+     */
+    public String checkCaseInfoUnique(Integer caseId, String caseInfo);
+
+
 }
 
 

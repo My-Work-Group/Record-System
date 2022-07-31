@@ -47,16 +47,26 @@
     <update id="updateCaseInfo" parameterType="CaseInfo">
         update rec_offsite_case
         <set>
-            <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number=#{caseInfo.caseNumber},</if>
-            <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object=#{caseInfo.caseObject},</if>
+            <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number=#{caseInfo.caseNumber},
+            </if>
+            <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object=#{caseInfo.caseObject},
+            </if>
+            <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id=#{caseInfo.personId},</if>
+            <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id=#{caseInfo.companyId},</if>
+            <if test="caseInfo.vehId != null and caseInfo.vehId != ''">veh_Id=#{caseInfo.vehId},</if>
             update_time = sysdate()
         </set>
         where case_id = #{caseInfo.caseId}
     </update>
 
-    <select id="checkCaseNumUnique" parameterType="String" resultMap="CaseInfoResult">
+    <select id="selectCaseInfoByNum" parameterType="String" resultMap="CaseInfoResult">
         <include refid="selectCaseInfoVo"/>
         where c.case_number=#{caseNum} limit 1
+    </select>
+
+    <select id="selectCaseInfoByIdAndNum"  resultMap="CaseInfoResult">
+        <include refid="selectCaseInfoVo"/>
+        where c.case_id=#{caseId} and c.case_number=#{caseNum} limit 1
     </select>
 
     <delete id="deleteCaseInfoByIds" parameterType="Integer">

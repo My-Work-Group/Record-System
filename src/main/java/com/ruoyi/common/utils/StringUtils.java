@@ -150,7 +150,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * *判断该对象是否: 返回ture表示所有属性为null  返回false表示不是所有属性都是null
+     * *判断该对象是否: 返回true表示所有属性为null  返回false表示不是所有属性都是null
      *
      * @param
      * @return
@@ -171,6 +171,30 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return true;
     }
+
+    /**
+     * *判断该对象是否存在空属性: 返回true表示存在
+     *
+     * @param
+     * @return
+     */
+    public static boolean isFieldNull(Object object) {
+        if (null == object) {
+            return true;
+        }
+        try {
+            for (Field f : object.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+                if (f.get(object) == null || String.valueOf(f.get(object)).equals("")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     /**
      * 去空格

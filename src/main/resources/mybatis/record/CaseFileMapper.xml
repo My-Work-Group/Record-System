@@ -84,7 +84,7 @@
             cp.company_name, cp.credit_code, cp.director_name, cp.director_num_id, cp.company_address, cp.company_phone
         from rec_offsite_case c
                  left join rec_offsite_overload  o  on c.case_id = o.overload_id
-                 left join rec_offsite_veh  v on c.veh_id=v. veh_id
+                 left join rec_offsite_veh  v on c.veh_id=v.veh_id
                  left join rec_offsite_person p on c.person_id = p.person_id
                  left join rec_offsite_company cp on c.company_id = cp.company_id
     </sql>
@@ -99,7 +99,7 @@
             cp.company_name, cp.credit_code, cp.director_name, cp.director_num_id, cp.company_address, cp.company_phone
         from rec_offsite_case c
              left join rec_offsite_overload  o  on c.case_id = o.overload_id
-             left join rec_offsite_veh  v on c.veh_id=v. veh_id
+             left join rec_offsite_veh  v on c.veh_id=v.veh_id
              left join rec_offsite_person p on c.person_id = p.person_id
              left join rec_offsite_company cp on c.company_id = cp.company_id;
     </select>

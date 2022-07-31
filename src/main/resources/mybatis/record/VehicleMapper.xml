@@ -19,7 +19,7 @@
                v.veh_plate_color,
                v.veh_type,
                v.veh_axes
-        from rec_offsite_vehicle v
+        from rec_offsite_veh v
     </sql>
 
     <insert id="insertVehicle" parameterType="Vehicle" useGeneratedKeys="true" keyProperty="vehId">
@@ -59,20 +59,15 @@
     </update>
 
     <!--    通过车辆车牌查询车辆信息-->
-    <select id="selectVehicleByPlateName" parameterType="String" resultMap="VehicleResult">
+    <select id="selectVehicleByPlateNum" parameterType="String" resultMap="VehicleResult">
         <include refid="selectVehicleVo"/>
-        where v.veh_plate_num = #{vehPlateNum}
+        where v.veh_plate_num = #{vehPlateNum} limit 1
     </select>
 
     <!--    通过车辆id查询车辆信息-->
-    <select id="selectVehicleById" parameterType="String" resultMap="VehicleResult">
+    <select id="selectVehicleById" parameterType="Integer" resultMap="VehicleResult">
         <include refid="selectVehicleVo"/>
         where v.vehId = #{vehId}
-    </select>
-
-    <select id="checkVehicleUnique" parameterType="String" resultMap="VehicleResult">
-        <include refid="selectVehicleVo"/>
-        where v.veh_plate_num=#{vehPlateNum} limit 1
     </select>
 
 </mapper> 

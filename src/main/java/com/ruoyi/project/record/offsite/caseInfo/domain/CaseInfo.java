@@ -20,9 +20,6 @@ public class CaseInfo extends BaseController {
     // 公司id
     private Integer companyId;
 
-    //处罚车辆的车牌号
-   // private String vehPlateNum;
-
     // 处罚车辆的车辆id
      private Integer vehId;
 

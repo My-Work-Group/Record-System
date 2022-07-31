@@ -13,7 +13,9 @@ public interface IPersonService {
 
     public int updatePerson(Person person);
 
-    public Person selectPersonById(Person person);
+    public Person selectPersonById(Integer personId);
+
+    public Person selectPersonByNumId(String personNumId);
 
     public String checkPersonUnique(Person person);
 }

@@ -1,19 +1,16 @@
 package com.ruoyi.project.record.offsite.company.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
 
 public class Company {
-//    private static final long serialVersionUID = 1L;
+    //    private static final long serialVersionUID = 1L;
     // 公司id
     private Integer companyId;
     // 公司名称
     private String companyName;
     // 统一社会信用代码
-    private String creditCode ;
+    private String creditCode;
     // 法人姓名
-    private String directorName ;
+    private String directorName;
     // 法人身份证
     private String directorNumId;
     //公司地址

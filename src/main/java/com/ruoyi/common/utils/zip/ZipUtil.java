@@ -72,7 +72,7 @@ public class ZipUtil {
     public static String encodingFileName(String fileName) {
         String returnFileName = "";
         try {
-            returnFileName = URLEncoder.encode(fileName, "UTF-8");
+            returnFileName = URLEncoder.encode(fileName, "utf-8");
             returnFileName = StringUtils.replace(returnFileName, "+", "%20");
             if (returnFileName.length() > 150) {
                 returnFileName = new String(fileName.getBytes("GB2312"), "ISO8859-1");
