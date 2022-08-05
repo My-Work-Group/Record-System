@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
 import static com.ruoyi.common.utils.zip.ZipUtil.encodingFileName;
-import static com.ruoyi.project.record.offsite.caseFile.util.CaseFileUtils.isCaseFileComplete;
+import static com.ruoyi.project.record.offsite.caseFile.util.CaseFileUtils.isNotCaseFileComplete;
 
 /**
  * @Author: 庞沛东
@@ -162,8 +162,8 @@ public class CaseFileController extends BaseController {
     @ResponseBody
     public AjaxResult recordDownLoad(Integer caseId, Integer docxFileId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        if (isCaseFileComplete(caseFile)) {
-            return AjaxResult.error("导出失败，该案件信息填写不完整，请仔细检查！");
+        if (isNotCaseFileComplete(caseFile)) {
+            return error("导出失败，该案件信息填写不完整，请仔细检查！");
         }
         return WordUtil.ExportDocument(caseFile, docxFileId);
     }
@@ -176,13 +176,13 @@ public class CaseFileController extends BaseController {
     @ResponseBody
     public AjaxResult zipDownload(HttpServletResponse response, Integer caseId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        if (isCaseFileComplete(caseFile)) {
-            return AjaxResult.error("导出失败，该案件信息填写不完整，请仔细检查！");
+        if (isNotCaseFileComplete(caseFile)) {
+            return error("导出失败，该案件信息填写不完整，请仔细检查！");
         }
         String zipName = caseFile.getCaseInfo().getCaseNumber() + ".zip";
         List<String> filePathList = filePathList(caseFile);
         genZip(response, zipName, filePathList);
-        return AjaxResult.success();
+        return success();
     }
 
     /**

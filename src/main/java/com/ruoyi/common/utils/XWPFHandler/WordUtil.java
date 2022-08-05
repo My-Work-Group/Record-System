@@ -29,6 +29,7 @@ public class WordUtil {
         return AjaxResult.success(fileName);
     }
 
+
     /**
      * 根据数据替换模板中关键字
      *
@@ -75,7 +76,8 @@ public class WordUtil {
     public static List<String> filePathList(CaseFile caseFile) {
         String filePath;
         List<String> filePathList = new ArrayList<>();
-        for (int i = 0; i < DocxFileName.values().length; i++) {
+        // 长度-1的目的是，不让一键导出的zip包中包含视听资料说明书
+        for (int i = 0; i < DocxFileName.values().length-1; i++) {
             filePath = replaceTag(caseFile, i + 1);
             filePathList.add(filePath);
         }

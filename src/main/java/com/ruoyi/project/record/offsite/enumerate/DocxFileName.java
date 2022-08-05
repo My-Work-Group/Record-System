@@ -10,7 +10,8 @@ public enum DocxFileName{
     FilE_7(7,"行政处罚决定书"),
     FilE_8(8,"行政处罚决定书送达回证"),
     FilE_9(9,"结案报告"),
-    FilE_10(10,"送达信息确认书");
+    FilE_10(10,"送达信息确认书"),
+    FilE_11(11,"视听资料说明书");
     private  int fileId;
     private String fileName;
     // 构造方法

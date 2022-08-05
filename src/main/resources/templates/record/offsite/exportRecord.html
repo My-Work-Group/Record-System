@@ -47,7 +47,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-2">
             <div class="ibox">
                 <div class="ibox-content" id="5">
@@ -80,7 +79,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-2">
             <div class="ibox">
                 <div class="ibox-content" id="8">
@@ -91,7 +89,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-2">
             <div class="ibox">
                 <div class="ibox-content" id="9">
@@ -102,7 +99,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-2">
             <div class="ibox">
                 <div class="ibox-content" id="10">
@@ -115,12 +111,25 @@
         </div>
     </div>
 
+    <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="11">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">附. 视听资料说明书<br><br>（一键导出不含此文件）</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
-            <button type="button" class="btn btn-sm btn-primary" onclick='batchExportRecord()'>
+            <button type="button" id="button" class="btn btn-sm btn-primary" >
                 <i class="fa fa-check"></i>一键导出
             </button>&nbsp;
-            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭</button>
         </div>
     </div>
 </div>
@@ -181,16 +190,37 @@
         });
     });
 
+    // /* 一键导出 */
+    // function batchExportRecord() {
+    //     var prefix = ctx + "record/offsite";
+    //     var caseId = [[${caseFile.caseInfo.caseId}]];
+    //     $.modal.confirm("确定要一键导出吗？", function () {
+    //         layer.msg('正在生成，请稍候…', {icon: 1});
+    //         // $.operate.get(prefix + "/batchExportRecord/download?caseId=" + caseId,{"caseId": caseId});
+    //         //window.location.href = prefix + "/batchExportRecord/download?caseId=" + caseId;
+    //         $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
+    // })}
+
     /* 一键导出 */
-    function batchExportRecord() {
+    $(function () {
+        $("#button").on("click", function () {
         var prefix = ctx + "record/offsite";
         var caseId = [[${caseFile.caseInfo.caseId}]];
-        $.modal.confirm("确定要一键导出吗？", function () {
-            layer.msg('正在生成，请稍候…', {icon: 1});
-            // $.operate.get(prefix + "/batchExportRecord/download?caseId=" + caseId,{"caseId": caseId});
-            //window.location.href = prefix + "/batchExportRecord/download?caseId=" + caseId;
-            $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
-    })}
+        $.modal.loading("正在导出数据，请稍候...");
+        var downloadUrl = prefix + "/batchExportRecord/download?caseId=" + caseId;
+        $.get(downloadUrl, function (result) {
+            if (result.code == web_status.SUCCESS) {
+                window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + false;;
+            } else if (result.code == web_status.WARNING) {
+                $.modal.alertWarning(result.msg)
+            } else {
+                $.modal.alertError(result.msg);
+            }
+            $.modal.closeLoading();
+        });
+    });
+    });
+
 
 
 </script>
