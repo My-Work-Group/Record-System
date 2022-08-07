@@ -126,10 +126,11 @@
 
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
-            <button type="button" id="button" class="btn btn-sm btn-primary" >
+            <button type="button" class="btn btn-sm btn-primary" onclick='batchExportRecord()'>
                 <i class="fa fa-check"></i>一键导出
-            </button>&nbsp;
-            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭</button>
+            </button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭
+            </button>
         </div>
     </div>
 </div>
@@ -190,37 +191,69 @@
         });
     });
 
+
     // /* 一键导出 */
     // function batchExportRecord() {
     //     var prefix = ctx + "record/offsite";
     //     var caseId = [[${caseFile.caseInfo.caseId}]];
     //     $.modal.confirm("确定要一键导出吗？", function () {
     //         layer.msg('正在生成，请稍候…', {icon: 1});
-    //         // $.operate.get(prefix + "/batchExportRecord/download?caseId=" + caseId,{"caseId": caseId});
-    //         //window.location.href = prefix + "/batchExportRecord/download?caseId=" + caseId;
     //         $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
-    // })}
+    //     })}
+    //
 
     /* 一键导出 */
-    $(function () {
-        $("#button").on("click", function () {
+    function batchExportRecord() {
+        //  1、定义发送请求的url
         var prefix = ctx + "record/offsite";
         var caseId = [[${caseFile.caseInfo.caseId}]];
-        $.modal.loading("正在导出数据，请稍候...");
-        var downloadUrl = prefix + "/batchExportRecord/download?caseId=" + caseId;
-        $.get(downloadUrl, function (result) {
-            if (result.code == web_status.SUCCESS) {
-                window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + false;;
-            } else if (result.code == web_status.WARNING) {
-                $.modal.alertWarning(result.msg)
-            } else {
-                $.modal.alertError(result.msg);
+        var url = prefix + "/batchExportRecord/download?caseId=" + caseId;
+        //  2、相当于先试着发请求，看看返回结果是什么
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        //这步至关重要，命令xhr返回给你的是blob(二进制大对象)类型的数据
+        xhr.responseType = 'blob';
+        xhr.send();
+        // $.modal.confirm("确定要一键导出吗？", function () {
+        xhr.onreadystatechange = function () {
+            console.log(xhr)
+            if (xhr.readyState === 4 ) {
+                console.log("进去了4！")
+                if (xhr.status === 200 && xhr.response !==null){
+                    console.log("200!")
+                    //  3、文件存在且可以下载，则正式发送请求下载文件
+                    layer.msg('正在生成，请稍候…', {icon: 1});
+                    window.location.href = url;
+                } else {
+                    //文件下载失败，弹出提示
+                    console.log("里面，失败了");
+                    $.modal.alertWarning("文件下载失败！");
+                }
             }
-            $.modal.closeLoading();
-        });
-    });
-    });
+        }
+    }
 
+
+    // /* 一键导出 */
+    // $(function () {
+    //     $("#button").on("click", function () {
+    //     var prefix = ctx + "record/offsite";
+    //     var caseId = [[${caseFile.caseInfo.caseId}]];
+    //     $.modal.loading("正在导出数据，请稍候...");
+    //     var downloadUrl = prefix + "/batchExportRecord/download?caseId=" + caseId;
+    //     $.get(downloadUrl, function (result) {
+    //         if (result.code == web_status.SUCCESS) {
+    //             log.info(result)
+    //             window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + false;;
+    //         } else if (result.code == web_status.WARNING) {
+    //             $.modal.alertWarning(result.msg)
+    //         } else {
+    //             $.modal.alertError(result.msg);
+    //         }
+    //         $.modal.closeLoading();
+    //     });
+    // });
+    // });
 
 
 </script>

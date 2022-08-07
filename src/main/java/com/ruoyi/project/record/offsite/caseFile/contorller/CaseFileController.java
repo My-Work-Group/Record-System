@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+
 import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
 import static com.ruoyi.common.utils.zip.ZipUtil.encodingFileName;
 import static com.ruoyi.project.record.offsite.caseFile.util.CaseFileUtils.isNotCaseFileComplete;
@@ -168,21 +170,18 @@ public class CaseFileController extends BaseController {
         return WordUtil.ExportDocument(caseFile, docxFileId);
     }
 
+
     /**
      * 批量下载案件word文档（一键导出）
      */
     @RequiresPermissions("record:offsite:export")
     @GetMapping("/batchExportRecord/download")
     @ResponseBody
-    public AjaxResult zipDownload(HttpServletResponse response, Integer caseId) {
+    public void zipDownload(HttpServletResponse response, Integer caseId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
-        if (isNotCaseFileComplete(caseFile)) {
-            return error("导出失败，该案件信息填写不完整，请仔细检查！");
-        }
         String zipName = caseFile.getCaseInfo().getCaseNumber() + ".zip";
         List<String> filePathList = filePathList(caseFile);
         genZip(response, zipName, filePathList);
-        return success();
     }
 
     /**
