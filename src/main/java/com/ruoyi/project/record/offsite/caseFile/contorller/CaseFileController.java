@@ -64,6 +64,7 @@ public class CaseFileController extends BaseController {
     public TableDataInfo list(CaseInfo caseInfo) {
         startPage();
         List<CaseInfo> list = caseFileService.selectRecordList();
+        System.out.println(list.toString());
         return getDataTable(list);
     }
 

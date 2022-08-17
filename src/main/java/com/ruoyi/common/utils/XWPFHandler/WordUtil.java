@@ -12,6 +12,7 @@ import static com.ruoyi.common.utils.DateUtils.getMinute;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
 import static com.ruoyi.project.record.offsite.enumerate.DocxFileName.getName;
+import static com.ruoyi.project.record.offsite.enumerate.WeightLimit.getWeightLimit;
 
 
 public class WordUtil {
@@ -76,7 +77,7 @@ public class WordUtil {
         String filePath;
         List<String> filePathList = new ArrayList<>();
         // 长度-1的目的是，不让一键导出的zip包中包含视听资料说明书
-        for (int i = 0; i < DocxFileName.values().length-1; i++) {
+        for (int i = 0; i < DocxFileName.values().length - 1; i++) {
             filePath = replaceTag(caseFile, i + 1);
             filePathList.add(filePath);
         }
@@ -87,12 +88,6 @@ public class WordUtil {
      * @return 获取resources 目录下docxTemplate路径
      */
     public static String getDocxTemplatesPath(String object, int docxFileId) {
-        /* URL url = WordUtil.class.getClassLoader().getResource("");
-        String path = url.getPath() + "docxTemplate";
-        if (containsAnyIgnoreCase(path, "!")) {
-            path = deleteCharString(path, '!');
-        }
-        return path; */
         String docxTemplatesFile;
         String path = getJarPath() + "\\docxTemplate\\";
         docxTemplatesFile = path + "\\person\\" + docxFileId + ".docx";
@@ -100,7 +95,7 @@ public class WordUtil {
             docxTemplatesFile = path + "\\company\\" + docxFileId + ".docx";
         }
         //模板文件和jar包同一路径
-        return  docxTemplatesFile;
+        return docxTemplatesFile;
     }
 
     /**
@@ -117,9 +112,23 @@ public class WordUtil {
         Date loadDate = caseFile.getOverload().getLoadTime();
         //  获取处罚对象
         String object = caseFile.getCaseInfo().getCaseObject();
-        double outWeight = caseFile.getOverload().getOutWeight();
-        outWeight = Math.floor(outWeight); // 向下取整
-        int fine = (int) (500 * outWeight);
+        // 获取车货总重，保留两位小数
+        String  str1 = String.format("%.2f",caseFile.getOverload().getTotalWeight());
+        double totalWeight = Double.parseDouble(str1);
+
+        // 获取车辆轴数
+        int vehAxleNum = caseFile.getVehicle().getVehAxleNum();
+        // 根据轴数获取车辆限重吨位
+        double weightLimit = getWeightLimit(vehAxleNum);
+        // 总重扣除5%计重误差
+        double finalTotalWeight = totalWeight * 0.95;
+        // 扣除5%的计重误差后，超限的吨位，保留两位小数
+        String  str2 = String.format("%.2f",finalTotalWeight - weightLimit);
+        double outWeight = Double.parseDouble(str2);
+
+        // 向下取整吨位，以便计算罚金
+        double InteOutWeight = Math.floor(outWeight); // 向下取整
+        int fine = (int) (500 * InteOutWeight);
         // 案件信息
         map.put("createYear", String.valueOf(getYear(createDate)));
         map.put("createMonth", String.valueOf(getMonth(createDate)));
@@ -167,8 +176,8 @@ public class WordUtil {
         map.put("loadMinute", String.valueOf(getMinute(loadDate)));
         map.put("loadSite", caseFile.getOverload().getLoadSite());
         map.put("checkSite", caseFile.getOverload().getCheckSite());
-        map.put("totalWeight", Double.toString(caseFile.getOverload().getTotalWeight()));
-        map.put("outWeight", Double.toString(caseFile.getOverload().getOutWeight()));
+        map.put("totalWeight", Double.toString(totalWeight));
+        map.put("outWeight", Double.toString(outWeight));
         map.put("goods", caseFile.getOverload().getGoods());
         map.put("dest", caseFile.getOverload().getDest());
         return map;
