@@ -13,6 +13,7 @@ import com.ruoyi.project.record.offsite.caseFile.service.ICaseFileService;
 import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.caseInfo.service.ICaseInfoService;
 import com.ruoyi.project.record.offsite.company.domain.Company;
+import com.ruoyi.project.record.offsite.enumerate.EnforcementPerson;
 import com.ruoyi.project.record.offsite.person.domain.Person;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,6 @@ public class CaseFileController extends BaseController {
     public TableDataInfo list(CaseInfo caseInfo) {
         startPage();
         List<CaseInfo> list = caseFileService.selectRecordList();
-        System.out.println(list.toString());
         return getDataTable(list);
     }
 
@@ -75,7 +75,9 @@ public class CaseFileController extends BaseController {
     public String add(ModelMap mmap) {
         // 获取治超点位（枚举类）信息
         CheckSite[] sites = CheckSite.values();
+        EnforcementPerson[]  enforcementPeople = EnforcementPerson.values();
         mmap.put("sites", sites);
+        mmap.put("enforcementPeople", enforcementPeople);
         return prefix + "/add";
     }
 
@@ -107,12 +109,15 @@ public class CaseFileController extends BaseController {
         Company company = caseFile.getCompany();
         // 获取治超点位（枚举类）信息
         CheckSite[] sites = CheckSite.values();
+        // 执法人员信息
+        EnforcementPerson[]  enforcementPeople = EnforcementPerson.values();
         mmap.put("caseInfo", caseInfo);
         mmap.put("person", person);
         mmap.put("company", company);
         mmap.put("vehicle", caseFile.getVehicle());
         mmap.put("overload", caseFile.getOverload());
         mmap.put("sites", sites);
+        mmap.put("enforcementPeople", enforcementPeople);
         return prefix + "/edit";
     }
 

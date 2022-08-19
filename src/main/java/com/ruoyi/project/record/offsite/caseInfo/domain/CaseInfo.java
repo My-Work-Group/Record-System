@@ -25,8 +25,14 @@ public class CaseInfo extends BaseController {
 
     // 案卷编号
     private String caseNumber;
+    // 函告单编号
+    private String letterNumber;
     // 处罚对象
     private String caseObject;
+    // 询问人员
+    private String enquirePerson;
+    // 记录人员
+    private String recordPerson;
 
     // 受案时间
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
@@ -88,6 +94,30 @@ public class CaseInfo extends BaseController {
         this.companyId = companyId;
     }
 
+    public String getLetterNumber() {
+        return letterNumber;
+    }
+
+    public void setLetterNumber(String letterNumber) {
+        this.letterNumber = letterNumber;
+    }
+
+    public String getEnquirePerson() {
+        return enquirePerson;
+    }
+
+    public void setEnquirePerson(String enquirePerson) {
+        this.enquirePerson = enquirePerson;
+    }
+
+    public String getRecordPerson() {
+        return recordPerson;
+    }
+
+    public void setRecordPerson(String recordPerson) {
+        this.recordPerson = recordPerson;
+    }
+
     @Override
     public String toString() {
         return "CaseInfo{" +
@@ -96,6 +126,7 @@ public class CaseInfo extends BaseController {
                 ", companyId=" + companyId +
                 ", vehId='" + vehId + '\'' +
                 ", caseNumber='" + caseNumber + '\'' +
+                ", letterNumber='" + letterNumber + '\'' +
                 ", caseObject='" + caseObject + '\'' +
                 ", createTime=" + createTime +
                 '}';

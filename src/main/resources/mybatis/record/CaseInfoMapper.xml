@@ -9,6 +9,7 @@
         <id property="caseId" column="case_id"/>
         <result property="personId" column="person_id"/>
         <result property="companyId" column="company_id"/>
+        <result property="letterNumber" column="letter_number"/>
         <result property="caseNumber" column="case_number"/>
         <result property="createTime" column="create_time"/>
         <result property="caseObject" column="case_object"/>
@@ -25,19 +26,25 @@
         insert into rec_offsite_case(
         <if test="caseInfo.caseId != null">case_id,</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number,</if>
+        <if test="caseInfo.letterNumber != null and caseInfo.letterNumber != ''">letter_number,</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object,</if>
         <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id,</if>
         <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id,</if>
         <if test="caseInfo.vehId != null and caseInfo.vehId != ''">veh_id,</if>
+        <if test="caseInfo.enquirePerson != null and caseInfo.enquirePerson != ''">enquire_person,</if>
+        <if test="caseInfo.recordPerson != null and caseInfo.recordPerson != ''">record_person,</if>
         create_time,
         update_time
         )values(
         <if test="caseInfo.caseId != null and caseInfo.caseId != ''">#{caseInfo.caseId},</if>
         <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">#{caseInfo.caseNumber},</if>
+        <if test="caseInfo.letterNumber != null and caseInfo.letterNumber != ''">#{caseInfo.letterNumber},</if>
         <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">#{caseInfo.caseObject},</if>
         <if test="caseInfo.personId != null and caseInfo.personId != ''">#{caseInfo.personId},</if>
         <if test="caseInfo.companyId != null and caseInfo.companyId != ''">#{caseInfo.companyId},</if>
         <if test="caseInfo.vehId != null and caseInfo.vehId != ''">#{caseInfo.vehId},</if>
+        <if test="caseInfo.enquirePerson != null and caseInfo.enquirePerson != ''">#{caseInfo.enquirePerson},</if>
+        <if test="caseInfo.recordPerson != null and caseInfo.recordPerson != ''">#{caseInfo.recordPerson},</if>
         sysdate(),
         sysdate()
         )
@@ -49,11 +56,15 @@
         <set>
             <if test="caseInfo.caseNumber != null and caseInfo.caseNumber != ''">case_number=#{caseInfo.caseNumber},
             </if>
+            <if test="caseInfo.letterNumber != null and caseInfo.letterNumber != ''">letter_number=#{caseInfo.letterNumber},
+            </if>
             <if test="caseInfo.caseObject != null and caseInfo.caseObject != ''">case_object=#{caseInfo.caseObject},
             </if>
             <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id=#{caseInfo.personId},</if>
             <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id=#{caseInfo.companyId},</if>
             <if test="caseInfo.vehId != null and caseInfo.vehId != ''">veh_Id=#{caseInfo.vehId},</if>
+            <if test="caseInfo.recordPerson != null and caseInfo.recordPerson != ''">enquire_person=#{caseInfo.recordPerson},</if>
+            <if test="caseInfo.recordPerson != null and caseInfo.recordPerson != ''">record_person=#{caseInfo.recordPerson},</if>
             update_time = sysdate()
         </set>
         where case_id = #{caseInfo.caseId}

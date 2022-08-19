@@ -35,6 +35,35 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">询问人员：</label>
+                            <div class="col-sm-8">
+                                <select name="enquirePerson" id="enquirePerson" class="form-control select2-multiple" multiple value=''
+                                        required>
+                                    <option th:each="enforcementPeople:${enforcementPeople}" th:value="${enforcementPeople.id}"
+                                            th:text="${enforcementPeople.name}"
+                                            th:selected="${caseInfo.enquirePerson!=null}?${enforcementPeople.name eq caseInfo.enquirePerson}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">记录人员：</label>
+                            <div class="col-sm-8">
+                                <select name="recordPerson" id="recordPerson" class="form-control m-b" required>
+                                    <option th:each="enforcementPeople:${enforcementPeople}" th:value="${enforcementPeople.id}"
+                                            th:text="${enforcementPeople.name}"
+                                            th:selected="${caseInfo.recordPerson!=null}?${enforcementPeople.name eq caseInfo.recordPerson}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="person-info" id="person-info" th:object="${person}">
@@ -496,6 +525,10 @@
                 var caseObject = document.getElementById("object").value;
                 var personId = document.getElementById("personId").value;
                 var companyId = document.getElementById("companyId").value;
+                var letterNum = document.getElementById("letterNum").value;
+                var enquirePerson = $.form.selectCheckeds("enquirePerson");
+                var recordPerson = $.form.selectCheckeds("recordPerson");
+
                 //个人信息
                 var name = document.getElementById("name").value;
                 var age = document.getElementById("age").value;
@@ -536,6 +569,9 @@
                         "caseId":caseId,
                         "caseNumber": caseNum,
                         "caseObject": caseObject,
+                        "letterNumber": letterNum,
+                        "enquirePerson": enquirePerson,
+                        "recordPerson": recordPerson,
                         "personId":personId,
                         "companyId":companyId
                     },
