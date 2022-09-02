@@ -1,6 +1,7 @@
 package com.ruoyi.project.record.offsite.caseFile.contorller;
 
 import com.ruoyi.common.utils.XWPFHandler.WordUtil;
+import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.common.utils.zip.ZipUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -13,8 +14,9 @@ import com.ruoyi.project.record.offsite.caseFile.service.ICaseFileService;
 import com.ruoyi.project.record.offsite.caseInfo.domain.CaseInfo;
 import com.ruoyi.project.record.offsite.caseInfo.service.ICaseInfoService;
 import com.ruoyi.project.record.offsite.company.domain.Company;
-import com.ruoyi.project.record.offsite.enumerate.EnforcementPerson;
 import com.ruoyi.project.record.offsite.person.domain.Person;
+import com.ruoyi.project.record.personnel.domain.Personnel;
+import com.ruoyi.project.record.personnel.service.IPersonnelService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
 import static com.ruoyi.common.utils.zip.ZipUtil.encodingFileName;
@@ -46,6 +51,9 @@ public class CaseFileController extends BaseController {
 
     @Autowired
     private ICaseInfoService caseInfoService;
+
+    @Autowired
+    private IPersonnelService personnelService;
 
     @RequiresPermissions("record:offsite:view")
     @GetMapping()
@@ -75,9 +83,8 @@ public class CaseFileController extends BaseController {
     public String add(ModelMap mmap) {
         // 获取治超点位（枚举类）信息
         CheckSite[] sites = CheckSite.values();
-        EnforcementPerson[]  enforcementPeople = EnforcementPerson.values();
         mmap.put("sites", sites);
-        mmap.put("enforcementPeople", enforcementPeople);
+        mmap.put("enforcementPeoples", personnelService.selectPersonnelAll());
         return prefix + "/add";
     }
 
@@ -104,20 +111,22 @@ public class CaseFileController extends BaseController {
     @GetMapping("/edit/{caseId}")
     public String edit(@PathVariable("caseId") Integer caseId, ModelMap mmap) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
+        String[] eIds = Convert.toStrArray(caseFile.getCaseInfo().getEnquirePerson());
+        String[] rIds = Convert.toStrArray(caseFile.getCaseInfo().getRecordPerson());
+
         CaseInfo caseInfo = caseFile.getCaseInfo();
         Person person = caseFile.getPerson();
         Company company = caseFile.getCompany();
         // 获取治超点位（枚举类）信息
         CheckSite[] sites = CheckSite.values();
-        // 执法人员信息
-        EnforcementPerson[]  enforcementPeople = EnforcementPerson.values();
         mmap.put("caseInfo", caseInfo);
         mmap.put("person", person);
         mmap.put("company", company);
         mmap.put("vehicle", caseFile.getVehicle());
         mmap.put("overload", caseFile.getOverload());
         mmap.put("sites", sites);
-        mmap.put("enforcementPeople", enforcementPeople);
+        mmap.put("enquirePersons", personnelService.selectedPersonnelListByIds(eIds));
+        mmap.put("recordPersons", personnelService.selectedPersonnelListByIds(rIds));
         return prefix + "/edit";
     }
 
@@ -134,7 +143,7 @@ public class CaseFileController extends BaseController {
         String caseNumber = caseInfo.getCaseNumber();
         // 校验案件是否存在：
         // 1.判断修改的案件信息是否存在
-        // 2.且案件信息的id与当前id是否相等，不等即已存在，要做提示！等说明是同一个案件信息，不做提示。
+        // 2.且案件信息的id与当前id是否相等，不等即已存在，要做提示！相等说明是同一个案件信息，不做提示。
         if ("1".equals(caseInfoService.checkCaseNumUnique(caseNumber))
                 && !(caseInfoId).equals(caseInfoService.selectCaseInfoByNum(caseNumber).getCaseId())) {
             return error("该案件编号已存在！");
@@ -173,7 +182,8 @@ public class CaseFileController extends BaseController {
         if (isNotCaseFileComplete(caseFile)) {
             return error("导出失败，该案件信息填写不完整，请仔细检查！");
         }
-        return WordUtil.ExportDocument(caseFile, docxFileId);
+        Map<String, List<Personnel>> personnels = getPersonnel(caseFile);
+        return WordUtil.ExportDocument(caseFile, personnels, docxFileId);
     }
 
 
@@ -186,7 +196,8 @@ public class CaseFileController extends BaseController {
     public void zipDownload(HttpServletResponse response, Integer caseId) {
         CaseFile caseFile = caseFileService.selectRecordById(caseId);
         String zipName = caseFile.getCaseInfo().getCaseNumber() + ".zip";
-        List<String> filePathList = filePathList(caseFile);
+        Map<String, List<Personnel>> personnelMap = getPersonnel(caseFile);
+        List<String> filePathList = filePathList(caseFile, personnelMap);
         genZip(response, zipName, filePathList);
     }
 
@@ -201,4 +212,20 @@ public class CaseFileController extends BaseController {
         response.setHeader("Content-type", "application-download");
         ZipUtil.downZip(response, filePathList);
     }
+
+
+    public Map<String, List<Personnel>> getPersonnel(CaseFile caseFile) {
+        Map<String, List<Personnel>> personnelMap = new HashMap<>();
+        // 获取两名ZF人员id
+        String[] eIds = Convert.toStrArray(caseFile.getCaseInfo().getEnquirePerson());
+        // 获取记录人员id
+        String[] rIds = Convert.toStrArray(caseFile.getCaseInfo().getRecordPerson());
+        // 封装ZF人员
+        List<Personnel> enquirePerson = personnelService.selectPersonnelListByIds(eIds);
+        List<Personnel> recordPerson = personnelService.selectPersonnelListByIds(rIds);
+        personnelMap.put("enquirePerson", enquirePerson);
+        personnelMap.put("recordPerson", recordPerson);
+        return personnelMap;
+    }
+
 }

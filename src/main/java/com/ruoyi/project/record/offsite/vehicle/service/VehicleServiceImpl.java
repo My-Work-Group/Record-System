@@ -25,7 +25,7 @@ public class VehicleServiceImpl implements IVehicleService {
     @Override
     public int updateVehicle(Vehicle vehicle) {
         int vehicleId;
-        // 校验更新的信息用户名和身份证是否存在
+        // 校验车辆是否存在
         if ("1".equals(checkVehicleUnique(vehicle))) {
             Vehicle oldVehicle = selectVehicleByPlateNum(vehicle.getVehPlateNum());
             vehicle.setVehId(oldVehicle.getVehId());

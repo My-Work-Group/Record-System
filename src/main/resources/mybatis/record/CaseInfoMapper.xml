@@ -63,7 +63,7 @@
             <if test="caseInfo.personId != null and caseInfo.personId != ''">person_id=#{caseInfo.personId},</if>
             <if test="caseInfo.companyId != null and caseInfo.companyId != ''">company_id=#{caseInfo.companyId},</if>
             <if test="caseInfo.vehId != null and caseInfo.vehId != ''">veh_Id=#{caseInfo.vehId},</if>
-            <if test="caseInfo.recordPerson != null and caseInfo.recordPerson != ''">enquire_person=#{caseInfo.recordPerson},</if>
+            <if test="caseInfo.enquirePerson != null and caseInfo.enquirePerson != ''">enquire_person=#{caseInfo.enquirePerson},</if>
             <if test="caseInfo.recordPerson != null and caseInfo.recordPerson != ''">record_person=#{caseInfo.recordPerson},</if>
             update_time = sysdate()
         </set>

@@ -1,8 +1,10 @@
 package com.ruoyi.common.utils.XWPFHandler;
 
+
 import com.ruoyi.project.record.offsite.enumerate.DocxFileName;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
+import com.ruoyi.project.record.personnel.domain.Personnel;
 
 import java.io.*;
 import java.util.*;
@@ -19,13 +21,14 @@ public class WordUtil {
 
     private static WordTemplate template;
 
+
     /**
      * @param caseFile
      * @param docxFileId
      * @return
      */
-    public static AjaxResult ExportDocument(CaseFile caseFile, int docxFileId) {
-        String absoluteFileName = replaceTag(caseFile, docxFileId);
+    public static AjaxResult ExportDocument(CaseFile caseFile, Map<String, List<Personnel>> personnels, int docxFileId) {
+        String absoluteFileName = replaceTag(caseFile, personnels, docxFileId);
         String fileName = getFileNameWithSuffix(absoluteFileName);
         return AjaxResult.success(fileName);
     }
@@ -37,11 +40,10 @@ public class WordUtil {
      * @param docxFileId docx文档id号
      * @return 返回当前docx文件的绝对路径
      */
-    public static String replaceTag(CaseFile caseFile, int docxFileId) {
-        Map<String, String> map = data(caseFile);
+    public static String replaceTag(CaseFile caseFile, Map<String, List<Personnel>> personnels, int docxFileId) {
+        Map<String, String> map = data(caseFile, personnels);
         // 获取处罚对象
         String object = caseFile.getCaseInfo().getCaseObject();
-        String vehPlateNum = map.get("vehPlateNum");
         String docxTemplatesFile;
         docxTemplatesFile = getDocxTemplatesPath(object, docxFileId);
         // FileId + 表名
@@ -73,12 +75,12 @@ public class WordUtil {
      * @param caseFile
      * @return 批量下载的文件路径 list
      */
-    public static List<String> filePathList(CaseFile caseFile) {
+    public static List<String> filePathList(CaseFile caseFile, Map<String, List<Personnel>> personnelMap) {
         String filePath;
         List<String> filePathList = new ArrayList<>();
-        // 长度-1的目的是，不让一键导出的zip包中包含视听资料说明书
+        // 长度-1的目的是，不让[一键导出]的zip包中包含视听资料说明书
         for (int i = 0; i < DocxFileName.values().length - 1; i++) {
-            filePath = replaceTag(caseFile, i + 1);
+            filePath = replaceTag(caseFile, personnelMap, i + 1);
             filePathList.add(filePath);
         }
         return filePathList;
@@ -104,7 +106,7 @@ public class WordUtil {
      * @param caseFile
      * @return
      */
-    public static Map<String, String> data(CaseFile caseFile) {
+    public static Map<String, String> data(CaseFile caseFile, Map<String, List<Personnel>> personnels) {
 
         Map<String, String> map = new HashMap<>();//要插入的数据
         Date createDate = caseFile.getCaseInfo().getCreateTime();
@@ -113,7 +115,7 @@ public class WordUtil {
         //  获取处罚对象
         String object = caseFile.getCaseInfo().getCaseObject();
         // 获取车货总重，保留两位小数
-        String  str1 = String.format("%.2f",caseFile.getOverload().getTotalWeight());
+        String str1 = String.format("%.2f", caseFile.getOverload().getTotalWeight());
         double totalWeight = Double.parseDouble(str1);
 
         // 获取车辆轴数
@@ -123,12 +125,12 @@ public class WordUtil {
         // 总重扣除5%计重误差
         double finalTotalWeight = totalWeight * 0.95;
         // 扣除5%的计重误差后，超限的吨位，保留两位小数
-        String  str2 = String.format("%.2f",finalTotalWeight - weightLimit);
+        String str2 = String.format("%.2f", finalTotalWeight - weightLimit);
         double outWeight = Double.parseDouble(str2);
 
         // 向下取整吨位，以便计算罚金
-        double InteOutWeight = Math.floor(outWeight); // 向下取整
-        int fine = (int) (500 * InteOutWeight);
+        double IntOutWeight = Math.floor(outWeight); // 向下取整
+        int fine = (int) (500 * IntOutWeight);
         // 案件信息
         map.put("createYear", String.valueOf(getYear(createDate)));
         map.put("createMonth", String.valueOf(getMonth(createDate)));
@@ -136,7 +138,18 @@ public class WordUtil {
         map.put("createHour", String.valueOf(getHour(createDate)));
         map.put("createMinute", String.valueOf(getMinute(createDate)));
         map.put("caseNumber", caseFile.getCaseInfo().getCaseNumber());
+        map.put("letterNumber", caseFile.getCaseInfo().getLetterNumber());
         map.put("fine", String.valueOf(fine)); // 罚款金额，没有存储到数据库
+        // ZF人员信息
+        Personnel enquirePerson1 = personnels.get("enquirePerson").get(0);
+        Personnel enquirePerson2 = personnels.get("enquirePerson").get(1);
+        Personnel recordPerson = personnels.get("recordPerson").get(0);
+        map.put("enquirePerson1Name", enquirePerson1.getPersonnelName());  // ZF人员1
+        map.put("enquirePerson1EnfId", enquirePerson1.getEnforcementId());
+        map.put("enquirePerson2Name", enquirePerson2.getPersonnelName());  // ZF人员2
+        map.put("enquirePerson2EnfId", enquirePerson2.getEnforcementId());
+        map.put("recordPersonName", recordPerson.getPersonnelName());     // 记录人员
+        map.put("recordPersonEnfId", recordPerson.getPersonnelName());
         // 个人信息
         map.put("personName", caseFile.getPerson().getPersonName());
         map.put("age", Integer.toString(caseFile.getPerson().getAge()));

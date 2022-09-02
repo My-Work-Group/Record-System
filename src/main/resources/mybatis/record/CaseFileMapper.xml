@@ -19,8 +19,11 @@
         <result property="personId" column="person_id"/>
         <result property="companyId" column="company_id"/>
         <result property="caseNumber" column="case_number"/>
+        <result property="letterNumber" column="letter_number"/>
         <result property="createTime" column="create_time"/>
         <result property="caseObject" column="case_object"/>
+        <result property="enquirePerson" column="enquire_person"/>
+        <result property="recordPerson" column="record_person"/>
         <result property="vehId" column="veh_id"/>
     </resultMap>
 
@@ -77,7 +80,7 @@
     <!--    查询所有笔录信息-->
     <sql id="selectRecordList">
         select
-            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,
+            c.case_id, c.case_number, c.letter_number  ,c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,c.enquire_person,c.record_person,
             v.veh_id, v.veh_plate_num, v. veh_plate_color, v. veh_type, v. veh_axes,
             o.overload_id, o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,o.veh_id,
             p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,p.post_code,
@@ -92,7 +95,7 @@
     <!--    查询所有笔录信息-->
     <select id="selectRecordList"  resultMap="CaseRecordResult">
         select
-            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,
+            c.case_id, c.case_number, c.letter_number  ,c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,c.enquire_person,c.record_person,
             v.veh_id,v.veh_plate_num, v. veh_plate_color, v. veh_type, v. veh_axes,
             o.overload_id, o.check_time, o.check_site, o.total_weight, o.out_weight,o.goods, o.load_time,o.load_site, o.dest,o.veh_id,
             p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,p.post_code,

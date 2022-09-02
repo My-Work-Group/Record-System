@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.personnel.mapper.PersonnelMapper">
+
+    <!--    个人信息-->
+    <resultMap id="PersonnelResult" type="Personnel">
+        <id property="personnelId" column="personnel_id"/>
+        <result property="personnelName" column="personnel_name"/>
+        <result property="enforcementId" column="enforcement_id"/>
+    </resultMap>
+
+    <sql id="selectPersonnelVo">
+        select personnel_id, personnel_name, enforcement_id from rec_enforcement_person
+    </sql>
+
+    <select id="selectPersonnelById" parameterType="Integer" resultMap="PersonnelResult">
+        select *  from rec_enforcement_person  where find_in_set(#{personnel_id}, personnel_id)
+    </select>
+
+
+    <select id="selectPersonnelListByIds" resultMap="PersonnelResult">
+        select personnel_id, personnel_name, enforcement_id from rec_enforcement_person where personnel_id in
+        <foreach collection="array" item="personnelId" open="(" separator="," close=")">
+            #{personnelId}
+        </foreach>
+    </select>
+
+
+    <select id="selectPersonnelAll" resultMap="PersonnelResult">
+        <include refid="selectPersonnelVo"/>
+    </select>
+
+
+</mapper>

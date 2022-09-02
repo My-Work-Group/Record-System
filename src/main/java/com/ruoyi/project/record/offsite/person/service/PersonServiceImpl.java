@@ -28,6 +28,7 @@ public class PersonServiceImpl implements IPersonService {
         int personId;
         // 校验更新的个人信息是否存在
         if ("1".equals(checkPersonUnique(person))) {
+
             Person oldPerson = selectPersonByNumId(person.getNumberId());
             person.setPersonId(oldPerson.getPersonId());
             personMapper.updatePerson(person);

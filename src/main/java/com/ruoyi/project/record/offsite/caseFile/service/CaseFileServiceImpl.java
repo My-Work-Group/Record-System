@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.ruoyi.common.utils.StringUtils.isAllFieldNull;
 
@@ -99,11 +100,12 @@ public class CaseFileServiceImpl implements ICaseFileService {
         Vehicle vehicle = caseFile.getVehicle();
         Overload overload = caseFile.getOverload();
         int personId = personService.updatePerson(person);
-        int companyId = companyService.updateCompany(company);
+        if(!isAllFieldNull(company) && caseInfo.getCaseObject().equals("公司")){
+            int companyId = companyService.updateCompany(company);
+            caseInfo.setCompanyId(companyId);
+        }
         int vehicleId = vehicleService.updateVehicle(vehicle);
-
         caseInfo.setPersonId(personId);
-        caseInfo.setCompanyId(companyId);
         caseInfo.setVehId(vehicleId);
         overload.setVehId(vehicleId);
         // 超限信息中绑定了vehId，更新车辆信息后再更新超限信息！

@@ -11,7 +11,7 @@ import java.util.Date;
  * @Date: create in 2022/3/30 11:38
  */
 
-public class CaseInfo extends BaseController {
+public class CaseInfo  {
     private static final long serialVersionUID = 1L;
     // 案件id
     private Integer caseId;
@@ -128,6 +128,8 @@ public class CaseInfo extends BaseController {
                 ", caseNumber='" + caseNumber + '\'' +
                 ", letterNumber='" + letterNumber + '\'' +
                 ", caseObject='" + caseObject + '\'' +
+                ", enquirePerson='" + enquirePerson + '\'' +
+                ", recordPerson='" + recordPerson + '\'' +
                 ", createTime=" + createTime +
                 '}';
     }

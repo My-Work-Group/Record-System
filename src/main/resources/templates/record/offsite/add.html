@@ -41,8 +41,8 @@
                     <div class="col-sm-8">
                         <select name="enquirePerson" id="enquirePerson" class="form-control select2-multiple" multiple value=''
                                 required>
-                            <option th:each="enforcementPeople:${enforcementPeople}" th:value="${enforcementPeople.id}"
-                                    th:text="${enforcementPeople.name}"></option>
+                            <option th:each="enforcementPeople:${enforcementPeoples}" th:value="${enforcementPeople.personnelId}"
+                                    th:text="${enforcementPeople.personnelName}"></option>
                         </select>
                     </div>
                 </div>
@@ -52,8 +52,8 @@
                     <label class="col-sm-4 control-label">记录人员：</label>
                     <div class="col-sm-8">
                         <select name="recordPerson" id="recordPerson" class="form-control m-b" required>
-                            <option th:each="enforcementPeople:${enforcementPeople}" th:value="${enforcementPeople.id}"
-                                    th:text="${enforcementPeople.name}"></option>
+                            <option th:each="enforcementPeople:${enforcementPeoples}" th:value="${enforcementPeople.personnelId}"
+                                    th:text="${enforcementPeople.personnelName}"></option>
                         </select>
                     </div>
                 </div>
