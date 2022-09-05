@@ -1,6 +1,5 @@
 package com.ruoyi.common.utils.XWPFHandler;
 
-
 import com.ruoyi.project.record.offsite.enumerate.DocxFileName;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.record.offsite.caseFile.domain.CaseFile;
@@ -11,6 +10,7 @@ import java.util.*;
 
 import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
+import static com.ruoyi.common.utils.NumberUtils.formatDecimal;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
 import static com.ruoyi.project.record.offsite.enumerate.DocxFileName.getName;
@@ -44,10 +44,15 @@ public class WordUtil {
         Map<String, String> map = data(caseFile, personnels);
         // 获取处罚对象
         String object = caseFile.getCaseInfo().getCaseObject();
+        String vehPlate = caseFile.getVehicle().getVehPlateNum();
+        String date = convertDate2String(caseFile.getOverload().getCheckTime(), "yyyy-MM-dd");
         String docxTemplatesFile;
         docxTemplatesFile = getDocxTemplatesPath(object, docxFileId);
         // FileId + 表名
         String filename = docxFileId + "." + getName(docxFileId) + ".docx";
+        if (docxFileId == 11) {
+            filename = date + "-" + vehPlate + getName(docxFileId) + ".docx";
+        }
         File file = new File(docxTemplatesFile);
         FileInputStream fileInputStream = null;
         try {
@@ -114,10 +119,10 @@ public class WordUtil {
         Date loadDate = caseFile.getOverload().getLoadTime();
         //  获取处罚对象
         String object = caseFile.getCaseInfo().getCaseObject();
-        // 获取车货总重，保留两位小数
-        String str1 = String.format("%.2f", caseFile.getOverload().getTotalWeight());
-        double totalWeight = Double.parseDouble(str1);
-
+        // 获取车货总重
+        //String str1 = String.format("%.2f", caseFile.getOverload().getTotalWeight());
+        double totalWeight =caseFile.getOverload().getTotalWeight();
+        System.out.println(totalWeight);
         // 获取车辆轴数
         int vehAxleNum = caseFile.getVehicle().getVehAxleNum();
         // 根据轴数获取车辆限重吨位
@@ -125,8 +130,7 @@ public class WordUtil {
         // 总重扣除5%计重误差
         double finalTotalWeight = totalWeight * 0.95;
         // 扣除5%的计重误差后，超限的吨位，保留两位小数
-        String str2 = String.format("%.2f", finalTotalWeight - weightLimit);
-        double outWeight = Double.parseDouble(str2);
+        double outWeight = Double.parseDouble(formatDecimal(finalTotalWeight - weightLimit));
 
         // 向下取整吨位，以便计算罚金
         double IntOutWeight = Math.floor(outWeight); // 向下取整
