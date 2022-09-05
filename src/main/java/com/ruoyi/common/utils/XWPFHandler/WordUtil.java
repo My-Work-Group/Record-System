@@ -11,6 +11,7 @@ import java.util.*;
 import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
 import static com.ruoyi.common.utils.NumberUtils.formatDecimal;
+import static com.ruoyi.common.utils.StringUtils.inStringIgnoreCase;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
 import static com.ruoyi.project.record.offsite.enumerate.DocxFileName.getName;
@@ -51,7 +52,11 @@ public class WordUtil {
         // FileId + 表名
         String filename = docxFileId + "." + getName(docxFileId) + ".docx";
         if (docxFileId == 11) {
-            filename = date + "-" + vehPlate + getName(docxFileId) + ".docx";
+            filename = date + "-" + vehPlate + "-" + getName(docxFileId) + ".docx";
+            if (filename.contains("/")) {
+                vehPlate = vehPlate.substring(0, vehPlate.indexOf("/")); // 去掉挂车车牌
+                filename = date + "-" + vehPlate + "-" + getName(docxFileId) + ".docx";
+            }
         }
         File file = new File(docxTemplatesFile);
         FileInputStream fileInputStream = null;
@@ -121,7 +126,7 @@ public class WordUtil {
         String object = caseFile.getCaseInfo().getCaseObject();
         // 获取车货总重
         //String str1 = String.format("%.2f", caseFile.getOverload().getTotalWeight());
-        double totalWeight =caseFile.getOverload().getTotalWeight();
+        double totalWeight = caseFile.getOverload().getTotalWeight();
         System.out.println(totalWeight);
         // 获取车辆轴数
         int vehAxleNum = caseFile.getVehicle().getVehAxleNum();

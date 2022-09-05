@@ -192,46 +192,46 @@
     });
 
 
-    // /* 一键导出 */
-    // function batchExportRecord() {
-    //     var prefix = ctx + "record/offsite";
-    //     var caseId = [[${caseFile.caseInfo.caseId}]];
-    //     $.modal.confirm("确定要一键导出吗？", function () {
-    //         layer.msg('正在生成，请稍候…', {icon: 1});
-    //         $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
-    //     })}
-    //
-
     /* 一键导出 */
     function batchExportRecord() {
-        //  1、定义发送请求的url
         var prefix = ctx + "record/offsite";
         var caseId = [[${caseFile.caseInfo.caseId}]];
-        var url = prefix + "/batchExportRecord/download?caseId=" + caseId;
-        //  2、相当于先试着发请求，看看返回结果是什么
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        //这步至关重要，命令xhr返回给你的是blob(二进制大对象)类型的数据
-        xhr.responseType = 'blob';
-        xhr.send();
-        // $.modal.confirm("确定要一键导出吗？", function () {
-        xhr.onreadystatechange = function () {
-            console.log(xhr)
-            if (xhr.readyState === 4 ) {
-                console.log("进去了4！")
-                if (xhr.status === 200 && xhr.response !==null){
-                    console.log("200!")
-                    //  3、文件存在且可以下载，则正式发送请求下载文件
-                    layer.msg('正在生成，请稍候…', {icon: 1});
-                    window.location.href = url;
-                } else {
-                    //文件下载失败，弹出提示
-                    console.log("里面，失败了");
-                    $.modal.alertWarning("文件下载失败！");
-                }
-            }
-        }
-    }
+        $.modal.confirm("确定要一键导出吗？", function () {
+            layer.msg('正在生成，请稍候…', {icon: 1});
+            $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
+        })}
+
+
+    /* 一键导出 */
+    // function batchExportRecord() {
+    //     //  1、定义发送请求的url
+    //     var prefix = ctx + "record/offsite";
+    //     var caseId = [[${caseFile.caseInfo.caseId}]];
+    //     var url = prefix + "/batchExportRecord/download?caseId=" + caseId;
+    //     //  2、相当于先试着发请求，看看返回结果是什么
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('GET', url, true);
+    //     //这步至关重要，命令xhr返回给你的是blob(二进制大对象)类型的数据
+    //     xhr.responseType = 'blob';
+    //     xhr.send();
+    //     // $.modal.confirm("确定要一键导出吗？", function () {
+    //     xhr.onreadystatechange = function () {
+    //         console.log(xhr)
+    //         if (xhr.readyState === 4 ) {
+    //             console.log("进去了4！")
+    //             if (xhr.status === 200 && xhr.response !==null){
+    //                 console.log("200!")
+    //                 //  3、文件存在且可以下载，则正式发送请求下载文件
+    //                 layer.msg('正在生成，请稍候…', {icon: 1});
+    //                 window.location.href = url;
+    //             } else {
+    //                 //文件下载失败，弹出提示
+    //                 console.log("里面，失败了");
+    //                 $.modal.alertWarning("文件下载失败！");
+    //             }
+    //         }
+    //     }
+    // }
 
 
     // /* 一键导出 */
