@@ -14,7 +14,7 @@ public class CaseFileUtils {
         CaseInfo caseInfo = caseFile.getCaseInfo();
         String caseObject = caseInfo.getCaseObject();
 
-        if (isFieldNull(caseInfo)||isFieldNull(caseFile.getVehicle()) || isFieldNull(caseFile.getOverload())) {
+        if (isFieldNull(caseFile.getVehicle()) || isFieldNull(caseFile.getOverload())) {
             if ("个人".equals(caseObject) && isFieldNull(caseFile.getPerson()) && isNull(caseInfo.getPersonId())) {
                 return true;
             }

@@ -190,33 +190,39 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         return date;
     }
 
-    public static int getYear(Date date) {
+    public static String getYear(Date date) {
         String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
-        return Integer.parseInt(timeStr.substring(0, 4));
+        return  timeStr.substring(0, 4);
+        //return Integer.parseInt(timeStr.substring(0, 4));
     }
 
-    public static int getMonth(Date date) {
+    public static String getMonth(Date date) {
         String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
-        return Integer.parseInt(timeStr.substring(5, 7));
+        return  timeStr.substring(5, 7);
+        //return Integer.parseInt(timeStr.substring(5, 7));
     }
 
-    public static int getDay(Date date) {
+    public static String getDay(Date date) {
         String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
-        return Integer.parseInt(timeStr.substring(8, 10));
+        return  timeStr.substring(8, 10);
+        //return Integer.parseInt(timeStr.substring(8, 10));
     }
 
-    public static int getHour(Date date) {
+    public static String getHour(Date date) {
         String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
-        return Integer.parseInt(timeStr.substring(11, 13));
+        return  timeStr.substring(11, 13);
+        //return Integer.parseInt(timeStr.substring(11, 13));
     }
 
-    public static int getMinute(Date date) {
+    public static String getMinute(Date date) {
         String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
-        return Integer.parseInt(timeStr.substring(14, 16));
+        return  timeStr.substring(14, 16);
+        //return Integer.parseInt(timeStr.substring(14, 16));
     }
 
-    public static int getSecond(Date date) {
+    public static String getSecond(Date date) {
         String timeStr = convertDate2String(date, "yyyy-MM-dd HH:mm:ss");
-        return Integer.parseInt(timeStr.substring(17, 19));
+        return  timeStr.substring(17, 19);
+        //return Integer.parseInt(timeStr.substring(17, 19));
     }
 }

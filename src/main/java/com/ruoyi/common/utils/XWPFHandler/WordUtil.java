@@ -10,8 +10,8 @@ import java.util.*;
 
 import static com.ruoyi.common.utils.DateUtils.*;
 import static com.ruoyi.common.utils.DateUtils.getMinute;
-import static com.ruoyi.common.utils.NumberUtils.formatDecimal;
-import static com.ruoyi.common.utils.StringUtils.inStringIgnoreCase;
+import static com.ruoyi.common.utils.NumberUtils.*;
+import static com.ruoyi.common.utils.NumberUtils.formatDecimalTo2;
 import static com.ruoyi.common.utils.file.FileUtils.getAbsoluteFile;
 import static com.ruoyi.common.utils.file.FileUtils.getFileNameWithSuffix;
 import static com.ruoyi.project.record.offsite.enumerate.DocxFileName.getName;
@@ -125,18 +125,15 @@ public class WordUtil {
         //  获取处罚对象
         String object = caseFile.getCaseInfo().getCaseObject();
         // 获取车货总重
-        //String str1 = String.format("%.2f", caseFile.getOverload().getTotalWeight());
-        double totalWeight = caseFile.getOverload().getTotalWeight();
-        System.out.println(totalWeight);
+        double totalWeight = Double.parseDouble(formatDecimalTo2(caseFile.getOverload().getTotalWeight()));
         // 获取车辆轴数
         int vehAxleNum = caseFile.getVehicle().getVehAxleNum();
         // 根据轴数获取车辆限重吨位
         double weightLimit = getWeightLimit(vehAxleNum);
         // 总重扣除5%计重误差
-        double finalTotalWeight = totalWeight * 0.95;
+        double finalTotalWeight = multiplication(totalWeight,0.95);
         // 扣除5%的计重误差后，超限的吨位，保留两位小数
-        double outWeight = Double.parseDouble(formatDecimal(finalTotalWeight - weightLimit));
-
+        double outWeight = subtraction(finalTotalWeight,weightLimit);
         // 向下取整吨位，以便计算罚金
         double IntOutWeight = Math.floor(outWeight); // 向下取整
         int fine = (int) (500 * IntOutWeight);
@@ -186,20 +183,20 @@ public class WordUtil {
         map.put("vehAxleNum", Integer.toString(caseFile.getVehicle().getVehAxleNum()));
         map.put("vehType", caseFile.getVehicle().getVehType());
         // 超限信息
-        map.put("checkYear", String.valueOf(getYear(checkDate)));
-        map.put("checkMonth", String.valueOf(getMonth(checkDate)));
-        map.put("checkDay", String.valueOf(getDay(checkDate)));
-        map.put("checkHour", String.valueOf(getHour(checkDate)));
-        map.put("checkMinute", String.valueOf(getMinute(checkDate)));
-        map.put("loadYear", String.valueOf(getYear(loadDate)));
-        map.put("loadMonth", String.valueOf(getMonth(loadDate)));
-        map.put("loadDay", String.valueOf(getDay(loadDate)));
-        map.put("loadHour", String.valueOf(getHour(loadDate)));
-        map.put("loadMinute", String.valueOf(getMinute(loadDate)));
+        map.put("checkYear", getYear(checkDate));
+        map.put("checkMonth", getMonth(checkDate));
+        map.put("checkDay", getDay(checkDate));
+        map.put("checkHour", getHour(checkDate));
+        map.put("checkMinute", getMinute(checkDate));
+        map.put("loadYear", getYear(loadDate));
+        map.put("loadMonth", (getMonth(loadDate)));
+        map.put("loadDay", getDay(loadDate));
+        map.put("loadHour", getHour(loadDate));
+        map.put("loadMinute", getMinute(loadDate));
         map.put("loadSite", caseFile.getOverload().getLoadSite());
         map.put("checkSite", caseFile.getOverload().getCheckSite());
-        map.put("totalWeight", Double.toString(totalWeight));
-        map.put("outWeight", Double.toString(outWeight));
+        map.put("totalWeight", formatDecimalTo2(totalWeight));
+        map.put("outWeight", formatDecimalTo2(outWeight));
         map.put("goods", caseFile.getOverload().getGoods());
         map.put("dest", caseFile.getOverload().getDest());
         return map;
