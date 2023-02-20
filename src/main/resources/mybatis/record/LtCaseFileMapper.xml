@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.lgtrans.LtCaseFile.mapper.LtCaseFileMapper">
+
+    <!--    笔录-->
+    <resultMap type="LtCaseFile" id="LtCaseRecordResult">
+        <association property="ltCaseInfo" column="case_id" javaType="LtCaseInfo" resultMap="LtCaseInfoResult"/>
+        <association property="ltOverload" column="overload_id" javaType="LtOverload" resultMap="LtOverloadResult"/>
+        <association property="ltVehicle" column="veh_id" javaType="LtVehicle" resultMap="LtVehicleResult"/>
+        <association property="ltPerson" column="person_id" javaType="LtPerson" resultMap="LtPersonResult"/>
+        <association property="ltCompany" column="company_id" javaType="LtCompany" resultMap="LtCompanyResult"/>
+    </resultMap>
+
+    <!--    案件信息-->
+    <resultMap type="LtCaseInfo" id="LtCaseInfoResult">
+        <id property="caseId" column="case_id"/>
+        <result property="personId" column="person_id"/>
+        <result property="companyId" column="company_id"/>
+        <result property="caseNumber" column="case_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="caseObject" column="case_object"/>
+        <result property="enquirePerson" column="enquire_person"/>
+        <result property="recordPerson" column="record_person"/>
+        <result property="fine" column="fine"/>
+        <result property="vehId" column="veh_id"/>
+    </resultMap>
+
+        <!--    车辆信息-->
+        <resultMap id="LtVehicleResult" type="LtVehicle">
+            <id property="vehId" column="veh_id"/>
+            <result property="vehPlateNum" column="veh_plate_Num"/>
+            <result property="vehPlateColor" column="veh_plate_color"/>
+            <result property="vehAxleNum" column="veh_axes"/>
+            <result property="vehType" column="veh_type"/>
+        </resultMap>
+
+        <!--    个人信息-->
+        <resultMap id="LtPersonResult" type="LtPerson">
+            <id property="personId" column="person_id"/>
+            <result property="personName" column="person_name"/>
+            <result property="age" column="age"/>
+            <result property="sex" column="sex"/>
+            <result property="numberId" column="number_id"/>
+            <result property="personPhone" column="person_phone"/>
+            <result property="homeAddress" column="home_address"/>
+            <result property="workUnit" column="work_unit"/>
+            <result property="contactAddress" column="contact_address"/>
+            <result property="post" column="post"/>
+            <result property="postCode" column="post_code"/>
+        </resultMap>
+
+        <!--    公司信息-->
+        <resultMap id="LtCompanyResult" type="LtCompany">
+            <id property="companyId" column="company_id"/>
+            <result property="companyName" column="company_name"/>
+            <result property="creditCode" column="credit_code"/>
+            <result property="directorName" column="director_name"/>
+            <result property="directorNumId" column="director_num_id"/>
+            <result property="companyAddress" column="company_address"/>
+            <result property="companyPhone" column="company_phone"/>
+        </resultMap>
+
+    <!--    超限信息-->
+    <resultMap id="LtOverloadResult" type="LtOverload">
+        <id property="overloadId" column="overload_id"/>
+        <result property="vehId" column="veh_id"/>
+        <result property="checkTime" column="check_time"/>
+        <result property="checkSite" column="check_site"/>
+        <result property="overallLength" column="overall_length"/>
+        <result property="overallWidth" column="overall_width"/>
+        <result property="overallHeight" column="overall_height"/>
+        <result property="goods" column="goods"/>
+        <result property="goodsLength" column="goods_length"/>
+        <result property="goodsWidth" column="goods_width"/>
+        <result property="goodsHeight" column="goods_height"/>
+        <result property="loadTime" column="load_time"/>
+        <result property="loadSite" column="load_site"/>
+        <result property="dest" column="dest"/>
+    </resultMap>
+
+
+    <!--    查询所有笔录信息-->
+    <sql id="selectRecordList">
+        select
+            c.case_id, c.case_number, c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,c.enquire_person,c.record_person,c.fine,
+            v.veh_id, v.veh_plate_num, v. veh_plate_color, v. veh_type, v. veh_axes,
+            o.overload_id, o.check_time, o.check_site, o.overall_length, o.overall_width, o.overall_height,o.goods, o.goods_length, o.goods_width, o.goods_height,o.load_time,o.load_site, o.dest,o.veh_id,
+            p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,p.post_code,
+            cp.company_name, cp.credit_code, cp.director_name, cp.director_num_id, cp.company_address, cp.company_phone
+        from rec_lgtrans_case c
+                 left join rec_lgtrans_overload  o  on c.case_id = o.overload_id
+                 left join rec_lgtrans_veh  v on c.veh_id=v.veh_id
+                 left join rec_lgtrans_person p on c.person_id = p.person_id
+                 left join rec_lgtrans_company cp on c.company_id = cp.company_id
+    </sql>
+
+    <!--    查询所有笔录信息-->
+    <select id="selectRecordList"  resultMap="LtCaseRecordResult">
+        select
+            c.case_id, c.case_number ,c.case_object,c.create_time, c.veh_id, c.person_id, c.company_id,c.enquire_person,c.record_person, c.fine,
+            v.veh_id,v.veh_plate_num, v. veh_plate_color, v. veh_type, v. veh_axes,
+            o.overload_id, o.check_time, o.check_site, o.overall_length, o.overall_width, o.overall_height, o.goods, o.goods_length, o.goods_width, o.goods_height, o.load_time,o.load_site, o.dest,o.veh_id,
+            p.person_name, p.sex, p.number_id, p.age, p.person_phone, p.home_address, p.work_unit, p.post, p.contact_address,p.post_code,
+            cp.company_name, cp.credit_code, cp.director_name, cp.director_num_id, cp.company_address, cp.company_phone
+        from rec_lgtrans_case c
+             left join rec_lgtrans_overload  o  on c.case_id = o.overload_id
+             left join rec_lgtrans_veh  v on c.veh_id=v.veh_id
+             left join rec_lgtrans_person p on c.person_id = p.person_id
+             left join rec_lgtrans_company cp on c.company_id = cp.company_id;
+    </select>
+
+    <!--    通过案件id查询笔录-->
+    <select id="selectRecordById" parameterType="Integer" resultMap="LtCaseRecordResult">
+        <include refid="selectRecordList"/>
+        where c.case_id = #{caseId}
+    </select>
+
+
+</mapper>

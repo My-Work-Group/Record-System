@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.lgtrans.LtCaseInfo.mapper.LtCaseInfoMapper">
+
+    <!--    案件信息-->
+    <resultMap type="LtCaseInfo" id="LtCaseInfoResult">
+        <id property="caseId" column="case_id"/>
+        <result property="personId" column="person_id"/>
+        <result property="companyId" column="company_id"/>
+        <result property="caseNumber" column="case_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="caseObject" column="case_object"/>
+        <result property="enquirePerson" column="enquire_person"/>
+        <result property="recordPerson" column="record_person"/>
+        <result property="fine" column="fine"/>
+        <result property="vehId" column="veh_id"/>
+    </resultMap>
+
+    <sql id="selectCaseInfoVo">
+        select c.case_id, c.case_number, c.case_object, c.veh_id, c.person_id, c.company_id, c.create_time
+        from rec_lgtrans_case c
+    </sql>
+
+
+    <insert id="insertCase" parameterType="LtCaseInfo" useGeneratedKeys="true" keyProperty="caseId">
+        insert into rec_lgtrans_case(
+        <if test="ltCaseInfo.caseId != null">case_id,</if>
+        <if test="ltCaseInfo.caseNumber != null and ltCaseInfo.caseNumber != ''">case_number,</if>
+        <if test="ltCaseInfo.caseObject != null and ltCaseInfo.caseObject != ''">case_object,</if>
+        <if test="ltCaseInfo.personId != null and ltCaseInfo.personId != ''">person_id,</if>
+        <if test="ltCaseInfo.companyId != null and ltCaseInfo.companyId != ''">company_id,</if>
+        <if test="ltCaseInfo.vehId != null and ltCaseInfo.vehId != ''">veh_id,</if>
+        <if test="ltCaseInfo.enquirePerson != null and ltCaseInfo.enquirePerson != ''">enquire_person,</if>
+        <if test="ltCaseInfo.recordPerson != null and ltCaseInfo.recordPerson != ''">record_person,</if>
+        <if test="ltCaseInfo.fine != null and ltCaseInfo.fine != ''">fine,</if>
+        create_time,
+        update_time
+        )values(
+        <if test="ltCaseInfo.caseId != null and ltCaseInfo.caseId != ''">#{ltCaseInfo.caseId},</if>
+        <if test="ltCaseInfo.caseNumber != null and ltCaseInfo.caseNumber != ''">#{ltCaseInfo.caseNumber},</if>
+        <if test="ltCaseInfo.caseObject != null and ltCaseInfo.caseObject != ''">#{ltCaseInfo.caseObject},</if>
+        <if test="ltCaseInfo.personId != null and ltCaseInfo.personId != ''">#{ltCaseInfo.personId},</if>
+        <if test="ltCaseInfo.companyId != null and ltCaseInfo.companyId != ''">#{ltCaseInfo.companyId},</if>
+        <if test="ltCaseInfo.vehId != null and ltCaseInfo.vehId != ''">#{ltCaseInfo.vehId},</if>
+        <if test="ltCaseInfo.enquirePerson != null and ltCaseInfo.enquirePerson != ''">#{ltCaseInfo.enquirePerson},</if>
+        <if test="ltCaseInfo.recordPerson != null and ltCaseInfo.recordPerson != ''">#{ltCaseInfo.recordPerson},</if>
+        <if test="ltCaseInfo.fine != null and ltCaseInfo.fine != ''">#{ltCaseInfo.fine},</if>
+        sysdate(),
+        sysdate()
+        )
+    </insert>
+
+
+    <update id="updateCaseInfo" parameterType="LtCaseInfo">
+        update rec_lgtrans_case
+        <set>
+            <if test="ltCaseInfo.caseNumber != null and ltCaseInfo.caseNumber != ''">case_number=#{ltCaseInfo.caseNumber},
+            </if>
+            <if test="ltCaseInfo.caseObject != null and ltCaseInfo.caseObject != ''">case_object=#{ltCaseInfo.caseObject},
+            </if>
+            <if test="ltCaseInfo.personId != null and ltCaseInfo.personId != ''">person_id=#{ltCaseInfo.personId},</if>
+            <if test="ltCaseInfo.companyId != null and ltCaseInfo.companyId != ''">company_id=#{ltCaseInfo.companyId},</if>
+            <if test="ltCaseInfo.vehId != null and ltCaseInfo.vehId != ''">veh_Id=#{ltCaseInfo.vehId},</if>
+            <if test="ltCaseInfo.enquirePerson != null and ltCaseInfo.enquirePerson != ''">enquire_person=#{ltCaseInfo.enquirePerson},</if>
+            <if test="ltCaseInfo.recordPerson != null and ltCaseInfo.recordPerson != ''">record_person=#{ltCaseInfo.recordPerson},</if>
+            <if test="ltCaseInfo.fine != null and ltCaseInfo.fine != ''">fine=#{ltCaseInfo.fine},</if>
+            update_time = sysdate()
+        </set>
+        where case_id = #{ltCaseInfo.caseId}
+    </update>
+
+    <select id="selectCaseInfoByNum" parameterType="String" resultMap="LtCaseInfoResult">
+        <include refid="selectCaseInfoVo"/>
+        where c.case_number=#{caseNum} limit 1
+    </select>
+
+    <select id="selectCaseInfoByIdAndNum"  resultMap="LtCaseInfoResult">
+        <include refid="selectCaseInfoVo"/>
+        where c.case_id=#{caseId} and c.case_number=#{caseNum} limit 1
+    </select>
+
+    <delete id="deleteCaseInfoByIds" parameterType="Integer">
+        delete from rec_lgtrans_case where case_id in
+        <foreach collection="array" item="caseId" open="(" separator="," close=")">
+            #{caseId}
+        </foreach>
+    </delete>
+
+
+</mapper>

@@ -55,7 +55,6 @@ public class CaseFileServiceImpl implements ICaseFileService {
         Person person = caseFile.getPerson();
         Company company = caseFile.getCompany();
         Overload overload = caseFile.getOverload();
-
         if (!isAllFieldNull(person) && caseInfo.getCaseObject().equals("个人")) {
             personService.insertPerson(person);
             // 1. [案件信息]关联个人Id

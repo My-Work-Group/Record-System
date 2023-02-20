@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.lgtrans.LtOverload.mapper.LtOverloadMapper">
+
+    <insert id="insertOverload" parameterType="LtOverload" useGeneratedKeys="true" keyProperty="overloadId">
+        insert into rec_lgtrans_overload(
+        <if test="ltOverload.overloadId != null and ltOverload.overloadId != ''">overload_id,</if>
+        <if test="ltOverload.checkTime != null ">check_time,</if>
+        <if test="ltOverload.checkSite != null and ltOverload.checkSite != ''">check_site,</if>
+        <if test="ltOverload.overallLength != null and ltOverload.overallLength != ''">overall_length,</if>
+        <if test="ltOverload.overallWidth != null and ltOverload.overallWidth != ''">overall_width,</if>
+        <if test="ltOverload.overallHeight != null and ltOverload.overallHeight != ''">overall_height,</if>
+        <if test="ltOverload.goods != null and ltOverload.goods != ''">goods,</if>
+        <if test="ltOverload.goodsLength != null and ltOverload.goodsLength != ''">goods_length,</if>
+        <if test="ltOverload.goodsWidth != null and ltOverload.goodsWidth != ''">goods_width,</if>
+        <if test="ltOverload.goodsHeight != null and ltOverload.goodsHeight != ''">goods_height,</if>
+        <if test="ltOverload.loadTime != null">load_time,</if>
+        <if test="ltOverload.loadSite != null and ltOverload.loadSite != ''">load_site,</if>
+        <if test="ltOverload.dest != null and ltOverload.dest != ''">dest,</if>
+        <if test="ltOverload.vehId != null and ltOverload.vehId != ''">veh_id,</if>
+        update_time
+        ) values (
+        <if test="ltOverload.overloadId != null and ltOverload.overloadId != ''">#{ltOverload.overloadId},</if>
+        <if test="ltOverload.checkTime != null">#{ltOverload.checkTime},</if>
+        <if test="ltOverload.checkSite != null and ltOverload.checkSite != ''">#{ltOverload.checkSite},</if>
+        <if test="ltOverload.overallLength != null and ltOverload.overallLength != ''">#{ltOverload.overallLength},</if>
+        <if test="ltOverload.overallWidth != null and ltOverload.overallWidth != ''">#{ltOverload.overallWidth},</if>
+        <if test="ltOverload.overallHeight != null and ltOverload.overallHeight != ''">#{ltOverload.overallHeight},</if>
+        <if test="ltOverload.goods != null and ltOverload.goods != ''">#{ltOverload.goods},</if>
+        <if test="ltOverload.goodsLength != null and ltOverload.goodsLength != ''">#{ltOverload.goodsLength},</if>
+        <if test="ltOverload.goodsWidth != null and ltOverload.goodsWidth != ''">#{ltOverload.goodsWidth},</if>
+        <if test="ltOverload.goodsHeight != null and ltOverload.goodsHeight != ''">#{ltOverload.goodsHeight},</if>
+        <if test="ltOverload.loadTime != null">#{ltOverload.loadTime},</if>
+        <if test="ltOverload.loadSite != null and ltOverload.loadSite != ''">#{ltOverload.loadSite},</if>
+        <if test="ltOverload.dest != null and ltOverload.dest != ''">#{ltOverload.dest},</if>
+        <if test="ltOverload.vehId != null and ltOverload.vehId != ''">#{ltOverload.vehId},</if>
+        sysdate()
+        )
+    </insert>
+
+    <update id="updateOverload" parameterType="LtOverload">
+        update rec_lgtrans_overload
+        <set>
+            <if test="ltOverload.checkTime != null">check_time=#{ltOverload.checkTime},</if>
+            <if test="ltOverload.checkSite != null and ltOverload.checkSite != ''">check_site=#{ltOverload.checkSite},</if>
+            <if test="ltOverload.overallLength != null and ltOverload.overallLength != ''">overall_length=#{ltOverload.overallLength},</if>
+            <if test="ltOverload.overallWidth != null and ltOverload.overallWidth != ''">overall_width=#{ltOverload.overallWidth},</if>
+            <if test="ltOverload.overallHeight != null and ltOverload.overallHeight != ''">overall_height=#{ltOverload.overallHeight},</if>
+            <if test="ltOverload.goods != null and ltOverload.goods != ''">goods=#{ltOverload.goods},</if>
+            <if test="ltOverload.goodsLength != null and ltOverload.goodsLength != ''">goods_length=#{ltOverload.goodsLength},</if>
+            <if test="ltOverload.goodsWidth != null and ltOverload.goodsWidth != ''">goods_width=#{ltOverload.goodsWidth},</if>
+            <if test="ltOverload.goodsHeight != null and ltOverload.goodsHeight != ''">goods_height=#{ltOverload.goodsHeight},</if>
+            <if test="ltOverload.loadTime != null">load_time=#{ltOverload.loadTime},</if>
+            <if test="ltOverload.loadSite != null and ltOverload.loadSite != ''">load_site=#{ltOverload.loadSite},</if>
+            <if test="ltOverload.dest != null and ltOverload.dest != ''">dest=#{ltOverload.dest},</if>
+            <if test="ltOverload.vehId != null and ltOverload.vehId != ''">veh_id=#{ltOverload.vehId},</if>
+            update_time=sysdate()
+        </set>
+        where overload_id = #{ltOverload.overloadId}
+    </update>
+
+
+</mapper> 

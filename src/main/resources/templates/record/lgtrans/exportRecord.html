@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <th:block th:include="include :: header('笔录导出')"/>
+</head>
+<body>
+<div class="wrapper wrapper-content animated fadeInRight" th:object="${ltCaseFile}">
+    <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="1">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">1. 立案登记表</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="2">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">2. 询问笔录</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="3">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">3. 案卷调查报告</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="4">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">4. 违法行为通知书</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="5">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">5. 违法行为通知书送达回证</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="6">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">6. 陈述申辩笔录</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="7">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">7. 行政处罚决定书</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="8">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">8. 行政处罚决定书送达回证</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="9">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">9. 结案报告</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="10">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">10. 送达信息确认书</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content" id="11">
+                    <h2 style="color: #007fff;text-align:center">
+                        <i class="fa fa-cloud-download"></i>
+                    </h2>
+                    <h3 class="m-b-none" style="text-align:center">附. 视听资料说明书<br><br>（一键导出不含此文件）</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick='batchExportRecord()'>
+                <i class="fa fa-check"></i>一键导出
+            </button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关闭
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: peity-js"/>
+<th:block th:include="include :: sparkline-js"/>
+<script type="text/javascript">
+    $(function () {
+        $("span.pie").peity("pie", {
+            fill: ['#1ab394', '#d7d7d7', '#ffffff']
+        })
+
+        $(".line").peity("line", {
+            fill: '#1ab394',
+            stroke: '#169c81',
+        })
+
+        $(".bar").peity("bar", {
+            fill: ["#1ab394", "#d7d7d7"]
+        })
+
+        $(".bar_dashboard").peity("bar", {
+            fill: ["#1ab394", "#d7d7d7"],
+            width: 100
+        })
+
+        var updatingChart = $(".updating-chart").peity("line", {fill: '#1ab394', stroke: '#169c81', width: 64})
+
+        setInterval(function () {
+            var random = Math.round(Math.random() * 10)
+            var values = updatingChart.text().split(",")
+            values.shift()
+            values.push(random)
+            updatingChart
+                .text(values.join(","))
+                .change()
+        }, 1000);
+    });
+
+    $(function () {
+        $("div.ibox-content").on("click", function () {
+            var prefix = ctx + "record/lgtrans";
+            var docxFileId = $(this).attr('id');
+            var caseId = [[${ltCaseFile.ltCaseInfo.caseId}]];
+            var downloadUrl = prefix + "/exportRecord/download?caseId=" + caseId + "&docxFileId=" + docxFileId;
+            $.modal.loading("正在导出数据，请稍候...");
+            $.post(downloadUrl, {"caseId": caseId, "fileId": docxFileId}, function (result) {
+                if (result.code == web_status.SUCCESS) {
+                    window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + false;
+                } else if (result.code == web_status.WARNING) {
+                    $.modal.alertWarning(result.msg)
+                } else {
+                    $.modal.alertError(result.msg);
+                }
+                $.modal.closeLoading();
+            });
+        });
+    });
+
+
+    /* 一键导出 */
+    function batchExportRecord() {
+        var prefix = ctx + "record/lgtrans";
+        var caseId = [[${ltCaseFile.ltCaseInfo.caseId}]];
+        $.modal.confirm("确定要一键导出吗？", function () {
+            layer.msg('正在生成，请稍候…', {icon: 1});
+            $(location).attr('href',prefix + "/batchExportRecord/download?caseId=" + caseId);
+        })}
+
+
+</script>
+</body>
+</html>

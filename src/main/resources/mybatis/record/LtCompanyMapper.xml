@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.record.lgtrans.LtCompany.mapper.LtCompanyMapper">
+
+    <!--    车辆信息-->
+    <resultMap id="LtCompanyResult" type="LtCompany">
+        <id property="companyId" column="company_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="creditCode" column="credit_code"/>
+        <result property="directorName" column="director_name"/>
+        <result property="directorNumId" column="director_num_id"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="companyPhone" column="company_phone"/>
+    </resultMap>
+
+    <sql id="selectCompanyVo">
+        select cp.company_id,
+               cp.company_name,
+               cp.credit_code,
+               cp.director_name,
+               cp.director_num_id,
+               cp.company_phone
+        from rec_lgtrans_company cp
+    </sql>
+
+    <insert id="insertCompany" parameterType="LtCompany" useGeneratedKeys="true" keyProperty="companyId">
+        insert into rec_lgtrans_company(
+        <if test="ltCompany.companyId != null and ltCompany.companyId != ''">company_id,</if>
+        <if test="ltCompany.companyName != null and ltCompany.companyName != ''">company_name,</if>
+        <if test="ltCompany.creditCode != null and ltCompany.creditCode != ''">credit_code,</if>
+        <if test="ltCompany.directorName != null and ltCompany.directorName != ''">director_name,</if>
+        <if test="ltCompany.directorNumId != null and ltCompany.directorNumId != ''">director_num_id,</if>
+        <if test="ltCompany.companyAddress != null and ltCompany.companyAddress != ''">company_address,</if>
+        <if test="ltCompany.companyPhone != null and ltCompany.companyPhone != ''">company_phone,</if>
+        update_time
+        ) values (
+        <if test="ltCompany.companyId != null and ltCompany.companyId != ''">#{ltCompany.companyId},</if>
+        <if test="ltCompany.companyName != null and ltCompany.companyName != ''">#{ltCompany.companyName},</if>
+        <if test="ltCompany.creditCode != null and ltCompany.creditCode != ''">#{ltCompany.creditCode},</if>
+        <if test="ltCompany.directorName != null and ltCompany.directorName != ''">#{ltCompany.directorName},</if>
+        <if test="ltCompany.directorNumId != null and ltCompany.directorNumId != ''">#{ltCompany.directorNumId},</if>
+        <if test="ltCompany.companyAddress != null and ltCompany.companyAddress != ''">#{ltCompany.companyAddress},</if>
+        <if test="ltCompany.companyPhone != null and ltCompany.companyPhone != ''">#{ltCompany.companyPhone},</if>
+        sysdate()
+        )
+        ON DUPLICATE KEY UPDATE
+        <if test="ltCompany.creditCode != null and ltCompany.creditCode != ''">credit_code=values(credit_code),</if>
+        <if test="ltCompany.directorName != null and ltCompany.directorName != ''">director_name=values(director_name),</if>
+        <if test="ltCompany.directorNumId != null and ltCompany.directorNumId != ''">
+            director_num_id=values(director_num_id),
+        </if>
+        <if test="ltCompany.companyAddress != null and ltCompany.companyAddress != ''">
+            company_address=values(company_address),
+        </if>
+        <if test="ltCompany.companyPhone != null and ltCompany.companyPhone != ''">company_phone=values(company_phone),</if>
+        update_time=sysdate()
+    </insert>
+
+    <update id="updateCompany" parameterType="LtCompany">
+        update rec_lgtrans_company
+        <set>
+            <if test="ltCompany.companyName != null and ltCompany.companyName != ''">company_name=#{ltCompany.companyName},
+            </if>
+            <if test="ltCompany.creditCode != null and ltCompany.creditCode != ''">credit_code=#{ltCompany.creditCode},</if>
+            <if test="ltCompany.directorName != null and ltCompany.directorName != ''">
+                director_name=#{ltCompany.directorName},
+            </if>
+            <if test="ltCompany.directorNumId != null and ltCompany.directorNumId != ''">
+                director_num_id=#{ltCompany.directorNumId},
+            </if>
+            <if test="ltCompany.companyAddress != null and ltCompany.companyAddress != ''">
+                company_address=#{ltCompany.companyAddress},
+            </if>
+            <if test="ltCompany.companyPhone != null and ltCompany.companyPhone != ''">
+                company_phone=#{ltCompany.companyPhone},
+            </if>
+            update_time=sysdate()
+        </set>
+        where company_id = #{ltCompany.companyId}
+    </update>
+
+    <!--    通过公司名字查询公司信息-->
+    <select id="selectCompanyByName" parameterType="String" resultMap="LtCompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.company_name = #{companyName}
+    </select>
+
+    <!--    通过公司id查询公司信息-->
+    <select id="selectCompanyById" parameterType="Integer" resultMap="LtCompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.company_id = #{companyId}
+    </select>
+
+    <!--    通过公司社会信用代码-->
+    <select id="selectCompanyByCreditCode" parameterType="String" resultMap="LtCompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.credit_code=#{creditCode}  limit 1
+    </select>
+
+    <select id="selectCompanyByNameAndCreditCode" parameterType="String" resultMap="LtCompanyResult">
+        <include refid="selectCompanyVo"/>
+        where cp.company_name=#{companyName}  and cp.credit_code=#{creditCode}  limit 1
+    </select>
+
+</mapper> 

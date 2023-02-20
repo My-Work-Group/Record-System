@@ -1,6 +1,6 @@
 package com.ruoyi.project.record.offsite.caseFile.contorller;
 
-import com.ruoyi.common.utils.XWPFHandler.WordUtil;
+import com.ruoyi.project.record.offsite.utils.ExportUtil;
 import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.common.utils.zip.ZipUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -28,9 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.ruoyi.common.utils.XWPFHandler.WordUtil.filePathList;
+import static com.ruoyi.project.record.offsite.utils.ExportUtil.filePathList;
 import static com.ruoyi.common.utils.zip.ZipUtil.encodingFileName;
-import static com.ruoyi.project.record.offsite.caseFile.util.CaseFileUtils.isNotCaseFileComplete;
+import static com.ruoyi.project.record.offsite.utils.CaseFileUtils.isNotCaseFileComplete;
 
 /**
  * @Author: 庞沛东
@@ -182,7 +182,7 @@ public class CaseFileController extends BaseController {
             return error("导出失败，该案件信息填写不完整，请仔细检查！");
         }
         Map<String, List<Personnel>> personnels = getPersonnel(caseFile);
-        return WordUtil.ExportDocument(caseFile, personnels, docxFileId);
+        return ExportUtil.ExportDocument(caseFile, personnels, docxFileId);
     }
 
 
